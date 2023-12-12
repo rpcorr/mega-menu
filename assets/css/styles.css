@@ -63,6 +63,21 @@ a {
 }
 .header .item-right {
   flex: 0 0 17%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header .item-right a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #555;
+  display: inline-block;
+  margin-left: 10px;
+  transition: color 0.3s ease;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
 }
 
 .header .menu > ul > li {
@@ -84,6 +99,7 @@ a {
   -o-transition: color 0.3s ease;
 }
 
+.header .item-right a:hover,
 .header .menu > ul > li:hover > a {
   color: #ea4636;
 }
