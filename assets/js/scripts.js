@@ -4,7 +4,7 @@ const menu = document.querySelector('.menu');
 const menuMain = menu.querySelector('.menu-main');
 const goBack = menu.querySelector('.go-back');
 const menuTrigger = document.querySelector('.mobile-menu-trigger');
-//const closeMenu = document.querySelector('.mobile-menu-close');
+const closeMenu = menu.querySelector('.mobile-menu-close');
 
 let subMenu;
 
@@ -20,6 +20,14 @@ goBack.addEventListener('click', () => {
 });
 
 menuTrigger.addEventListener('click', () => {
+  toggleMenu();
+});
+
+closeMenu.addEventListener('click', () => {
+  toggleMenu();
+});
+
+document.querySelector('.menu-overlay').addEventListener('click', () => {
   toggleMenu();
 });
 
