@@ -117,12 +117,14 @@ a {
   visibility: hidden;
 }
 
-.header .menu > ul > li.menu-item-has-children:hover .sub-menu {
-  margin-top: 0;
+@media (min-width: 992px) {
+  .header .menu > ul > li.menu-item-has-children:hover .sub-menu {
+    margin-top: 0;
 
-  /* show dropdown menu */
-  visibility: visible;
-  opacity: 1;
+    /* show dropdown menu */
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .header .menu > ul > li .sub-menu > ul > li {
