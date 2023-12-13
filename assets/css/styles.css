@@ -296,13 +296,29 @@ a {
     position: fixed;
     width: 320px;
     background-color: #fff;
-    box-shadow: 0 0 15px #ccc;
     left: 0;
     top: 0;
     height: 100%;
     overflow: hidden;
+    transform: translate(-100%);
+    -webkit-transform: translate(-100%);
+    -moz-transform: translate(-100%);
+    -ms-transform: translate(-100%);
+    -o-transform: translate(-100%);
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
   }
 
+  .header .menu.active {
+    transform: translate(0%);
+    -webkit-transform: translate(0%);
+    -moz-transform: translate(0%);
+    -ms-transform: translate(0%);
+    -o-transform: translate(0%);
+  }
   .header .menu > ul > li {
     line-height: 1;
     margin: 0;
