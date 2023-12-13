@@ -67,3 +67,21 @@ window.onresize = function () {
     }
   }
 };
+
+/* Accessibility */
+var megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
+console.log(megaMenuLinks.length);
+for (let i = 0; i < megaMenuLinks.length; i++) {
+  megaMenuLinks[i].addEventListener('click', handleLinkClick);
+}
+
+function handleLinkClick(e) {
+  e.preventDefault();
+  var target = document.querySelector(`${e.target.getAttribute('href')}`);
+
+  if (target.getAttribute('aria-expanded') === 'true') {
+    target.setAttribute('aria-expanded', 'false');
+  } else {
+    target.setAttribute('aria-expanded', 'true');
+  }
+}

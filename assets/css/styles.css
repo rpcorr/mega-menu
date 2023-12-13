@@ -236,6 +236,18 @@ a {
   display: none;
 }
 
+/* Accessibility */
+
+.header .menu > ul > li.menu-item-has-children [aria-expanded='true'] {
+  visibility: visible;
+  opacity: 1;
+}
+
+.header .menu > ul > li.menu-item-has-children [aria-expanded='false'] {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* Responsive */
 @media (max-width: 991px) {
   .header .item-center {
