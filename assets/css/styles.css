@@ -195,10 +195,20 @@ a {
   padding: 10px 0;
 }
 
+.header
+  .menu
+  > ul
+  > li
+  .sub-menu.mega-menu-column-4
+  > .list-item.text-center
+  .title {
+  text-align: center;
+}
 .header .menu > ul > li .sub-menu.mega-menu-column-4 > .list-item img {
   max-width: 100%;
   width: 100%;
   vertical-align: middle;
+  margin-top: 10px;
 }
 
 .header .menu > ul > li .sub-menu.mega-menu .list-item > ul > li > a:hover,
