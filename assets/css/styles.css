@@ -342,6 +342,11 @@ a {
     right: 0;
     text-align: center;
     line-height: 50px;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
   }
 
   .header .menu .mobile-menu-head {
