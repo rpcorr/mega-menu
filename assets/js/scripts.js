@@ -25,6 +25,7 @@ menuTrigger.addEventListener('click', () => {
 
 function toggleMenu() {
   menu.classList.toggle('active');
+  document.querySelector('.menu-overlay').classList.toggle('active');
 }
 
 function showSubMenu(hasChildren) {
