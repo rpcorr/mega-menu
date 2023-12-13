@@ -9,6 +9,10 @@ const closeMenu = menu.querySelector('.mobile-menu-close');
 let subMenu;
 
 menuMain.addEventListener('click', (e) => {
+  if (!menu.classList.contains('active')) {
+    return;
+  }
+
   if (e.target.closest('.menu-item-has-children')) {
     const hasChildren = e.target.closest('.menu-item-has-children');
     showSubMenu(hasChildren);
@@ -55,3 +59,11 @@ function hideSubMenu() {
   menu.querySelector('.current-menu-title').innerHTML = '';
   menu.querySelector('.mobile-menu-head').classList.remove('active');
 }
+
+window.onresize = function () {
+  if (this.innerWidth > 991) {
+    if (menu.classList.contains('active')) {
+      toggleMenu();
+    }
+  }
+};
