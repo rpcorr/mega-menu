@@ -27,6 +27,13 @@ menuTrigger.addEventListener('click', () => {
   toggleMenu();
 });
 
+menuTrigger.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    toggleMenu();
+    document.querySelector('#home').focus();
+  }
+});
+
 closeMenu.addEventListener('click', () => {
   toggleMenu();
 });
