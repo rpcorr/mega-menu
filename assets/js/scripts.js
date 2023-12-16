@@ -10,6 +10,8 @@ const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
 
 let subMenu;
 
+let enableFirstLastTabStop = true;
+
 menuMain.addEventListener('click', (e) => {
   if (!menu.classList.contains('active')) {
     return;
@@ -159,19 +161,21 @@ function handleLinkClick(e) {
     target.setAttribute('aria-expanded', 'true');
   }
 
-  // store top menu item to give focus later when user closes the sub menu
-  lastFocusedElement = document.activeElement;
+  if (enableFirstLastTabStop) {
+    // store top menu item to give focus later when user closes the sub menu
+    lastFocusedElement = document.activeElement;
 
-  // get the first and last sub menu items to keep users looping through the sub menu items
-  // all the while the sub menu is open
-  var focusableElements = target.querySelectorAll('a');
-  firstTabStop = focusableElements[0];
-  lastTabStop = focusableElements[focusableElements.length - 1];
+    // get the first and last sub menu items to keep users looping through the sub menu items
+    // all the while the sub menu is open
+    var focusableElements = target.querySelectorAll('a');
+    firstTabStop = focusableElements[0];
+    lastTabStop = focusableElements[focusableElements.length - 1];
 
-  // add a timeout for the focus to work
-  setTimeout(() => {
-    firstTabStop.focus();
-  }, 10);
+    // add a timeout for the focus to work
+    setTimeout(() => {
+      firstTabStop.focus();
+    }, 10);
+  }
 
   // add a keyup eventListener for all links
   var targets = target.querySelectorAll('a');
@@ -186,9 +190,11 @@ function handleKeypress(e) {
     if (document.activeElement === lastTabStop) {
       e.preventDefault();
 
-      //setTimeout(() => {
-      firstTabStop.focus();
-      //}, 2000);
+      if (enableFirstLastTabStop) {
+        setTimeout(() => {
+          firstTabStop.focus();
+        }, 2000);
+      }
     }
   }
 
@@ -196,9 +202,12 @@ function handleKeypress(e) {
     // the user is trying to nagivate backwards
     if (document.activeElement === firstTabStop) {
       e.preventDefault();
-      setTimeout(() => {
-        lastTabStop.focus();
-      }, 2000);
+
+      if (enableFirstLastTabStop) {
+        setTimeout(() => {
+          lastTabStop.focus();
+        }, 2000);
+      }
     }
   }
 
