@@ -12,6 +12,10 @@ let subMenu;
 
 let enableFirstLastTabStop = true;
 
+window.addEventListener('load', () => {
+  checkScreenSize();
+});
+
 menuMain.addEventListener('click', (e) => {
   if (!menu.classList.contains('active')) {
     return;
@@ -23,72 +27,14 @@ menuMain.addEventListener('click', (e) => {
   }
 });
 
-goBack.addEventListener('click', () => {
-  hideSubMenu();
-});
-
-menuTrigger.addEventListener('click', () => {
-  toggleMenu();
-  if (menu.classList.contains('active')) {
-    // add menu items to tab order
-    addTopMenItemsToTabOrder();
-
-    // give home menu the focus
-    setTimeout(() => {
-      document.querySelector('#home').focus();
-    }, 10);
-  }
-});
-
-menuTrigger.addEventListener('keyup', (e) => {
-  if (e.keyCode === 13) {
-    toggleMenu();
-    if (menu.classList.contains('active')) {
-      // add menu items to tab order
-      addTopMenItemsToTabOrder();
-
-      // give home menu the focus
-      setTimeout(() => {
-        document.querySelector('#home').focus();
-      }, 10);
-    }
-  }
-});
-
-closeMenu.addEventListener('click', () => {
-  toggleMenu();
-
-  // prevent users accessing the menu items when close
-  removeTopMenuItemsFromTabOrder();
-  // give menuTrigger the focus
-  menuTrigger.focus();
-});
-
-document.querySelector('.menu-overlay').addEventListener('click', () => {
-  toggleMenu();
-});
-
-window.onload = function () {
-  if (this.innerWidth > 991) {
-    // large screens
-
-    // add menu items to tab order
-    addTopMenItemsToTabOrder();
-  } else {
-    // small screens
-
-    // prevent users accessing the menu items when close
-    removeTopMenuItemsFromTabOrder();
-
-    // give menuTrigger the focus
-    menuTrigger.focus();
-  }
+window.onresize = function () {
+  checkScreenSize();
 };
 
-window.onresize = function () {
-  if (this.innerWidth > 991) {
+function checkScreenSize() {
+  if (window.innerWidth > 991) {
     // larger screen
-
+    console.log('large screen');
     // add menu items to tab order
     addTopMenItemsToTabOrder();
 
@@ -99,9 +45,73 @@ window.onresize = function () {
   } else {
     // small screen
 
+    console.log('small screen');
+
     removeTopMenuItemsFromTabOrder();
+
+    goBack.addEventListener('click', () => {
+      hideSubMenu();
+    });
+
+    menuTrigger.addEventListener('click', () => {
+      toggleMenu();
+      if (menu.classList.contains('active')) {
+        // add menu items to tab order
+        addTopMenItemsToTabOrder();
+
+        // give home menu the focus
+        setTimeout(() => {
+          document.querySelector('#home').focus();
+        }, 10);
+      }
+    });
+
+    menuTrigger.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        console.log('Stephanie');
+        // add a tabindex to the close button
+        closeMenu.setAttribute('tabindex', 0);
+
+        toggleMenu();
+        if (menu.classList.contains('active')) {
+          // add menu items to tab order
+          addTopMenItemsToTabOrder();
+
+          // give home menu the focus
+          setTimeout(() => {
+            document.querySelector('#home').focus();
+          }, 10);
+        }
+      }
+    });
+
+    closeMenu.addEventListener('click', () => {
+      toggleMenu();
+
+      // prevent users accessing the menu items when close
+      removeTopMenuItemsFromTabOrder();
+      // give menuTrigger the focus
+      menuTrigger.focus();
+    });
+
+    closeMenu.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        // remove tabindex from close button
+        closeMenu.removeAttribute('tabindex');
+
+        toggleMenu();
+        // prevent users accessing the menu items when close
+        removeTopMenuItemsFromTabOrder();
+        // give menuTrigger the focus
+        menuTrigger.focus();
+      }
+    });
+
+    document.querySelector('.menu-overlay').addEventListener('click', () => {
+      toggleMenu();
+    });
   }
-};
+}
 
 function toggleMenu() {
   menu.classList.toggle('active');
