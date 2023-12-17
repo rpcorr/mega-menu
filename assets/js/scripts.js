@@ -93,6 +93,9 @@ function checkScreenSize() {
 
       // prevent users accessing the menu items when close
       removeTopMenuItemsFromTabOrder();
+
+      closeMenu.removeAttribute('tabindex');
+
       // give menuTrigger the focus
       menuTrigger.focus();
     });
@@ -119,6 +122,7 @@ function checkScreenSize() {
 function toggleMenu() {
   menu.classList.toggle('active');
   document.querySelector('.menu-overlay').classList.toggle('active');
+  closeMenu.setAttribute('tabindex', 0);
 }
 
 function showSubMenu(hasChildren) {
