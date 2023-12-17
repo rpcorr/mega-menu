@@ -5,16 +5,26 @@ const menuMain = menu.querySelector('.menu-main');
 const goBack = menu.querySelector('.go-back');
 const menuTrigger = document.querySelector('.mobile-menu-trigger');
 const closeMenu = menu.querySelector('.mobile-menu-close');
-
 const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
 
-let subMenu;
+/* For Accessibility */
+const megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
+
+// add eventListener to all the a elements in the megaMenu
+for (let i = 0; i < megaMenuLinks.length; i++) {
+  megaMenuLinks[i].addEventListener('click', handleLinkClick);
+}
 
 let enableFirstLastTabStop = true;
+let subMenu;
 
-window.addEventListener('load', () => {
+window.onload = function () {
   checkScreenSize();
-});
+};
+
+window.onresize = function () {
+  checkScreenSize();
+};
 
 menuMain.addEventListener('click', (e) => {
   if (!menu.classList.contains('active')) {
@@ -27,14 +37,10 @@ menuMain.addEventListener('click', (e) => {
   }
 });
 
-window.onresize = function () {
-  checkScreenSize();
-};
-
 function checkScreenSize() {
   if (window.innerWidth > 991) {
     // larger screen
-    console.log('large screen');
+
     // add menu items to tab order
     addTopMenItemsToTabOrder();
 
@@ -44,8 +50,6 @@ function checkScreenSize() {
     }
   } else {
     // small screen
-
-    console.log('small screen');
 
     removeTopMenuItemsFromTabOrder();
 
@@ -68,7 +72,6 @@ function checkScreenSize() {
 
     menuTrigger.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
-        console.log('Stephanie');
         // add a tabindex to the close button
         closeMenu.setAttribute('tabindex', 0);
 
@@ -150,14 +153,6 @@ function removeTopMenuItemsFromTabOrder() {
   menuMainListItems.forEach((listItem) => {
     listItem.setAttribute('tabindex', -1);
   });
-}
-
-/* Accessibility */
-var megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
-
-// add eventListener to all the a element in the megaMenu
-for (let i = 0; i < megaMenuLinks.length; i++) {
-  megaMenuLinks[i].addEventListener('click', handleLinkClick);
 }
 
 function handleLinkClick(e) {
