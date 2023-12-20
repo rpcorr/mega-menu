@@ -54,17 +54,13 @@ function checkScreenSize() {
     removeTopMenuItemsFromTabOrder();
 
     goBack.addEventListener('click', () => {
-      // Ensure Go Back button is not reachable by the keyboard when hidden
-      goBack.removeAttribute('tabindex');
+      closeSubMenu();
+    });
 
-      // give keyboard access to top level menu items
-      addTopMenItemsToTabOrder();
-      hideSubMenu();
-
-      // give home menu the focus
-      setTimeout(() => {
-        document.querySelector('#home').focus();
-      }, 10);
+    goBack.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        closeSubMenu();
+      }
     });
 
     menuTrigger.addEventListener('click', () => {
@@ -133,6 +129,22 @@ function toggleMenu() {
   menu.classList.toggle('active');
   document.querySelector('.menu-overlay').classList.toggle('active');
   closeMenu.setAttribute('tabindex', 0);
+}
+
+function closeSubMenu() {
+  // Ensure Go Back button is not reachable by the keyboard when hidden
+  goBack.removeAttribute('tabindex');
+
+  // give keyboard access to top level menu items
+  addTopMenItemsToTabOrder();
+  hideSubMenu();
+
+  console.log(lastFocusedElement);
+
+  // give the last focused main menu item the focus
+  setTimeout(() => {
+    lastFocusedElement.focus();
+  }, 10);
 }
 
 function showSubMenu(hasChildren) {
