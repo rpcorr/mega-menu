@@ -5,6 +5,7 @@ const menuMain = menu.querySelector('.menu-main');
 const goBack = menu.querySelector('.go-back');
 const menuTrigger = document.querySelector('.mobile-menu-trigger');
 const closeMenu = menu.querySelector('.mobile-menu-close');
+const mobileMenuHead = menu.querySelector('.mobile-menu-head');
 const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
 
 /* For Accessibility */
@@ -108,10 +109,10 @@ function checkScreenSize() {
 
     closeMenu.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
+        toggleMenu();
         // remove tabindex from close button
         closeMenu.removeAttribute('tabindex');
 
-        toggleMenu();
         // prevent users accessing the menu items when close
         removeTopMenuItemsFromTabOrder();
         // give menuTrigger the focus
@@ -154,7 +155,7 @@ function showSubMenu(hasChildren) {
   const menuTitle =
     hasChildren.querySelector('i').parentNode.childNodes[0].textContent;
   menu.querySelector('.current-menu-title').innerHTML = menuTitle;
-  menu.querySelector('.mobile-menu-head').classList.add('active');
+  mobileMenuHead.classList.add('active');
   // when sub menu is visible ensure main menu item are not reachable
   removeTopMenuItemsFromTabOrder();
   // make the go back button accessible from the keyboard
@@ -168,7 +169,7 @@ function hideSubMenu() {
   }, 300);
 
   menu.querySelector('.current-menu-title').innerHTML = '';
-  menu.querySelector('.mobile-menu-head').classList.remove('active');
+  mobileMenuHead.classList.remove('active');
 }
 
 function addTopMenItemsToTabOrder() {
