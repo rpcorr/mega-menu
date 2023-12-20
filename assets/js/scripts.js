@@ -101,7 +101,15 @@ function checkScreenSize() {
       // prevent users accessing the menu items when close
       removeTopMenuItemsFromTabOrder();
 
+      // hide submenu
+      hideSubMenu();
+
+      // remove tabindex from Close Menu and Go Back buttons
       closeMenu.removeAttribute('tabindex');
+      goBack.removeAttribute('tabindex');
+
+      // remove active class from mobile menu head
+      mobileMenuHead.classList.remove('active');
 
       // give menuTrigger the focus
       menuTrigger.focus();
@@ -110,11 +118,20 @@ function checkScreenSize() {
     closeMenu.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
         toggleMenu();
-        // remove tabindex from close button
-        closeMenu.removeAttribute('tabindex');
 
         // prevent users accessing the menu items when close
         removeTopMenuItemsFromTabOrder();
+
+        // hide submenu
+        hideSubMenu();
+
+        // remove tabindex from Close Menu and Go Back buttons
+        closeMenu.removeAttribute('tabindex');
+        goBack.removeAttribute('tabindex');
+
+        // remove active class from mobile menu head
+        mobileMenuHead.classList.remove('active');
+
         // give menuTrigger the focus
         menuTrigger.focus();
       }
