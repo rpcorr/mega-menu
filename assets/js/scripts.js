@@ -1,5 +1,6 @@
 'use strict';
 
+const menuOverlay = document.querySelector('.menu-overlay');
 const menu = document.querySelector('.menu');
 const menuMain = menu.querySelector('.menu-main');
 const goBack = menu.querySelector('.go-back');
@@ -53,6 +54,26 @@ function checkScreenSize() {
     // small screen
 
     removeTopMenuItemsFromTabOrder();
+
+    menuMain.addEventListener('keydown', (e) => {
+      // if user is on main menu and clicks esc
+      if (e.keyCode === 27 && !mobileMenuHead.classList.contains('active')) {
+        // close menu
+        menu.classList.remove('active');
+
+        // remove top menu items from tab over
+        removeTopMenuItemsFromTabOrder();
+
+        // remove tabindex from close button
+        closeMenu.removeAttribute('tabindex');
+
+        // hide overlay
+        menuOverlay.classList.remove('active');
+
+        // put focus on mobile menu trigger
+        menuTrigger.focus();
+      }
+    });
 
     goBack.addEventListener('click', () => {
       closeSubMenu();
@@ -265,6 +286,9 @@ function handleKeypress(e) {
   }
 
   if (e.keyCode === 27) {
+    // close mobile menu
+    closeSubMenu();
+
     // get the sub menu parent element
     const currentTopMenuItem =
       document.activeElement.parentElement.closest('.list-item').parentElement;
