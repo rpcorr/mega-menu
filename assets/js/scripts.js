@@ -80,9 +80,7 @@ function checkScreenSize() {
     });
 
     goBack.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) {
-        closeSubMenu();
-      }
+      if (e.keyCode === 13) closeSubMenu();
     });
 
     menuTrigger.addEventListener('click', () => {
@@ -180,7 +178,11 @@ function closeSubMenu() {
   // if small screen then hideSubMenu too
   if (window.innerWidth < 991) hideSubMenu();
 
-  console.log(lastFocusedElement);
+  //get  active main menu item element to set aria-expanded to false when go back is clicked
+  const activeMainMenuElement = document.getElementById(
+    lastFocusedElement.getAttribute('href').substring(1)
+  );
+  activeMainMenuElement.setAttribute('aria-expanded', 'false');
 
   // give the last focused main menu item the focus
   setTimeout(() => {
@@ -203,6 +205,13 @@ function showSubMenu(hasChildren) {
 }
 
 function hideSubMenu() {
+  //  get  active main menu item element to set aria-expanded to false when close is clicked
+  const activeMainMenuElement = document.getElementById(
+    lastFocusedElement.getAttribute('href').substring(1)
+  );
+
+  activeMainMenuElement.setAttribute('aria-expanded', 'false');
+
   subMenu.style.animation = 'slideRight 0.5s ease forwards';
   setTimeout(() => {
     subMenu.classList.remove('active');
