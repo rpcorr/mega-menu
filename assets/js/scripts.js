@@ -176,7 +176,9 @@ function closeSubMenu() {
 
   // give keyboard access to top level menu items
   addTopMenItemsToTabOrder();
-  hideSubMenu();
+
+  // if small screen then hideSubMenu too
+  if (window.innerWidth < 991) hideSubMenu();
 
   console.log(lastFocusedElement);
 
