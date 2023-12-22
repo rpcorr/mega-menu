@@ -182,7 +182,6 @@ function closeSubMenu() {
   const activeMainMenuElement = document.getElementById(
     lastFocusedElement.getAttribute('href').substring(1)
   );
-  activeMainMenuElement.setAttribute('aria-expanded', 'false');
 
   // give the last focused main menu item the focus
   setTimeout(() => {
@@ -299,13 +298,6 @@ function handleKeypress(e) {
   if (e.keyCode === 27) {
     // close mobile menu
     closeSubMenu();
-
-    // get the sub menu parent element
-    const currentTopMenuItem =
-      document.activeElement.parentElement.closest('.list-item').parentElement;
-
-    // add aria-expaneded = false
-    currentTopMenuItem.setAttribute('aria-expanded', 'false');
 
     // give sub menu parent element the focus
     setTimeout(() => {
