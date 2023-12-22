@@ -5,7 +5,7 @@ const menu = document.querySelector('.menu');
 const menuMain = menu.querySelector('.menu-main');
 const goBack = menu.querySelector('.go-back');
 const menuTrigger = document.querySelector('.mobile-menu-trigger');
-const closeMenu = menu.querySelector('.mobile-menu-close');
+const closeMenuBtn = menu.querySelector('.mobile-menu-close');
 const mobileMenuHead = menu.querySelector('.mobile-menu-head');
 const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
 
@@ -64,8 +64,8 @@ function checkScreenSize() {
         // remove top menu items from tab over
         removeTopMenuItemsFromTabOrder();
 
-        // remove tabindex from close button
-        closeMenu.removeAttribute('tabindex');
+        // remove tabindex from close menu button
+        closeMenuBtn.removeAttribute('tabindex');
 
         // hide overlay
         menuOverlay.classList.remove('active');
@@ -98,8 +98,8 @@ function checkScreenSize() {
 
     menuTrigger.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
-        // add a tabindex to the close button
-        closeMenu.setAttribute('tabindex', 0);
+        // add a tabindex to the close menu button
+        closeMenuBtn.setAttribute('tabindex', 0);
 
         toggleMenu();
         if (menu.classList.contains('active')) {
@@ -114,17 +114,17 @@ function checkScreenSize() {
       }
     });
 
-    closeMenu.addEventListener('click', () => {
+    closeMenuBtn.addEventListener('click', () => {
       toggleMenu();
 
       // prevent users accessing the menu items when close
       removeTopMenuItemsFromTabOrder();
 
-      // hide submenu
-      hideSubMenu();
+      // hide secondary menu
+      hideSecondaryMenu();
 
       // remove tabindex from Close Menu and Go Back buttons
-      closeMenu.removeAttribute('tabindex');
+      closeMenuBtn.removeAttribute('tabindex');
       goBack.removeAttribute('tabindex');
 
       // remove active class from mobile menu head
@@ -134,18 +134,18 @@ function checkScreenSize() {
       menuTrigger.focus();
     });
 
-    closeMenu.addEventListener('keyup', (e) => {
+    closeMenuBtn.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
         toggleMenu();
 
         // prevent users accessing the menu items when close
         removeTopMenuItemsFromTabOrder();
 
-        // hide submenu
-        hideSubMenu();
+        // hide secondary menu
+        hideSecondaryMenu();
 
         // remove tabindex from Close Menu and Go Back buttons
-        closeMenu.removeAttribute('tabindex');
+        closeMenuBtn.removeAttribute('tabindex');
         goBack.removeAttribute('tabindex');
 
         // remove active class from mobile menu head
@@ -165,7 +165,7 @@ function checkScreenSize() {
 function toggleMenu() {
   menu.classList.toggle('active');
   document.querySelector('.menu-overlay').classList.toggle('active');
-  closeMenu.setAttribute('tabindex', 0);
+  closeMenuBtn.setAttribute('tabindex', 0);
 }
 
 function closeSubMenu() {
@@ -175,8 +175,8 @@ function closeSubMenu() {
   // give keyboard access to top level menu items
   addTopMenItemsToTabOrder();
 
-  // if small screen then hideSubMenu too
-  if (window.innerWidth < 991) hideSubMenu();
+  // if small screen then hideSecondaryMenu too
+  if (window.innerWidth < 991) hideSecondaryMenu();
 
   //get  active main menu item element to set aria-expanded to false when go back is clicked
   const activeMainMenuElement = document.getElementById(
@@ -203,7 +203,7 @@ function showSubMenu(hasChildren) {
   goBack.setAttribute('tabindex', 0);
 }
 
-function hideSubMenu() {
+function hideSecondaryMenu() {
   //  get  active main menu item element to set aria-expanded to false when close is clicked
   const activeMainMenuElement = document.getElementById(
     lastFocusedElement.getAttribute('href').substring(1)
