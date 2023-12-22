@@ -28,11 +28,14 @@ window.onresize = function () {
   checkScreenSize();
 };
 
+// Determine if it is the desktop menu or mobile menu
 menuMain.addEventListener('click', (e) => {
+  // desktop view
   if (!menu.classList.contains('active')) {
     return;
   }
 
+  // mobile view
   if (e.target.closest('.menu-item-has-children')) {
     const hasChildren = e.target.closest('.menu-item-has-children');
     showSubMenu(hasChildren);
@@ -84,16 +87,7 @@ function checkScreenSize() {
     });
 
     menuTrigger.addEventListener('click', () => {
-      toggleMenu();
-      if (menu.classList.contains('active')) {
-        // add menu items to tab order
-        addTopMenItemsToTabOrder();
-
-        // give home menu the focus
-        setTimeout(() => {
-          document.querySelector('#home').focus();
-        }, 10);
-      }
+      checkIfMenuIsOpen();
     });
 
     menuTrigger.addEventListener('keyup', (e) => {
@@ -101,59 +95,16 @@ function checkScreenSize() {
         // add a tabindex to the close menu button
         closeMenuBtn.setAttribute('tabindex', 0);
 
-        toggleMenu();
-        if (menu.classList.contains('active')) {
-          // add menu items to tab order
-          addTopMenItemsToTabOrder();
-
-          // give home menu the focus
-          setTimeout(() => {
-            document.querySelector('#home').focus();
-          }, 10);
-        }
+        checkIfMenuIsOpen();
       }
     });
 
     closeMenuBtn.addEventListener('click', () => {
-      toggleMenu();
-
-      // prevent users accessing the menu items when close
-      removeTopMenuItemsFromTabOrder();
-
-      // hide secondary menu
-      hideSecondaryMenu();
-
-      // remove tabindex from Close Menu and Go Back buttons
-      closeMenuBtn.removeAttribute('tabindex');
-      goBack.removeAttribute('tabindex');
-
-      // remove active class from mobile menu head
-      mobileMenuHead.classList.remove('active');
-
-      // give menuTrigger the focus
-      menuTrigger.focus();
+      closeMenu();
     });
 
     closeMenuBtn.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) {
-        toggleMenu();
-
-        // prevent users accessing the menu items when close
-        removeTopMenuItemsFromTabOrder();
-
-        // hide secondary menu
-        hideSecondaryMenu();
-
-        // remove tabindex from Close Menu and Go Back buttons
-        closeMenuBtn.removeAttribute('tabindex');
-        goBack.removeAttribute('tabindex');
-
-        // remove active class from mobile menu head
-        mobileMenuHead.classList.remove('active');
-
-        // give menuTrigger the focus
-        menuTrigger.focus();
-      }
+      if (e.keyCode === 13) closeMenu();
     });
 
     document.querySelector('.menu-overlay').addEventListener('click', () => {
@@ -162,10 +113,44 @@ function checkScreenSize() {
   }
 }
 
-function toggleMenu() {
-  menu.classList.toggle('active');
-  document.querySelector('.menu-overlay').classList.toggle('active');
-  closeMenuBtn.setAttribute('tabindex', 0);
+function addTopMenItemsToTabOrder() {
+  // add menu items to tab order
+  menuMainListItems.forEach((listItem) => {
+    listItem.removeAttribute('tabindex');
+  });
+}
+
+function checkIfMenuIsOpen() {
+  toggleMenu();
+  if (menu.classList.contains('active')) {
+    // add menu items to tab order
+    addTopMenItemsToTabOrder();
+
+    // give home menu the focus
+    setTimeout(() => {
+      document.querySelector('#home').focus();
+    }, 10);
+  }
+}
+
+function closeMenu() {
+  toggleMenu();
+
+  // prevent users accessing the menu items when close
+  removeTopMenuItemsFromTabOrder();
+
+  // hide secondary menu
+  hideSecondaryMenu();
+
+  // remove tabindex from Close Menu and Go Back buttons
+  closeMenuBtn.removeAttribute('tabindex');
+  goBack.removeAttribute('tabindex');
+
+  // remove active class from mobile menu head
+  mobileMenuHead.classList.remove('active');
+
+  // give menuTrigger the focus
+  menuTrigger.focus();
 }
 
 function closeSubMenu() {
@@ -187,85 +172,6 @@ function closeSubMenu() {
   setTimeout(() => {
     lastFocusedElement.focus();
   }, 10);
-}
-
-function showSubMenu(hasChildren) {
-  subMenu = hasChildren.querySelector('.sub-menu');
-  subMenu.classList.add('active');
-  subMenu.style.animation = 'slideLeft 0.5s ease forwards';
-  const menuTitle =
-    hasChildren.querySelector('i').parentNode.childNodes[0].textContent;
-  menu.querySelector('.current-menu-title').innerHTML = menuTitle;
-  mobileMenuHead.classList.add('active');
-  // when sub menu is visible ensure main menu item are not reachable
-  removeTopMenuItemsFromTabOrder();
-  // make the go back button accessible from the keyboard
-  goBack.setAttribute('tabindex', 0);
-}
-
-function hideSecondaryMenu() {
-  //  get  active main menu item element to set aria-expanded to false when close is clicked
-  const activeMainMenuElement = document.getElementById(
-    lastFocusedElement.getAttribute('href').substring(1)
-  );
-
-  activeMainMenuElement.setAttribute('aria-expanded', 'false');
-
-  subMenu.style.animation = 'slideRight 0.5s ease forwards';
-  setTimeout(() => {
-    subMenu.classList.remove('active');
-  }, 300);
-
-  menu.querySelector('.current-menu-title').innerHTML = '';
-  mobileMenuHead.classList.remove('active');
-}
-
-function addTopMenItemsToTabOrder() {
-  // add menu items to tab order
-  menuMainListItems.forEach((listItem) => {
-    listItem.removeAttribute('tabindex');
-  });
-}
-
-function removeTopMenuItemsFromTabOrder() {
-  // remove menu items from tab order
-  menuMainListItems.forEach((listItem) => {
-    listItem.setAttribute('tabindex', -1);
-  });
-}
-
-function handleLinkClick(e) {
-  e.preventDefault();
-  var target = document.querySelector(`${e.target.getAttribute('href')}`);
-
-  // toggle aria-expanded attribute - this determines if the sub menu is appearing or not
-  if (target.getAttribute('aria-expanded') === 'true') {
-    target.setAttribute('aria-expanded', 'false');
-  } else {
-    target.setAttribute('aria-expanded', 'true');
-  }
-
-  if (enableFirstLastTabStop) {
-    // store top menu item to give focus later when user closes the sub menu
-    lastFocusedElement = document.activeElement;
-
-    // get the first and last sub menu items to keep users looping through the sub menu items
-    // all the while the sub menu is open
-    var focusableElements = target.querySelectorAll('a');
-    firstTabStop = focusableElements[0];
-    lastTabStop = focusableElements[focusableElements.length - 1];
-
-    // add a timeout for the focus to work
-    setTimeout(() => {
-      firstTabStop.focus();
-    }, 10);
-  }
-
-  // add a keyup eventListener for all links
-  var targets = target.querySelectorAll('a');
-  for (var i = 0; i < targets.length; i++) {
-    targets[i].addEventListener('keyup', handleKeypress);
-  }
 }
 
 function handleKeypress(e) {
@@ -304,6 +210,84 @@ function handleKeypress(e) {
       lastFocusedElement.focus();
     }, 10);
   }
+}
+
+function handleLinkClick(e) {
+  e.preventDefault();
+  var target = document.querySelector(`${e.target.getAttribute('href')}`);
+
+  // toggle aria-expanded attribute - this determines if the sub menu is appearing or not
+  if (target.getAttribute('aria-expanded') === 'true') {
+    target.setAttribute('aria-expanded', 'false');
+  } else {
+    target.setAttribute('aria-expanded', 'true');
+  }
+
+  if (enableFirstLastTabStop) {
+    // store top menu item to give focus later when user closes the sub menu
+    lastFocusedElement = document.activeElement;
+
+    // get the first and last sub menu items to keep users looping through the sub menu items
+    // all the while the sub menu is open
+    var focusableElements = target.querySelectorAll('a');
+    firstTabStop = focusableElements[0];
+    lastTabStop = focusableElements[focusableElements.length - 1];
+
+    // add a timeout for the focus to work
+    setTimeout(() => {
+      firstTabStop.focus();
+    }, 10);
+  }
+
+  // add a keyup eventListener for all links
+  var targets = target.querySelectorAll('a');
+  for (var i = 0; i < targets.length; i++) {
+    targets[i].addEventListener('keyup', handleKeypress);
+  }
+}
+
+function hideSecondaryMenu() {
+  //  get  active main menu item element to set aria-expanded to false when close is clicked
+  const activeMainMenuElement = document.getElementById(
+    lastFocusedElement.getAttribute('href').substring(1)
+  );
+
+  activeMainMenuElement.setAttribute('aria-expanded', 'false');
+
+  subMenu.style.animation = 'slideRight 0.5s ease forwards';
+  setTimeout(() => {
+    subMenu.classList.remove('active');
+  }, 300);
+
+  menu.querySelector('.current-menu-title').innerHTML = '';
+  mobileMenuHead.classList.remove('active');
+}
+
+function removeTopMenuItemsFromTabOrder() {
+  // remove menu items from tab order
+  menuMainListItems.forEach((listItem) => {
+    listItem.setAttribute('tabindex', -1);
+  });
+}
+
+function showSubMenu(hasChildren) {
+  subMenu = hasChildren.querySelector('.sub-menu');
+  subMenu.classList.add('active');
+  subMenu.style.animation = 'slideLeft 0.5s ease forwards';
+  const menuTitle =
+    hasChildren.querySelector('i').parentNode.childNodes[0].textContent;
+  menu.querySelector('.current-menu-title').innerHTML = menuTitle;
+  mobileMenuHead.classList.add('active');
+  // when sub menu is visible ensure main menu item are not reachable
+  removeTopMenuItemsFromTabOrder();
+  // make the go back button accessible from the keyboard
+  goBack.setAttribute('tabindex', 0);
+}
+
+function toggleMenu() {
+  menu.classList.toggle('active');
+  document.querySelector('.menu-overlay').classList.toggle('active');
+  closeMenuBtn.setAttribute('tabindex', 0);
 }
 
 var lastFocusedElement;
