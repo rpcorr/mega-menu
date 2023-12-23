@@ -247,20 +247,21 @@ function handleLinkClick(e) {
 }
 
 function hideSecondaryMenu() {
-  //  get  active main menu item element to set aria-expanded to false when close is clicked
-  const activeMainMenuElement = document.getElementById(
-    lastFocusedElement.getAttribute('href').substring(1)
-  );
+  if (mobileMenuHead.classList.contains('active')) {
+    //  get  active main menu item element to set aria-expanded to false when close is clicked
+    const activeMainMenuElement = document.getElementById(
+      lastFocusedElement.getAttribute('href').substring(1)
+    );
+    activeMainMenuElement.setAttribute('aria-expanded', 'false');
 
-  activeMainMenuElement.setAttribute('aria-expanded', 'false');
+    subMenu.style.animation = 'slideRight 0.5s ease forwards';
+    setTimeout(() => {
+      subMenu.classList.remove('active');
+    }, 300);
 
-  subMenu.style.animation = 'slideRight 0.5s ease forwards';
-  setTimeout(() => {
-    subMenu.classList.remove('active');
-  }, 300);
-
-  menu.querySelector('.current-menu-title').innerHTML = '';
-  mobileMenuHead.classList.remove('active');
+    menu.querySelector('.current-menu-title').innerHTML = '';
+    mobileMenuHead.classList.remove('active');
+  }
 }
 
 function removeTopMenuItemsFromTabOrder() {

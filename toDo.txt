@@ -1,7 +1,7 @@
 Errors to fix:
 
 1. Mobile View: click 'enter' to close the menu at top level cause a cannot read properties of
-undefined (reading 'getAttribute') at hideSubMenu line 210:24   
+undefined (reading 'getAttribute') at hideSubMenu line 210:24  (FIXED)
 
 2. Mobile View:  when on sub menu item and click esc, users are sent back to the main menu,
    but recieve a console error: Uncaught TypeError: Cannot read properties of null (reading 'parentElement' )  line 305  Only happens for single-column menu (FIXED)
