@@ -113,6 +113,10 @@ function checkScreenSize() {
   }
 }
 
+function getScreenSize() {
+  return screen.width;
+}
+
 function addTopMenItemsToTabOrder() {
   // add menu items to tab order
   menuMainListItems.forEach((listItem) => {
@@ -126,10 +130,26 @@ function checkIfMenuIsOpen() {
     // add menu items to tab order
     addTopMenItemsToTabOrder();
 
-    // give home menu the focus
-    setTimeout(() => {
-      document.querySelector('#home').focus();
-    }, 10);
+    if (getScreenSize() <= 825 && getScreenSize() > 750) {
+      document.querySelector('#contactLink').focus();
+    } else if (getScreenSize() <= 750 && getScreenSize() > 680) {
+      setTimeout(() => {
+        document.querySelector('#blogLink').focus();
+      }, 10);
+    } else if (getScreenSize() <= 680 && getScreenSize() > 625) {
+      setTimeout(() => {
+        document.querySelector('#packagesLink').focus();
+      }, 10);
+    } else if (getScreenSize() <= 625 && getScreenSize() > 550) {
+      setTimeout(() => {
+        document.querySelector('#popluarLink').focus();
+      }, 10);
+    } else {
+      // give home menu the focus
+      setTimeout(() => {
+        document.querySelector('#home').focus();
+      }, 10);
+    }
   }
 }
 
