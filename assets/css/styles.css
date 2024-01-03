@@ -293,6 +293,15 @@ a {
     > nav
     > .menu-priority
     > li.menu-item-has-children
+    [aria-expanded='true'] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sm-screens
+    > nav
+    > .menu-priority
+    > li.menu-item-has-children
     [aria-expanded='false'] {
     opacity: 0;
     visibility: hidden;
