@@ -240,6 +240,7 @@ function handleLinkClick(e) {
   if (target.getAttribute('aria-expanded') === 'true') {
     target.setAttribute('aria-expanded', 'false');
   } else {
+    console.log('this could be it');
     target.setAttribute('aria-expanded', 'true');
   }
 
