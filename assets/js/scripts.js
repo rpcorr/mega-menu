@@ -113,6 +113,10 @@ function checkScreenSize() {
   }
 }
 
+function getScreenSize() {
+  return screen.width;
+}
+
 function addTopMenItemsToTabOrder() {
   // add menu items to tab order
   menuMainListItems.forEach((listItem) => {
@@ -126,10 +130,26 @@ function checkIfMenuIsOpen() {
     // add menu items to tab order
     addTopMenItemsToTabOrder();
 
-    // give home menu the focus
-    setTimeout(() => {
-      document.querySelector('#home').focus();
-    }, 10);
+    if (getScreenSize() <= 825 && getScreenSize() > 750) {
+      document.querySelector('#contactLink').focus();
+    } else if (getScreenSize() <= 750 && getScreenSize() > 680) {
+      setTimeout(() => {
+        document.querySelector('#blogLink').focus();
+      }, 10);
+    } else if (getScreenSize() <= 680 && getScreenSize() > 625) {
+      setTimeout(() => {
+        document.querySelector('#packagesLink').focus();
+      }, 10);
+    } else if (getScreenSize() <= 625 && getScreenSize() > 550) {
+      setTimeout(() => {
+        document.querySelector('#popularLink').focus();
+      }, 10);
+    } else {
+      // give home menu the focus
+      setTimeout(() => {
+        document.querySelector('#home').focus();
+      }, 10);
+    }
   }
 }
 
@@ -149,6 +169,8 @@ function closeMenu() {
   // remove active class from mobile menu head
   mobileMenuHead.classList.remove('active');
 
+  setLinksAriaLabelsToOpenSubMenu();
+
   // give menuTrigger the focus
   menuTrigger.focus();
 }
@@ -167,6 +189,9 @@ function closeSubMenu() {
   const activeMainMenuElement = document.getElementById(
     lastFocusedElement.getAttribute('href').substring(1)
   );
+
+  // set links aria labels to "open sub menu"
+  setLinksAriaLabelsToOpenSubMenu();
 
   // give the last focused main menu item the focus
   setTimeout(() => {
@@ -219,8 +244,10 @@ function handleLinkClick(e) {
   // toggle aria-expanded attribute - this determines if the sub menu is appearing or not
   if (target.getAttribute('aria-expanded') === 'true') {
     target.setAttribute('aria-expanded', 'false');
+    e.target.setAttribute('aria-label', 'Click enter to open sub menu');
   } else {
     target.setAttribute('aria-expanded', 'true');
+    e.target.setAttribute('aria-label', 'Click enter to close sub menu');
   }
 
   if (enableFirstLastTabStop) {
@@ -269,6 +296,21 @@ function removeTopMenuItemsFromTabOrder() {
   menuMainListItems.forEach((listItem) => {
     listItem.setAttribute('tabindex', -1);
   });
+}
+
+function setLinksAriaLabelsToOpenSubMenu() {
+  // get all links that has a sub menu
+  const menuItemsWithSubMenu = document.querySelectorAll(
+    '.menu-item-has-children > a'
+  );
+
+  // set each menuItemsWithSubMenu aria label to Click 'enter' to open
+  for (let i = 0; i < menuItemsWithSubMenu.length; i++) {
+    menuItemsWithSubMenu[i].setAttribute(
+      'aria-label',
+      `${menuItemsWithSubMenu[i].text} has a sub menu. Click 'enter' to open`
+    );
+  }
 }
 
 function showSubMenu(hasChildren) {
