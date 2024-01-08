@@ -169,6 +169,8 @@ function closeMenu() {
   // remove active class from mobile menu head
   mobileMenuHead.classList.remove('active');
 
+  setLinksAriaLabelsToOpenSubMenu();
+
   // give menuTrigger the focus
   menuTrigger.focus();
 }
@@ -188,10 +190,8 @@ function closeSubMenu() {
     lastFocusedElement.getAttribute('href').substring(1)
   );
 
-  // set parent link aria-label to Click enter to open sub menu
-  document
-    .getElementById(activeMainMenuElement.id + 'Link')
-    .setAttribute('aria-label', 'Click enter to open sub menu');
+  // set links aria labels to "open sub menu"
+  setLinksAriaLabelsToOpenSubMenu();
 
   // give the last focused main menu item the focus
   setTimeout(() => {
@@ -296,6 +296,21 @@ function removeTopMenuItemsFromTabOrder() {
   menuMainListItems.forEach((listItem) => {
     listItem.setAttribute('tabindex', -1);
   });
+}
+
+function setLinksAriaLabelsToOpenSubMenu() {
+  // get all links that has a sub menu
+  const menuItemsWithSubMenu = document.querySelectorAll(
+    '.menu-item-has-children > a'
+  );
+
+  // set each menuItemsWithSubMenu aria label to Click 'enter' to open
+  for (let i = 0; i < menuItemsWithSubMenu.length; i++) {
+    menuItemsWithSubMenu[i].setAttribute(
+      'aria-label',
+      `${menuItemsWithSubMenu[i].text} has a sub menu. Click 'enter' to open`
+    );
+  }
 }
 
 function showSubMenu(hasChildren) {
