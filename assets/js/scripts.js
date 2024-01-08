@@ -142,7 +142,7 @@ function checkIfMenuIsOpen() {
       }, 10);
     } else if (getScreenSize() <= 625 && getScreenSize() > 550) {
       setTimeout(() => {
-        document.querySelector('#popluarLink').focus();
+        document.querySelector('#popularLink').focus();
       }, 10);
     } else {
       // give home menu the focus
@@ -187,6 +187,11 @@ function closeSubMenu() {
   const activeMainMenuElement = document.getElementById(
     lastFocusedElement.getAttribute('href').substring(1)
   );
+
+  // set parent link aria-label to Click enter to open sub menu
+  document
+    .getElementById(activeMainMenuElement.id + 'Link')
+    .setAttribute('aria-label', 'Click enter to open sub menu');
 
   // give the last focused main menu item the focus
   setTimeout(() => {
@@ -239,9 +244,10 @@ function handleLinkClick(e) {
   // toggle aria-expanded attribute - this determines if the sub menu is appearing or not
   if (target.getAttribute('aria-expanded') === 'true') {
     target.setAttribute('aria-expanded', 'false');
+    e.target.setAttribute('aria-label', 'Click enter to open sub menu');
   } else {
-    console.log('this could be it');
     target.setAttribute('aria-expanded', 'true');
+    e.target.setAttribute('aria-label', 'Click enter to close sub menu');
   }
 
   if (enableFirstLastTabStop) {
