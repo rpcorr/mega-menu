@@ -1,5 +1,6 @@
 'use strict';
 
+const logoLink = document.querySelector('.logo > a');
 const menuOverlay = document.querySelector('.menu-overlay');
 const menu = document.querySelector('.menu');
 const menuMain = menu.querySelector('.menu-main');
@@ -127,20 +128,33 @@ function addTopMenItemsToTabOrder() {
 function checkIfMenuIsOpen() {
   toggleMenu();
   if (menu.classList.contains('active')) {
+    logoLink.setAttribute('tabindex', -1);
+    menuTrigger.setAttribute('tabindex', -1);
+
     // add menu items to tab order
     addTopMenItemsToTabOrder();
 
     if (getScreenSize() <= 825 && getScreenSize() > 750) {
       document.querySelector('#contactLink').focus();
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#blogLinkSm').setAttribute('tabindex', '-1');
     } else if (getScreenSize() <= 750 && getScreenSize() > 680) {
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
       setTimeout(() => {
         document.querySelector('#blogLink').focus();
       }, 10);
     } else if (getScreenSize() <= 680 && getScreenSize() > 625) {
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
       setTimeout(() => {
         document.querySelector('#packagesLink').focus();
       }, 10);
     } else if (getScreenSize() <= 625 && getScreenSize() > 550) {
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
       setTimeout(() => {
         document.querySelector('#popularLink').focus();
       }, 10);
@@ -155,6 +169,29 @@ function checkIfMenuIsOpen() {
 
 function closeMenu() {
   toggleMenu();
+
+  // set menu trigger tabindex to 0
+  menuTrigger.setAttribute('tabindex', 0);
+
+  // remove logoLink tabindex attribute
+  logoLink.removeAttribute('tabindex');
+
+  // determine which small menu links links tabindex attribute is removed for small screens
+  if (getScreenSize() <= 825 && getScreenSize() > 750) {
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
+    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
+    document.querySelector('#blogLinkSm').removeAttribute('tabindex');
+  } else if (getScreenSize() <= 750 && getScreenSize() > 680) {
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
+    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
+  } else if (getScreenSize() <= 680 && getScreenSize() > 625) {
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
+  } else if (getScreenSize() <= 625 && getScreenSize() > 550) {
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+  }
 
   // prevent users accessing the menu items when close
   removeTopMenuItemsFromTabOrder();
