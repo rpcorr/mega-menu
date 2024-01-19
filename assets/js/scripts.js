@@ -10,6 +10,231 @@ const closeMenuBtn = menu.querySelector('.mobile-menu-close');
 const mobileMenuHead = menu.querySelector('.mobile-menu-head');
 const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
 
+// read in the Menu JSON file
+let count = 0;
+let output = '';
+let outputLg = '';
+let outputSm = '';
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function () {
+  if (this.readyState == 4 && this.status == 200) {
+    // Typical action to be performed when the document is ready:
+
+    let response = JSON.parse(xhttp.responseText);
+
+    response.menuItems.forEach((mI) => {
+      outputLg = menuLarge(mI);
+    });
+
+    // reset output variable
+    output = '';
+
+    response.menuItems.forEach((mI) => {
+      outputSm = menuSmall(mI);
+    });
+
+    document.getElementsByClassName('menu-main')[0].innerHTML = outputLg;
+    document.getElementsByClassName('menu-priority')[0].innerHTML = outputSm;
+  }
+};
+xhttp.open('GET', 'assets/json/menu.json', true);
+xhttp.send();
+
+function menuLarge(mI) {
+  let curLiId = mI.liId !== '' ? `id="${mI.liId}"` : '';
+  let curLiClass = mI.liClass !== '' ? `class="${mI.liClass}"` : '';
+  let downArrow =
+    mI.liClass === 'menu-item-has-children'
+      ? '<i class="fas fa-angle-down"></i>'
+      : '';
+  let linkAriaLabel =
+    mI.liClass === 'menu-item-has-children'
+      ? `aria-label="${mI.name} has a sub menu. Click 'enter' to open"`
+      : '';
+
+  output += `<li ${curLiId} ${curLiClass}><a href="${mI.link}" id="${mI.aLinkId}" ${linkAriaLabel}>${mI.name} ${downArrow}</a>`;
+
+  let subMenuContainer = '';
+
+  if (mI.subMenuItems && mI.subMenuType === 'photoLinks') {
+    subMenuContainer = `
+        <div id="${mI.link.substring(
+          1
+        )}" class="sub-menu mega-menu mega-menu-column-4" aria-expanded="false">`;
+
+    mI.subMenuItems.forEach((_, i) => {
+      let subMenuContainerContent = `
+                  <div class="list-item text-center">
+                    <a href="${mI.subMenuItems[i].link}">
+                      <img
+                        src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg"
+                        alt="${mI.subMenuItems[i].title}"
+                      />
+                      <h4 class="title">${mI.subMenuItems[i].title}</h4>
+                    </a>
+                  </div>
+                `;
+      subMenuContainer += subMenuContainerContent;
+    });
+  }
+
+  if (mI.subMenuItems && mI.subMenuType === 'categorizedLinks') {
+    subMenuContainer = `<div id="${mI.link.substring(
+      1
+    )}" class="sub-menu mega-menu mega-menu-column-4" aria-expanded="false">`;
+
+    let subMenuContainerContent = '';
+
+    mI.subMenuItems.forEach((_, i) => {
+      let subMenuContainerInnerContent = '';
+
+      if (mI.subMenuItems[i].contentType === 'text') {
+        if (i === 0 || i === 2 || i === 4)
+          subMenuContainerInnerContent += `<div class="list-item">`;
+
+        subMenuContainerInnerContent += `<h4 class="title" id="${mI.subMenuItems[i].titleId}">${mI.subMenuItems[i].title}</h4>`;
+
+        let listItemValues = '<ul>';
+        mI.subMenuItems[i].links.forEach((_, j) => {
+          listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}"><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
+        });
+        listItemValues += '</ul>';
+
+        subMenuContainerInnerContent += `${listItemValues}`;
+
+        if (i === 1 || i === 3 || i === 4)
+          subMenuContainerInnerContent += '</div>';
+      }
+
+      if (mI.subMenuItems[i].contentType === 'photo') {
+        subMenuContainerInnerContent += '<div class="list-item">';
+
+        let columnValue = `<img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />`;
+
+        subMenuContainerInnerContent += `${columnValue}</div>`;
+      }
+      subMenuContainerContent += `${subMenuContainerInnerContent}`;
+    });
+
+    subMenuContainer += subMenuContainerContent + `</div>`;
+  }
+
+  if (mI.subMenuItems && mI.subMenuType === 'singleColumn') {
+    subMenuContainer = `<div
+    id="${mI.link.substring(
+      1
+    )}" class="sub-menu single-column-menu" aria-expanded="false">`;
+
+    let subMenuContainerContent = '<ul>';
+
+    mI.subMenuItems.forEach((_, i) => {
+      subMenuContainerContent += `<li><a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a><a/li>`;
+    });
+
+    subMenuContainer += `${subMenuContainerContent}</ul></div>`;
+  }
+
+  output += subMenuContainer + '</li>';
+  return output;
+}
+
+function menuSmall(mI) {
+  //let curLiId = mI.liId !== '' ? `id="${mI.liId}"` : '';
+  let curLiClass = mI.liClass !== '' ? `class="${mI.liClass}"` : '';
+  let downArrow =
+    mI.liClass === 'menu-item-has-children'
+      ? '<i class="fas fa-angle-down"></i>'
+      : '';
+  let linkAriaLabel =
+    mI.liClass === 'menu-item-has-children'
+      ? `aria-label="${mI.name} has a sub menu. Click 'enter' to open"`
+      : '';
+
+  output += `<li ${curLiClass}><a ${
+    mI.name === 'Home' ? 'id = "homeLinkSm"' : ''
+  } href="${mI.link}${
+    mI.liClass === 'menu-item-has-children' ? 'Sm' : ''
+  }" id="${mI.aLinkId}${
+    mI.liClass === 'menu-item-has-children' ? 'Sm' : ''
+  }" ${linkAriaLabel}>${mI.name} ${downArrow}</a>`;
+
+  let subMenuContainer = '';
+
+  if (mI.subMenuItems && mI.subMenuType === 'photoLinks') {
+    subMenuContainer = `
+        <div id="${mI.link.substring(
+          1
+        )}Sm" class="sub-menu mega-menu mega-menu-column-4" aria-expanded="false">`;
+
+    mI.subMenuItems.forEach((_, i) => {
+      let subMenuContainerContent = `
+                  <div class="list-item text-center">
+                    <a href="${mI.subMenuItems[i].link}Sm">
+                      <img
+                        src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg"
+                        alt="${mI.subMenuItems[i].title}"
+                      />
+                      <h4 class="title">${mI.subMenuItems[i].title}</h4>
+                    </a>
+                  </div>
+                `;
+      subMenuContainer += subMenuContainerContent;
+    });
+  }
+
+  if (mI.subMenuItems && mI.subMenuType === 'categorizedLinks') {
+    subMenuContainer = `<div id="${mI.link.substring(
+      1
+    )}Sm" class="sub-menu mega-menu mega-menu-column-2" aria-expanded="false">`;
+
+    let subMenuContainerContent = '';
+
+    mI.subMenuItems.forEach((_, i) => {
+      let subMenuContainerInnerContent = '';
+
+      if (mI.subMenuItems[i].contentType === 'text') {
+        if (i === 0 || i === 3)
+          subMenuContainerInnerContent += `<div class="list-item">`;
+
+        subMenuContainerInnerContent += `<h4 class="title" id="${mI.subMenuItems[i].titleId}">${mI.subMenuItems[i].title}</h4>`;
+
+        let listItemValues = '<ul>';
+        mI.subMenuItems[i].links.forEach((_, j) => {
+          listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}"><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
+        });
+        listItemValues += '</ul>';
+
+        subMenuContainerInnerContent += `${listItemValues}`;
+
+        if (i === 2 || i === 4) subMenuContainerInnerContent += '</div>';
+      }
+
+      subMenuContainerContent += `${subMenuContainerInnerContent}`;
+    });
+
+    subMenuContainer += subMenuContainerContent + `</div>`;
+  }
+
+  if (mI.subMenuItems && mI.subMenuType === 'singleColumn') {
+    subMenuContainer = `<div
+    id="${mI.link.substring(
+      1
+    )}Sm" class="sub-menu single-column-menu" aria-expanded="false">`;
+
+    let subMenuContainerContent = '<ul>';
+
+    mI.subMenuItems.forEach((_, i) => {
+      subMenuContainerContent += `<li><a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a><a/li>`;
+    });
+
+    subMenuContainer += `${subMenuContainerContent}</ul></div>`;
+  }
+
+  output += subMenuContainer + '</li>';
+
+  return output;
+}
+
 /* For Accessibility */
 const megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
 
@@ -135,6 +360,7 @@ function checkIfMenuIsOpen() {
     addTopMenItemsToTabOrder();
 
     if (getScreenSize() <= 825 && getScreenSize() > 750) {
+      console.log('here');
       document.querySelector('#contactLink').focus();
       document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
       document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
@@ -223,9 +449,11 @@ function closeSubMenu() {
   if (window.innerWidth < 991) hideSecondaryMenu();
 
   //get  active main menu item element to set aria-expanded to false when go back is clicked
-  const activeMainMenuElement = document.getElementById(
-    lastFocusedElement.getAttribute('href').substring(1)
-  );
+  if (lastFocusedElement.hasAttribute('href')) {
+    const activeMainMenuElement = document.getElementById(
+      lastFocusedElement.getAttribute('href').substring(1)
+    );
+  }
 
   // set links aria labels to "open sub menu"
   setLinksAriaLabelsToOpenSubMenu();
@@ -313,10 +541,15 @@ function handleLinkClick(e) {
 function hideSecondaryMenu() {
   if (mobileMenuHead.classList.contains('active')) {
     //  get  active main menu item element to set aria-expanded to false when close is clicked
-    const activeMainMenuElement = document.getElementById(
-      lastFocusedElement.getAttribute('href').substring(1)
-    );
-    activeMainMenuElement.setAttribute('aria-expanded', 'false');
+
+    lastFocusedElement = document.activeElement;
+
+    if (lastFocusedElement.hasAttribute('href')) {
+      const activeMainMenuElement = document.getElementById(
+        lastFocusedElement.getAttribute('href').substring(1)
+      );
+      activeMainMenuElement.setAttribute('aria-expanded', 'false');
+    }
 
     subMenu.style.animation = 'slideRight 0.5s ease forwards';
     setTimeout(() => {
@@ -351,6 +584,9 @@ function setLinksAriaLabelsToOpenSubMenu() {
 }
 
 function showSubMenu(hasChildren) {
+  if (hasChildren.hasAttribute('id') && hasChildren.id === 'blogMenu')
+    document.getElementById('blog').setAttribute('aria-expanded', 'true');
+
   subMenu = hasChildren.querySelector('.sub-menu');
   subMenu.classList.add('active');
   subMenu.style.animation = 'slideLeft 0.5s ease forwards';

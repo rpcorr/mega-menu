@@ -1,0 +1,230 @@
+{
+  "menuItems": [
+    {
+      "aLinkId": "home",
+      "name": "Home",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liId": "",
+      "liClass": ""
+    },
+    {
+      "aLinkId": "popularLink",
+      "name": "Popular",
+      "link": "#popular",
+      "linkAriaLabel": "has a sub menu. Click 'enter' to open",
+      "liId": "popularMenu",
+      "liClass": "menu-item-has-children",
+      "subMenuType": "photoLinks",
+      "subMenuItemsColumns": 1,
+      "subMenuItems": [
+        {
+          "title": "Rain Forest",
+          "link": "#rainForest",
+          "imgSrc": "p1"
+        },
+        {
+          "title": "Mountains",
+          "link": "#mountains",
+          "imgSrc": "p2"
+        },
+        {
+          "title": "Water",
+          "link": "#waterfall",
+          "imgSrc": "p3"
+        },
+        {
+          "title": "Owl",
+          "link": "#owl",
+          "imgSrc": "p4"
+        }
+      ]
+    },
+    {
+      "aLinkId": "packagesLink",
+      "name": "Packages",
+      "link": "#packages",
+      "linkAriaLabel": "has a sub menu. Click 'enter' to open",
+      "liId": "packagesMenu",
+      "liClass": "menu-item-has-children",
+      "subMenuType": "categorizedLinks",
+      "subMenuItemsColumns": 3,
+      "subMenuItems": [
+        {
+          "contentType": "text",
+          "titleId": "na",
+          "title": "North America",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            },
+            {
+              "name": "Package 5",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "sa",
+          "title": "South America",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "au",
+          "title": "Australia",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "af",
+          "title": "Africa",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "eu",
+          "title": "Europe",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            },
+            {
+              "name": "Package 5",
+              "link": "#"
+            },
+            {
+              "name": "Package 6",
+              "link": "#"
+            },
+            {
+              "name": "Package 7",
+              "link": "#"
+            },
+            {
+              "name": "Package 8",
+              "link": "#"
+            },
+            {
+              "name": "Package 9",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "photo",
+          "title": "Mountain goats",
+          "imgSrc": "p5"
+        }
+      ]
+    },
+
+    {
+      "aLinkId": "blogLink",
+      "name": "Blog",
+      "link": "#blog",
+      "linkAriaLabel": "has a sub menu. Click 'enter' to open",
+      "liId": "blogMenu",
+      "liClass": "menu-item-has-children",
+      "subMenuType": "singleColumn",
+      "subMenuItemsColumns": 1,
+      "subMenuItems": [
+        {
+          "name": "Standard Layout",
+          "link": "#sl"
+        },
+        {
+          "name": "Grid Layout",
+          "link": "#gl"
+        },
+        {
+          "name": "Single Post Layout",
+          "link": "#spl"
+        }
+      ]
+    },
+
+    {
+      "aLinkId": "contactLink",
+      "name": "Contact",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liId": "",
+      "liClass": ""
+    }
+  ]
+}
