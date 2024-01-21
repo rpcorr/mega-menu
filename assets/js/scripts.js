@@ -4,6 +4,9 @@ const logoLink = document.querySelector('.logo > a');
 const menuOverlay = document.querySelector('.menu-overlay');
 const menu = document.querySelector('.menu');
 const menuMain = menu.querySelector('.menu-main');
+//console.log(menuMain);
+const menuPriority = document.querySelector('.menu-priority');
+//console.log(menuPriority);
 const goBack = menu.querySelector('.go-back');
 const menuTrigger = document.querySelector('.mobile-menu-trigger');
 const closeMenuBtn = menu.querySelector('.mobile-menu-close');
@@ -256,16 +259,22 @@ window.onresize = function () {
 
 // Determine if it is the desktop menu or mobile menu
 menuMain.addEventListener('click', (e) => {
-  // desktop view
-  if (!menu.classList.contains('active')) {
-    return;
+  if (getScreenSize() > 825) {
+    // large screens
+    if (e.target.closest('.menu-item-has-children')) {
+      handleLinkClick(e);
+    }
+  } else {
+    // small screens (mobile menu)
+    if (e.target.closest('.menu-item-has-children')) {
+      const hasChildren = e.target.closest('.menu-item-has-children');
+      showSubMenu(hasChildren);
+    }
   }
+});
 
-  // mobile view
-  if (e.target.closest('.menu-item-has-children')) {
-    const hasChildren = e.target.closest('.menu-item-has-children');
-    showSubMenu(hasChildren);
-  }
+menuPriority.addEventListener('click', (e) => {
+  handleLinkClick(e);
 });
 
 function checkScreenSize() {
@@ -504,15 +513,28 @@ function handleKeypress(e) {
 
 function handleLinkClick(e) {
   e.preventDefault();
-  var target = document.querySelector(`${e.target.getAttribute('href')}`);
+  const target = document.querySelector(`${e.target.getAttribute('href')}`);
+  let parentMenuText = '';
 
   // toggle aria-expanded attribute - this determines if the sub menu is appearing or not
   if (target.getAttribute('aria-expanded') === 'true') {
+    // assign text when sub menu is open
+    parentMenuText = target.parentElement.innerText.split(' ')[0];
+
     target.setAttribute('aria-expanded', 'false');
-    e.target.setAttribute('aria-label', 'Click enter to open sub menu');
+    e.target.setAttribute(
+      'aria-label',
+      `${parentMenuText} has a sub menu. Click enter to open.`
+    );
   } else {
+    // assign text when sub menu is closed
+    parentMenuText = target.parentElement.innerText;
+
     target.setAttribute('aria-expanded', 'true');
-    e.target.setAttribute('aria-label', 'Click enter to close sub menu');
+    e.target.setAttribute(
+      'aria-label',
+      `Click enter to close ${parentMenuText} sub menu`
+    );
   }
 
   if (enableFirstLastTabStop) {
