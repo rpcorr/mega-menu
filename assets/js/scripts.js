@@ -1,17 +1,19 @@
 'use strict';
 
+// set global constants
 const logoLink = document.querySelector('.logo > a');
 const menuOverlay = document.querySelector('.menu-overlay');
 const menu = document.querySelector('.menu');
 const menuMain = menu.querySelector('.menu-main');
-//console.log(menuMain);
 const menuPriority = document.querySelector('.menu-priority');
-//console.log(menuPriority);
 const goBack = menu.querySelector('.go-back');
 const menuTrigger = document.querySelector('.mobile-menu-trigger');
 const closeMenuBtn = menu.querySelector('.mobile-menu-close');
 const mobileMenuHead = menu.querySelector('.mobile-menu-head');
 const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
+
+/* For Accessibility */
+const megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
 
 // read in the Menu JSON file
 let count = 0;
@@ -42,6 +44,378 @@ xhttp.onreadystatechange = function () {
 };
 xhttp.open('GET', 'assets/json/menu.json', true);
 xhttp.send();
+
+// add eventListener to all the a elements in the megaMenu
+for (let i = 0; i < megaMenuLinks.length; i++) {
+  megaMenuLinks[i].addEventListener('click', handleLinkClick);
+}
+
+let enableFirstLastTabStop = true;
+let subMenu;
+
+window.onload = function () {
+  checkScreenSize();
+};
+
+window.onresize = function () {
+  checkScreenSize();
+};
+
+// Determine if it is the desktop menu or mobile menu
+menuMain.addEventListener('click', (e) => {
+  if (getScreenSize() > 825) {
+    // large screens
+
+    if (e.target.closest('.menu-item-has-children')) {
+      handleLinkClick(e);
+    }
+  } else {
+    // small screens (mobile menu)
+
+    if (e.target.closest('.menu-item-has-children')) {
+      const hasChildren = e.target.closest('.menu-item-has-children');
+      showSubMenu(hasChildren);
+    }
+  }
+});
+
+menuPriority.addEventListener('click', (e) => {
+  handleLinkClick(e);
+});
+
+var lastFocusedElement;
+var firstTabStop;
+var lastTabStop;
+
+/// FUNCTIONS ARE BELOW
+
+function checkIfMenuIsOpen() {
+  toggleMenu();
+  if (menu.classList.contains('active')) {
+    logoLink.setAttribute('tabindex', -1);
+    menuTrigger.setAttribute('tabindex', -1);
+
+    // set the top menu items tab order status
+    topMenuItemsTabOrderStatus();
+  }
+}
+
+function checkScreenSize() {
+  if (window.innerWidth > 825) {
+    // larger screen
+
+    // add menu items to tab order
+    topMenuItemsTabOrderStatus();
+
+    if (menu.classList.contains('active')) {
+      // toggle Menu
+      toggleMenu();
+    }
+  } else {
+    // small screen
+
+    // remove main menu items from tab order based on screen size
+    if (window.innerWidth <= 825 && window.innerWidth > 751) {
+      // contact is hidden
+      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+    }
+
+    if (window.innerWidth <= 750 && window.innerWidth >= 681) {
+      // contact and blog are hidden'
+      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+    }
+
+    if (window.innerWidth <= 680 && window.innerWidth > 625) {
+      // contact, blog, and packages are hidden
+      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+      document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
+    }
+
+    if (window.innerWidth <= 625 && window.innerWidth > 550) {
+      // contact, blog, packages, popular are hidden
+      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+      document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLink').setAttribute('tabindex', '-1');
+    }
+
+    if (window.innerWidth <= 550) {
+      // contact, blog, packages, popular, and home are hidden
+      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+      document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLink').setAttribute('tabindex', '-1');
+      document.querySelector('#home').setAttribute('tabindex', '-1');
+    }
+
+    menuMain.addEventListener('keydown', (e) => {
+      // if user is on main menu and clicks esc
+      if (e.keyCode === 27 && !mobileMenuHead.classList.contains('active')) {
+        // close menu
+        menu.classList.remove('active');
+
+        // remove top menu items from tab order
+        removeTopMenuItemsFromTabOrder();
+
+        // remove tabindex from close menu button
+        closeMenuBtn.removeAttribute('tabindex');
+
+        // hide overlay
+        menuOverlay.classList.remove('active');
+
+        // put focus on mobile menu trigger
+        menuTrigger.focus();
+      }
+    });
+
+    goBack.addEventListener('click', () => {
+      closeSubMenu();
+    });
+
+    goBack.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) closeSubMenu();
+    });
+
+    menuTrigger.addEventListener('click', () => {
+      checkIfMenuIsOpen();
+    });
+
+    menuTrigger.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        // add a tabindex to the close menu button
+        closeMenuBtn.setAttribute('tabindex', 0);
+
+        checkIfMenuIsOpen();
+      }
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+      closeMenu();
+    });
+
+    closeMenuBtn.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) closeMenu();
+    });
+
+    document.querySelector('.menu-overlay').addEventListener('click', () => {
+      toggleMenu();
+    });
+  }
+}
+
+function closeMenu() {
+  toggleMenu();
+
+  // set menu trigger tabindex to 0
+  menuTrigger.setAttribute('tabindex', 0);
+
+  // remove logoLink tabindex attribute
+  logoLink.removeAttribute('tabindex');
+
+  // determine which small menu links links tabindex attribute is removed for small screens
+
+  if (window.innerWidth <= 825 && window.innerWidth > 751) {
+    // contact menu is hidden
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
+    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
+    document.querySelector('#blogLinkSm').removeAttribute('tabindex');
+    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+  }
+
+  if (window.innerWidth <= 750 && window.innerWidth >= 681) {
+    // contact, blog menu are hidden
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
+    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
+    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+  }
+
+  if (window.innerWidth <= 680 && window.innerWidth > 625) {
+    // contact, blog, packages menu are hidden
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
+    document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
+    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+  }
+
+  if (window.innerWidth <= 625 && window.innerWidth > 550) {
+    // contact, blog, packages, popular menu are hidden
+    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
+    document.querySelector('#popularLink').setAttribute('tabindex', '-1');
+    document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
+    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+  }
+
+  if (window.innerWidth <= 550) {
+    // home contact, blog, packages, popular menu are hidden
+    document.querySelector('#home').setAttribute('tabindex', '-1');
+    document.querySelector('#popularLink').setAttribute('tabindex', '-1');
+    document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
+    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+  }
+
+  // hide secondary menu
+  hideSecondaryMenu();
+
+  // remove tabindex from Close Menu and Go Back buttons
+  closeMenuBtn.removeAttribute('tabindex');
+  goBack.removeAttribute('tabindex');
+
+  // remove active class from mobile menu head
+  mobileMenuHead.classList.remove('active');
+
+  setLinksAriaLabelsToOpenSubMenu();
+
+  // give menuTrigger the focus
+  menuTrigger.focus();
+}
+
+function closeSubMenu() {
+  // Ensure Go Back button is not reachable by the keyboard when hidden
+  goBack.removeAttribute('tabindex');
+
+  // give keyboard access to top level menu items
+  topMenuItemsTabOrderStatus();
+
+  // if small screen then hideSecondaryMenu too
+  if (window.innerWidth < 991) hideSecondaryMenu();
+
+  //get  active main menu item element to set aria-expanded to false when go back is clicked
+  if (lastFocusedElement.hasAttribute('href')) {
+    const activeMainMenuElement = document.getElementById(
+      lastFocusedElement.getAttribute('href').substring(1)
+    );
+  }
+
+  // set links aria labels to "open sub menu"
+  setLinksAriaLabelsToOpenSubMenu();
+
+  // give the last focused main menu item the focus
+  setTimeout(() => {
+    lastFocusedElement.focus();
+  }, 10);
+}
+
+function getScreenSize() {
+  return screen.width;
+}
+
+function handleKeypress(e) {
+  if (e.keyCode === 9 && !e.shiftKey) {
+    // the user is trying to nagivate forward
+    if (document.activeElement === lastTabStop) {
+      e.preventDefault();
+
+      if (enableFirstLastTabStop) {
+        setTimeout(() => {
+          firstTabStop.focus();
+        }, 2000);
+      }
+    }
+  }
+
+  if (e.keyCode === 9 && e.shiftKey) {
+    // the user is trying to nagivate backwards
+    if (document.activeElement === firstTabStop) {
+      e.preventDefault();
+
+      if (enableFirstLastTabStop) {
+        setTimeout(() => {
+          lastTabStop.focus();
+        }, 2000);
+      }
+    }
+  }
+
+  if (e.keyCode === 27) {
+    // close mobile menu
+    closeSubMenu();
+
+    // give sub menu parent element the focus
+    setTimeout(() => {
+      lastFocusedElement.focus();
+    }, 10);
+  }
+}
+
+function handleLinkClick(e) {
+  e.preventDefault();
+  const target = document.querySelector(`${e.target.getAttribute('href')}`);
+  let parentMenuText = '';
+
+  // toggle aria-expanded attribute - this determines if the sub menu is appearing or not
+  if (target.getAttribute('aria-expanded') === 'true') {
+    // assign text when sub menu is open
+    parentMenuText = target.parentElement.innerText.split(' ')[0];
+
+    target.setAttribute('aria-expanded', 'false');
+    e.target.setAttribute(
+      'aria-label',
+      `${parentMenuText} has a sub menu. Click enter to open.`
+    );
+  } else {
+    // assign text when sub menu is closed
+    parentMenuText = target.parentElement.innerText;
+
+    target.setAttribute('aria-expanded', 'true');
+    e.target.setAttribute(
+      'aria-label',
+      `Click enter to close ${parentMenuText} sub menu`
+    );
+  }
+
+  if (enableFirstLastTabStop) {
+    // store top menu item to give focus later when user closes the sub menu
+    lastFocusedElement = document.activeElement;
+
+    // get the first and last sub menu items to keep users looping through the sub menu items
+    // all the while the sub menu is open
+    var focusableElements = target.querySelectorAll('a');
+    firstTabStop = focusableElements[0];
+    lastTabStop = focusableElements[focusableElements.length - 1];
+
+    // add a timeout for the focus to work
+    setTimeout(() => {
+      firstTabStop.focus();
+    }, 10);
+  }
+
+  // add a keyup eventListener for all links
+  var targets = target.querySelectorAll('a');
+  for (var i = 0; i < targets.length; i++) {
+    targets[i].addEventListener('keyup', handleKeypress);
+  }
+}
+
+function hideSecondaryMenu() {
+  if (mobileMenuHead.classList.contains('active')) {
+    //  get  active main menu item element to set aria-expanded to false when close is clicked
+
+    lastFocusedElement = document.activeElement;
+
+    if (lastFocusedElement.hasAttribute('href')) {
+      const activeMainMenuElement = document.getElementById(
+        lastFocusedElement.getAttribute('href').substring(1)
+      );
+      activeMainMenuElement.setAttribute('aria-expanded', 'false');
+    }
+
+    subMenu.style.animation = 'slideRight 0.5s ease forwards';
+    setTimeout(() => {
+      subMenu.classList.remove('active');
+    }, 300);
+
+    menu.querySelector('.current-menu-title').innerHTML = '';
+    mobileMenuHead.classList.remove('active');
+  }
+}
 
 function menuLarge(mI) {
   let curLiId = mI.liId !== '' ? `id="${mI.liId}"` : '';
@@ -238,351 +612,6 @@ function menuSmall(mI) {
   return output;
 }
 
-/* For Accessibility */
-const megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
-
-// add eventListener to all the a elements in the megaMenu
-for (let i = 0; i < megaMenuLinks.length; i++) {
-  megaMenuLinks[i].addEventListener('click', handleLinkClick);
-}
-
-let enableFirstLastTabStop = true;
-let subMenu;
-
-window.onload = function () {
-  checkScreenSize();
-};
-
-window.onresize = function () {
-  checkScreenSize();
-};
-
-// Determine if it is the desktop menu or mobile menu
-menuMain.addEventListener('click', (e) => {
-  if (getScreenSize() > 825) {
-    // large screens
-    if (e.target.closest('.menu-item-has-children')) {
-      handleLinkClick(e);
-    }
-  } else {
-    // small screens (mobile menu)
-    if (e.target.closest('.menu-item-has-children')) {
-      const hasChildren = e.target.closest('.menu-item-has-children');
-      showSubMenu(hasChildren);
-    }
-  }
-});
-
-menuPriority.addEventListener('click', (e) => {
-  handleLinkClick(e);
-});
-
-function checkScreenSize() {
-  if (window.innerWidth > 991) {
-    // larger screen
-
-    // add menu items to tab order
-    addTopMenItemsToTabOrder();
-
-    if (menu.classList.contains('active')) {
-      // toggle Menu
-      toggleMenu();
-    }
-  } else {
-    // small screen
-
-    removeTopMenuItemsFromTabOrder();
-
-    menuMain.addEventListener('keydown', (e) => {
-      // if user is on main menu and clicks esc
-      if (e.keyCode === 27 && !mobileMenuHead.classList.contains('active')) {
-        // close menu
-        menu.classList.remove('active');
-
-        // remove top menu items from tab over
-        removeTopMenuItemsFromTabOrder();
-
-        // remove tabindex from close menu button
-        closeMenuBtn.removeAttribute('tabindex');
-
-        // hide overlay
-        menuOverlay.classList.remove('active');
-
-        // put focus on mobile menu trigger
-        menuTrigger.focus();
-      }
-    });
-
-    goBack.addEventListener('click', () => {
-      closeSubMenu();
-    });
-
-    goBack.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) closeSubMenu();
-    });
-
-    menuTrigger.addEventListener('click', () => {
-      checkIfMenuIsOpen();
-    });
-
-    menuTrigger.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) {
-        // add a tabindex to the close menu button
-        closeMenuBtn.setAttribute('tabindex', 0);
-
-        checkIfMenuIsOpen();
-      }
-    });
-
-    closeMenuBtn.addEventListener('click', () => {
-      closeMenu();
-    });
-
-    closeMenuBtn.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) closeMenu();
-    });
-
-    document.querySelector('.menu-overlay').addEventListener('click', () => {
-      toggleMenu();
-    });
-  }
-}
-
-function getScreenSize() {
-  return screen.width;
-}
-
-function addTopMenItemsToTabOrder() {
-  // add menu items to tab order
-  menuMainListItems.forEach((listItem) => {
-    listItem.removeAttribute('tabindex');
-  });
-}
-
-function checkIfMenuIsOpen() {
-  toggleMenu();
-  if (menu.classList.contains('active')) {
-    logoLink.setAttribute('tabindex', -1);
-    menuTrigger.setAttribute('tabindex', -1);
-
-    // add menu items to tab order
-    addTopMenItemsToTabOrder();
-
-    if (getScreenSize() <= 825 && getScreenSize() > 750) {
-      console.log('here');
-      document.querySelector('#contactLink').focus();
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#blogLinkSm').setAttribute('tabindex', '-1');
-    } else if (getScreenSize() <= 750 && getScreenSize() > 680) {
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
-      setTimeout(() => {
-        document.querySelector('#blogLink').focus();
-      }, 10);
-    } else if (getScreenSize() <= 680 && getScreenSize() > 625) {
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
-      setTimeout(() => {
-        document.querySelector('#packagesLink').focus();
-      }, 10);
-    } else if (getScreenSize() <= 625 && getScreenSize() > 550) {
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
-      setTimeout(() => {
-        document.querySelector('#popularLink').focus();
-      }, 10);
-    } else {
-      // give home menu the focus
-      setTimeout(() => {
-        document.querySelector('#home').focus();
-      }, 10);
-    }
-  }
-}
-
-function closeMenu() {
-  toggleMenu();
-
-  // set menu trigger tabindex to 0
-  menuTrigger.setAttribute('tabindex', 0);
-
-  // remove logoLink tabindex attribute
-  logoLink.removeAttribute('tabindex');
-
-  // determine which small menu links links tabindex attribute is removed for small screens
-  if (getScreenSize() <= 825 && getScreenSize() > 750) {
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
-    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
-    document.querySelector('#blogLinkSm').removeAttribute('tabindex');
-  } else if (getScreenSize() <= 750 && getScreenSize() > 680) {
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
-    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
-  } else if (getScreenSize() <= 680 && getScreenSize() > 625) {
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
-  } else if (getScreenSize() <= 625 && getScreenSize() > 550) {
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-  }
-
-  // prevent users accessing the menu items when close
-  removeTopMenuItemsFromTabOrder();
-
-  // hide secondary menu
-  hideSecondaryMenu();
-
-  // remove tabindex from Close Menu and Go Back buttons
-  closeMenuBtn.removeAttribute('tabindex');
-  goBack.removeAttribute('tabindex');
-
-  // remove active class from mobile menu head
-  mobileMenuHead.classList.remove('active');
-
-  setLinksAriaLabelsToOpenSubMenu();
-
-  // give menuTrigger the focus
-  menuTrigger.focus();
-}
-
-function closeSubMenu() {
-  // Ensure Go Back button is not reachable by the keyboard when hidden
-  goBack.removeAttribute('tabindex');
-
-  // give keyboard access to top level menu items
-  addTopMenItemsToTabOrder();
-
-  // if small screen then hideSecondaryMenu too
-  if (window.innerWidth < 991) hideSecondaryMenu();
-
-  //get  active main menu item element to set aria-expanded to false when go back is clicked
-  if (lastFocusedElement.hasAttribute('href')) {
-    const activeMainMenuElement = document.getElementById(
-      lastFocusedElement.getAttribute('href').substring(1)
-    );
-  }
-
-  // set links aria labels to "open sub menu"
-  setLinksAriaLabelsToOpenSubMenu();
-
-  // give the last focused main menu item the focus
-  setTimeout(() => {
-    lastFocusedElement.focus();
-  }, 10);
-}
-
-function handleKeypress(e) {
-  if (e.keyCode === 9 && !e.shiftKey) {
-    // the user is trying to nagivate forward
-    if (document.activeElement === lastTabStop) {
-      e.preventDefault();
-
-      if (enableFirstLastTabStop) {
-        setTimeout(() => {
-          firstTabStop.focus();
-        }, 2000);
-      }
-    }
-  }
-
-  if (e.keyCode === 9 && e.shiftKey) {
-    // the user is trying to nagivate backwards
-    if (document.activeElement === firstTabStop) {
-      e.preventDefault();
-
-      if (enableFirstLastTabStop) {
-        setTimeout(() => {
-          lastTabStop.focus();
-        }, 2000);
-      }
-    }
-  }
-
-  if (e.keyCode === 27) {
-    // close mobile menu
-    closeSubMenu();
-
-    // give sub menu parent element the focus
-    setTimeout(() => {
-      lastFocusedElement.focus();
-    }, 10);
-  }
-}
-
-function handleLinkClick(e) {
-  e.preventDefault();
-  const target = document.querySelector(`${e.target.getAttribute('href')}`);
-  let parentMenuText = '';
-
-  // toggle aria-expanded attribute - this determines if the sub menu is appearing or not
-  if (target.getAttribute('aria-expanded') === 'true') {
-    // assign text when sub menu is open
-    parentMenuText = target.parentElement.innerText.split(' ')[0];
-
-    target.setAttribute('aria-expanded', 'false');
-    e.target.setAttribute(
-      'aria-label',
-      `${parentMenuText} has a sub menu. Click enter to open.`
-    );
-  } else {
-    // assign text when sub menu is closed
-    parentMenuText = target.parentElement.innerText;
-
-    target.setAttribute('aria-expanded', 'true');
-    e.target.setAttribute(
-      'aria-label',
-      `Click enter to close ${parentMenuText} sub menu`
-    );
-  }
-
-  if (enableFirstLastTabStop) {
-    // store top menu item to give focus later when user closes the sub menu
-    lastFocusedElement = document.activeElement;
-
-    // get the first and last sub menu items to keep users looping through the sub menu items
-    // all the while the sub menu is open
-    var focusableElements = target.querySelectorAll('a');
-    firstTabStop = focusableElements[0];
-    lastTabStop = focusableElements[focusableElements.length - 1];
-
-    // add a timeout for the focus to work
-    setTimeout(() => {
-      firstTabStop.focus();
-    }, 10);
-  }
-
-  // add a keyup eventListener for all links
-  var targets = target.querySelectorAll('a');
-  for (var i = 0; i < targets.length; i++) {
-    targets[i].addEventListener('keyup', handleKeypress);
-  }
-}
-
-function hideSecondaryMenu() {
-  if (mobileMenuHead.classList.contains('active')) {
-    //  get  active main menu item element to set aria-expanded to false when close is clicked
-
-    lastFocusedElement = document.activeElement;
-
-    if (lastFocusedElement.hasAttribute('href')) {
-      const activeMainMenuElement = document.getElementById(
-        lastFocusedElement.getAttribute('href').substring(1)
-      );
-      activeMainMenuElement.setAttribute('aria-expanded', 'false');
-    }
-
-    subMenu.style.animation = 'slideRight 0.5s ease forwards';
-    setTimeout(() => {
-      subMenu.classList.remove('active');
-    }, 300);
-
-    menu.querySelector('.current-menu-title').innerHTML = '';
-    mobileMenuHead.classList.remove('active');
-  }
-}
-
 function removeTopMenuItemsFromTabOrder() {
   // remove menu items from tab order
   menuMainListItems.forEach((listItem) => {
@@ -628,6 +657,75 @@ function toggleMenu() {
   closeMenuBtn.setAttribute('tabindex', 0);
 }
 
-var lastFocusedElement;
-var firstTabStop;
-var lastTabStop;
+function topMenuItemsTabOrderStatus() {
+  // remove tab index base on status
+  if (window.innerWidth <= 825 && window.innerWidth > 751) {
+    // contact is keyboard accessible
+    document.querySelector('#contactLink').removeAttribute('tabindex');
+
+    if (menu.classList.contains('active')) {
+      // side panel is open remove priory menu items from tab order
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#blogLinkSm').setAttribute('tabindex', '-1');
+    }
+
+    document.querySelector('#contactLink').focus();
+  }
+
+  if (window.innerWidth <= 750 && window.innerWidth >= 681) {
+    // contact and blog are keyboard accessible
+    document.querySelector('#contactLink').removeAttribute('tabindex');
+    document.querySelector('#blogLink').removeAttribute('tabindex');
+
+    if (menu.classList.contains('active')) {
+      // side panel is open remove priory menu items from tab order
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
+    }
+
+    document.querySelector('#blogLink').focus();
+  }
+
+  if (window.innerWidth <= 680 && window.innerWidth > 625) {
+    // contact, blog, and packages are keyboard accessible
+    document.querySelector('#contactLink').removeAttribute('tabindex');
+    document.querySelector('#blogLink').removeAttribute('tabindex');
+    document.querySelector('#packagesLink').removeAttribute('tabindex');
+
+    if (menu.classList.contains('active')) {
+      // side panel is open remove priory menu items from tab order
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
+    }
+
+    document.querySelector('#packagesLink').focus();
+  }
+
+  if (window.innerWidth <= 625 && window.innerWidth > 550) {
+    // contact, blog, packages, popular are keyboard accessible
+    document.querySelector('#contactLink').removeAttribute('tabindex');
+    document.querySelector('#blogLink').removeAttribute('tabindex');
+    document.querySelector('#packagesLink').removeAttribute('tabindex');
+    document.querySelector('#popularLink').removeAttribute('tabindex');
+
+    if (menu.classList.contains('active')) {
+      // side panel is open remove priory menu items from tab order
+      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+    }
+
+    document.querySelector('#popularLink').focus();
+  }
+
+  if (window.innerWidth <= 550) {
+    // contact, blog, packages, popular, and home are keyboard accessible
+    document.querySelector('#contactLink').removeAttribute('tabindex');
+    document.querySelector('#blogLink').removeAttribute('tabindex');
+    document.querySelector('#packagesLink').removeAttribute('tabindex');
+    document.querySelector('#popularLink').removeAttribute('tabindex');
+    document.querySelector('#home').removeAttribute('tabindex');
+    document.querySelector('#home').focus();
+  }
+}
