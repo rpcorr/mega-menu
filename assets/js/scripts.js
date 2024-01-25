@@ -12,6 +12,15 @@ const closeMenuBtn = menu.querySelector('.mobile-menu-close');
 const mobileMenuHead = menu.querySelector('.mobile-menu-head');
 const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
 
+///
+const contactLink = '#contactLink';
+const blogLink = '#blogLink';
+const packagesLink = '#packagesLink';
+const popularLink = '#popularLink';
+const homeID = '#home';
+
+///
+
 /* For Accessibility */
 const megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
 
@@ -117,37 +126,37 @@ function checkScreenSize() {
     // remove main menu items from tab order based on screen size
     if (window.innerWidth <= 825 && window.innerWidth > 751) {
       // contact is hidden
-      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+      document.querySelector(contactLink).setAttribute('tabindex', '-1');
     }
 
     if (window.innerWidth <= 750 && window.innerWidth >= 681) {
       // contact and blog are hidden'
-      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
-      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
+      document.querySelector(contactLink).setAttribute('tabindex', '-1');
+      document.querySelector(blogLink).setAttribute('tabindex', '-1');
     }
 
     if (window.innerWidth <= 680 && window.innerWidth > 625) {
       // contact, blog, and packages are hidden
-      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
-      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
-      document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
+      document.querySelector(contactLink).setAttribute('tabindex', '-1');
+      document.querySelector(blogLink).setAttribute('tabindex', '-1');
+      document.querySelector(packagesLink).setAttribute('tabindex', '-1');
     }
 
     if (window.innerWidth <= 625 && window.innerWidth > 550) {
       // contact, blog, packages, popular are hidden
-      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
-      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
-      document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLink').setAttribute('tabindex', '-1');
+      document.querySelector(contactLink).setAttribute('tabindex', '-1');
+      document.querySelector(blogLink).setAttribute('tabindex', '-1');
+      document.querySelector(packagesLink).setAttribute('tabindex', '-1');
+      document.querySelector(popularLink).setAttribute('tabindex', '-1');
     }
 
     if (window.innerWidth <= 550) {
       // contact, blog, packages, popular, and home are hidden
-      document.querySelector('#contactLink').setAttribute('tabindex', '-1');
-      document.querySelector('#blogLink').setAttribute('tabindex', '-1');
-      document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLink').setAttribute('tabindex', '-1');
-      document.querySelector('#home').setAttribute('tabindex', '-1');
+      document.querySelector(contactLink).setAttribute('tabindex', '-1');
+      document.querySelector(blogLink).setAttribute('tabindex', '-1');
+      document.querySelector(packagesLink).setAttribute('tabindex', '-1');
+      document.querySelector(popularLink).setAttribute('tabindex', '-1');
+      document.querySelector(homeID).setAttribute('tabindex', '-1');
     }
 
     menuMain.addEventListener('keydown', (e) => {
@@ -218,47 +227,47 @@ function closeMenu() {
 
   if (window.innerWidth <= 825 && window.innerWidth > 751) {
     // contact menu is hidden
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
-    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
-    document.querySelector('#blogLinkSm').removeAttribute('tabindex');
-    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+    document.querySelector(`${homeID}LinkSm`).removeAttribute('tabindex');
+    document.querySelector(`${popularLink}Sm`).removeAttribute('tabindex');
+    document.querySelector(`${packagesLink}Sm`).removeAttribute('tabindex');
+    document.querySelector(`${blogLink}Sm`).removeAttribute('tabindex');
+    document.querySelector(contactLink).setAttribute('tabindex', '-1');
   }
 
   if (window.innerWidth <= 750 && window.innerWidth >= 681) {
     // contact, blog menu are hidden
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
-    document.querySelector('#packagesLinkSm').removeAttribute('tabindex');
-    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
-    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+    document.querySelector(`${homeID}LinkSm`).removeAttribute('tabindex');
+    document.querySelector(`${popularLink}Sm`).removeAttribute('tabindex');
+    document.querySelector(`${packagesLink}Sm`).removeAttribute('tabindex');
+    document.querySelector(blogLink).setAttribute('tabindex', '-1');
+    document.querySelector(contactLink).setAttribute('tabindex', '-1');
   }
 
   if (window.innerWidth <= 680 && window.innerWidth > 625) {
     // contact, blog, packages menu are hidden
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-    document.querySelector('#popularLinkSm').removeAttribute('tabindex');
-    document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
-    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
-    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+    document.querySelector(`${homeID}LinkSm`).removeAttribute('tabindex');
+    document.querySelector(`${popularLink}Sm`).removeAttribute('tabindex');
+    document.querySelector(packagesLink).setAttribute('tabindex', '-1');
+    document.querySelector(blogLink).setAttribute('tabindex', '-1');
+    document.querySelector(contactLink).setAttribute('tabindex', '-1');
   }
 
   if (window.innerWidth <= 625 && window.innerWidth > 550) {
     // contact, blog, packages, popular menu are hidden
-    document.querySelector('#homeLinkSm').removeAttribute('tabindex');
-    document.querySelector('#popularLink').setAttribute('tabindex', '-1');
-    document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
-    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
-    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+    document.querySelector(`${homeID}LinkSm`).removeAttribute('tabindex');
+    document.querySelector(popularLink).setAttribute('tabindex', '-1');
+    document.querySelector(packagesLink).setAttribute('tabindex', '-1');
+    document.querySelector(blogLink).setAttribute('tabindex', '-1');
+    document.querySelector(contactLink).setAttribute('tabindex', '-1');
   }
 
   if (window.innerWidth <= 550) {
     // home contact, blog, packages, popular menu are hidden
-    document.querySelector('#home').setAttribute('tabindex', '-1');
-    document.querySelector('#popularLink').setAttribute('tabindex', '-1');
-    document.querySelector('#packagesLink').setAttribute('tabindex', '-1');
-    document.querySelector('#blogLink').setAttribute('tabindex', '-1');
-    document.querySelector('#contactLink').setAttribute('tabindex', '-1');
+    document.querySelector(homeID).setAttribute('tabindex', '-1');
+    document.querySelector(popularLink).setAttribute('tabindex', '-1');
+    document.querySelector(packagesLink).setAttribute('tabindex', '-1');
+    document.querySelector(blogLink).setAttribute('tabindex', '-1');
+    document.querySelector(contactLink).setAttribute('tabindex', '-1');
   }
 
   // hide secondary menu
@@ -661,71 +670,75 @@ function topMenuItemsTabOrderStatus() {
   // remove tab index base on status
   if (window.innerWidth <= 825 && window.innerWidth > 751) {
     // contact is keyboard accessible
-    document.querySelector('#contactLink').removeAttribute('tabindex');
+    document.querySelector(contactLink).removeAttribute('tabindex');
 
     if (menu.classList.contains('active')) {
       // side panel is open remove priory menu items from tab order
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#blogLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector(`${homeID}LinkSm`).setAttribute('tabindex', '-1');
+      document.querySelector(`${popularLink}Sm`).setAttribute('tabindex', '-1');
+      document
+        .querySelector(`${packagesLink}Sm`)
+        .setAttribute('tabindex', '-1');
+      document.querySelector(`${blogLink}Sm`).setAttribute('tabindex', '-1');
     }
 
-    document.querySelector('#contactLink').focus();
+    document.querySelector(contactLink).focus();
   }
 
   if (window.innerWidth <= 750 && window.innerWidth >= 681) {
     // contact and blog are keyboard accessible
-    document.querySelector('#contactLink').removeAttribute('tabindex');
-    document.querySelector('#blogLink').removeAttribute('tabindex');
+    document.querySelector(contactLink).removeAttribute('tabindex');
+    document.querySelector(blogLink).removeAttribute('tabindex');
 
     if (menu.classList.contains('active')) {
       // side panel is open remove priory menu items from tab order
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#packagesLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector(`${homeID}LinkSm`).setAttribute('tabindex', '-1');
+      document.querySelector(`${popularLink}Sm`).setAttribute('tabindex', '-1');
+      document
+        .querySelector(`${packagesLink}Sm`)
+        .setAttribute('tabindex', '-1');
     }
 
-    document.querySelector('#blogLink').focus();
+    document.querySelector(blogLink).focus();
   }
 
   if (window.innerWidth <= 680 && window.innerWidth > 625) {
     // contact, blog, and packages are keyboard accessible
-    document.querySelector('#contactLink').removeAttribute('tabindex');
-    document.querySelector('#blogLink').removeAttribute('tabindex');
-    document.querySelector('#packagesLink').removeAttribute('tabindex');
+    document.querySelector(contactLink).removeAttribute('tabindex');
+    document.querySelector(blogLink).removeAttribute('tabindex');
+    document.querySelector(packagesLink).removeAttribute('tabindex');
 
     if (menu.classList.contains('active')) {
       // side panel is open remove priory menu items from tab order
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
-      document.querySelector('#popularLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector(`${homeID}LinkSm`).setAttribute('tabindex', '-1');
+      document.querySelector(`${popularLink}Sm`).setAttribute('tabindex', '-1');
     }
 
-    document.querySelector('#packagesLink').focus();
+    document.querySelector(packagesLink).focus();
   }
 
   if (window.innerWidth <= 625 && window.innerWidth > 550) {
     // contact, blog, packages, popular are keyboard accessible
-    document.querySelector('#contactLink').removeAttribute('tabindex');
-    document.querySelector('#blogLink').removeAttribute('tabindex');
-    document.querySelector('#packagesLink').removeAttribute('tabindex');
-    document.querySelector('#popularLink').removeAttribute('tabindex');
+    document.querySelector(contactLink).removeAttribute('tabindex');
+    document.querySelector(blogLink).removeAttribute('tabindex');
+    document.querySelector(packagesLink).removeAttribute('tabindex');
+    document.querySelector(popularLink).removeAttribute('tabindex');
 
     if (menu.classList.contains('active')) {
       // side panel is open remove priory menu items from tab order
-      document.querySelector('#homeLinkSm').setAttribute('tabindex', '-1');
+      document.querySelector(`${homeID}LinkSm`).setAttribute('tabindex', '-1');
     }
 
-    document.querySelector('#popularLink').focus();
+    document.querySelector(popularLink).focus();
   }
 
   if (window.innerWidth <= 550) {
     // contact, blog, packages, popular, and home are keyboard accessible
-    document.querySelector('#contactLink').removeAttribute('tabindex');
-    document.querySelector('#blogLink').removeAttribute('tabindex');
-    document.querySelector('#packagesLink').removeAttribute('tabindex');
-    document.querySelector('#popularLink').removeAttribute('tabindex');
-    document.querySelector('#home').removeAttribute('tabindex');
-    document.querySelector('#home').focus();
+    document.querySelector(contactLink).removeAttribute('tabindex');
+    document.querySelector(blogLink).removeAttribute('tabindex');
+    document.querySelector(packagesLink).removeAttribute('tabindex');
+    document.querySelector(popularLink).removeAttribute('tabindex');
+    document.querySelector(homeID).removeAttribute('tabindex');
+    document.querySelector(homeID).focus();
   }
 }
