@@ -166,7 +166,7 @@ function checkScreenSize() {
         menu.classList.remove('active');
 
         // remove top menu items from tab order
-        removeTopMenuItemsFromTabOrder();
+        //removeTopMenuItemsFromTabOrder();
 
         // remove tabindex from close menu button
         closeMenuBtn.removeAttribute('tabindex');
@@ -626,7 +626,7 @@ function menuSmall(mI) {
 function removeTopMenuItemsFromTabOrder() {
   // remove menu items from tab order
   menuMainListItems.forEach((listItem) => {
-    listItem.setAttribute('tabindex', -1);
+    listItem.setAttribute('tabindex', '-1');
   });
 }
 
@@ -657,9 +657,15 @@ function showSubMenu(hasChildren) {
   menu.querySelector('.current-menu-title').innerHTML = menuTitle;
   mobileMenuHead.classList.add('active');
   // when sub menu is visible ensure main menu item are not reachable
-  removeTopMenuItemsFromTabOrder();
+  // removeTopMenuItemsFromTabOrder();
   // make the go back button accessible from the keyboard
   goBack.setAttribute('tabindex', 0);
+
+  document.querySelector(homeID).setAttribute('tabindex', '-1');
+  document.querySelector(popularLink).setAttribute('tabindex', '-1');
+  document.querySelector(packagesLink).setAttribute('tabindex', '-1');
+  document.querySelector(blogLink).setAttribute('tabindex', '-1');
+  document.querySelector(contactLink).setAttribute('tabindex', '-1');
 }
 
 function toggleMenu() {
