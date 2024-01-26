@@ -413,7 +413,9 @@ function hideSecondaryMenu() {
       const activeMainMenuElement = document.getElementById(
         lastFocusedElement.getAttribute('href').substring(1)
       );
-      activeMainMenuElement.setAttribute('aria-expanded', 'false');
+
+      if (activeMainMenuElement != null)
+        activeMainMenuElement.setAttribute('aria-expanded', 'false');
     }
 
     subMenu.style.animation = 'slideRight 0.5s ease forwards';
