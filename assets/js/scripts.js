@@ -516,7 +516,7 @@ function menuLarge(mI) {
     let subMenuContainerContent = '<ul>';
 
     mI.subMenuItems.forEach((_, i) => {
-      subMenuContainerContent += `<li><a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a><a/li>`;
+      subMenuContainerContent += `<li><a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a></li>`;
     });
 
     subMenuContainer += `${subMenuContainerContent}</ul></div>`;
@@ -666,6 +666,33 @@ function showSubMenu(hasChildren) {
   document.querySelector(packagesLink).setAttribute('tabindex', '-1');
   document.querySelector(blogLink).setAttribute('tabindex', '-1');
   document.querySelector(contactLink).setAttribute('tabindex', '-1');
+
+  // put focus on first element in sub menu
+  setTimeout(() => {
+    // remove "Menu" to get container ID
+
+    if (hasChildren.id.replace('Menu', '') === 'popular')
+      document
+        .querySelector(
+          `#${hasChildren.id.replace('Menu', '')} > div:first-child a`
+        )
+        .focus();
+    else if (hasChildren.id.replace('Menu', '') === 'packages')
+      document
+        .querySelector(
+          `#${hasChildren.id.replace(
+            'Menu',
+            ''
+          )} > div.list-item:first-child > ul > li:first-child a`
+        )
+        .focus();
+    else if (hasChildren.id.replace('Menu', '') === 'blog')
+      document
+        .querySelector(
+          `#${hasChildren.id.replace('Menu', '')} > ul > li:first-child a`
+        )
+        .focus();
+  }, 10);
 }
 
 function toggleMenu() {
