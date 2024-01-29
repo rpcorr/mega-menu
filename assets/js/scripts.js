@@ -436,6 +436,18 @@ function hideSecondaryMenu() {
       subMenu.classList.remove('active');
     }, 300);
 
+    // ensure all sub menus aria-expanded are false and inline style removed
+    const menuHasChildren = document.querySelectorAll(
+      '.menu-item-has-children'
+    );
+
+    menuHasChildren.forEach((menu) => {
+      // set aria-expanded to false
+      menu.querySelector('li div').setAttribute('aria-expanded', 'false');
+      // remove inline styles
+      menu.querySelector('li div').removeAttribute('style');
+    });
+
     menu.querySelector('.current-menu-title').innerHTML = '';
     mobileMenuHead.classList.remove('active');
   }
