@@ -659,21 +659,26 @@ function setLinksAriaLabelsToOpenSubMenu() {
 }
 
 function showSubMenu(hasChildren) {
-  if (hasChildren.hasAttribute('id') && hasChildren.id === 'blogMenu')
-    document.getElementById('blog').setAttribute('aria-expanded', 'true');
-
+  // set active to sub menu add slideLeft style animation
   subMenu = hasChildren.querySelector('.sub-menu');
   subMenu.classList.add('active');
   subMenu.style.animation = 'slideLeft 0.5s ease forwards';
+
+  // set menu title
   const menuTitle =
     hasChildren.querySelector('i').parentNode.childNodes[0].textContent;
   menu.querySelector('.current-menu-title').innerHTML = menuTitle.trim();
+
+  // add active class to mobileMenuHead
   mobileMenuHead.classList.add('active');
-  // when sub menu is visible ensure main menu item are not reachable
-  // removeTopMenuItemsFromTabOrder();
+
+  // set aria-expanded to true on the sub menu
+  hasChildren.childNodes[1].setAttribute('aria-expanded', 'true');
+
   // make the go back button accessible from the keyboard
   goBack.setAttribute('tabindex', 0);
 
+  // when sub menu is visible ensure main menu item are not reachable
   document.querySelector(homeID).setAttribute('tabindex', '-1');
   document.querySelector(popularLink).setAttribute('tabindex', '-1');
   document.querySelector(packagesLink).setAttribute('tabindex', '-1');
