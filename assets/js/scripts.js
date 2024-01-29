@@ -293,15 +293,28 @@ function closeSubMenu() {
   // give keyboard access to top level menu items
   topMenuItemsTabOrderStatus();
 
+  // retrieve the current menu title to determine which menu should get the focus when closed
+  const curMenuTitle = document
+    .querySelector('.current-menu-title')
+    .textContent.toLowerCase();
+
   // if small screen then hideSecondaryMenu too
   if (window.innerWidth < 991) hideSecondaryMenu();
 
-  //get  active main menu item element to set aria-expanded to false when go back is clicked
-  if (lastFocusedElement.hasAttribute('href')) {
-    const activeMainMenuElement = document.getElementById(
-      lastFocusedElement.getAttribute('href').substring(1)
-    );
-  }
+  // //get  active main menu item element to set aria-expanded to false when go back is clicked
+  // if (lastFocusedElement.hasAttribute('href')) {
+  //   const activeMainMenuElement = document.getElementById(
+  //     lastFocusedElement.getAttribute('href').substring(1)
+  //   );
+  // }
+
+  // retreive lastFocusedElement
+  lastFocusedElement = document.querySelector(`#${curMenuTitle}Link`);
+
+  // set menu div aria-expanded to false
+  document
+    .querySelector(`#${curMenuTitle}`)
+    .setAttribute('aria-expanded', 'false');
 
   // set links aria labels to "open sub menu"
   setLinksAriaLabelsToOpenSubMenu();
@@ -654,7 +667,7 @@ function showSubMenu(hasChildren) {
   subMenu.style.animation = 'slideLeft 0.5s ease forwards';
   const menuTitle =
     hasChildren.querySelector('i').parentNode.childNodes[0].textContent;
-  menu.querySelector('.current-menu-title').innerHTML = menuTitle;
+  menu.querySelector('.current-menu-title').innerHTML = menuTitle.trim();
   mobileMenuHead.classList.add('active');
   // when sub menu is visible ensure main menu item are not reachable
   // removeTopMenuItemsFromTabOrder();
