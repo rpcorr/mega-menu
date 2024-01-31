@@ -4,13 +4,18 @@
 const logoLink = document.querySelector('.logo > a');
 const menuOverlay = document.querySelector('.menu-overlay');
 const menu = document.querySelector('.menu');
+const menuOverflow = document.querySelector('.menu-overflow');
 const menuMain = menu.querySelector('.menu-main');
 const menuPriority = document.querySelector('.menu-priority');
 const goBack = menu.querySelector('.go-back');
 const menuTrigger = document.querySelector('.mobile-menu-trigger');
+const menuTriggerLg = document.querySelector('.menu-trigger-lg');
 const closeMenuBtn = menu.querySelector('.mobile-menu-close');
+const closeMenuBtnOverflow = menuOverflow.querySelector('.menu-close');
 const mobileMenuHead = menu.querySelector('.mobile-menu-head');
-const menuMainListItems = document.querySelectorAll('.menu-main > li > a');
+const menuMainListItems = document.querySelectorAll(
+  '.menu > .menu-main > li > a'
+);
 
 ///
 const contactLink = '#contactLink';
@@ -109,19 +114,85 @@ function checkIfMenuIsOpen() {
   }
 }
 
+function checkIfLgMenuIsOpen() {
+  menuOverflow.classList.toggle('active');
+  document.querySelector('.menu-overlay').classList.toggle('active');
+  closeMenuBtn.setAttribute('tabindex', 0);
+
+  /// toggleMenu()
+
+  if (menuOverflow.classList.contains('active')) {
+    logoLink.setAttribute('tabindex', -1);
+    menuTriggerLg.setAttribute('tabindex', -1);
+
+    // set the top menu items tab order status
+    //topMenuItemsTabOrderStatus();
+
+    document.querySelector(homeID).setAttribute('tabindex', '-1');
+    document.querySelector(popularLink).setAttribute('tabindex', '-1');
+    document.querySelector(packagesLink).setAttribute('tabindex', '-1');
+    document.querySelector(blogLink).setAttribute('tabindex', '-1');
+    document.querySelector(contactLink).setAttribute('tabindex', '-1');
+
+    const overflowMenuUL = document.querySelector(
+      '.menu-overflow > .menu-main'
+    );
+
+    // get all the links in the overflow menu and remove tab index
+    // to become reachable by keyboard
+    const listAnchorTags = overflowMenuUL.querySelectorAll('li > a');
+
+    // place overflow menu items into tab order
+    listAnchorTags.forEach((lAT) => {
+      lAT.removeAttribute('tabindex');
+    });
+
+    // add focus to the first item in the list
+    listAnchorTags[0].focus();
+
+    // add tabindex to the close button
+    closeMenuBtnOverflow.setAttribute('tabindex', '0');
+  }
+}
+
 function checkScreenSize() {
   if (window.innerWidth > 825) {
     // larger screen
 
-    // add menu items to tab order
-    topMenuItemsTabOrderStatus();
+    // remove mobile menu trigger from tab order
+    menuTrigger.setAttribute('tabIndex', '-1');
+
+    // add large window menu trigger to the tab order
+    menuTriggerLg.setAttribute('tabindex', '0');
 
     if (menu.classList.contains('active')) {
       // toggle Menu
       toggleMenu();
     }
+
+    menuTriggerLg.addEventListener('click', () => {
+      checkIfLgMenuIsOpen();
+    });
+
+    menuTriggerLg.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) checkIfLgMenuIsOpen();
+    });
+
+    closeMenuBtnOverflow.addEventListener('click', () => {
+      closeMenuLg();
+    });
+
+    closeMenuBtnOverflow.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) closeMenuLg();
+    });
   } else {
     // small screen
+
+    // add mobile menu trigger into tab order
+    menuTrigger.setAttribute('tabIndex', '0');
+
+    // remove large window menu trigger from tab order
+    menuTriggerLg.setAttribute('tabindex', '-1');
 
     // remove main menu items from tab order based on screen size
     if (window.innerWidth <= 825 && window.innerWidth > 751) {
@@ -284,6 +355,40 @@ function closeMenu() {
 
   // give menuTrigger the focus
   menuTrigger.focus();
+}
+
+function closeMenuLg() {
+  menuOverflow.classList.toggle('active');
+  document.querySelector('.menu-overlay').classList.toggle('active');
+  closeMenuBtnOverflow.setAttribute('tabindex', 0);
+
+  // remove overflow links from tab order
+  const overflowMenuUL = document.querySelector('.menu-overflow > .menu-main');
+  const listAnchorTags = overflowMenuUL.querySelectorAll('li > a');
+
+  // remove overflowMenu links from tab order
+  listAnchorTags.forEach((at) => {
+    at.setAttribute('tabindex', '-1');
+  });
+
+  // add logo and top menu items to tab order
+  logoLink.removeAttribute('tabindex');
+  document.querySelector(homeID).removeAttribute('tabindex');
+  document.querySelector(popularLink).removeAttribute('tabindex');
+  document.querySelector(packagesLink).removeAttribute('tabindex');
+  document.querySelector(blogLink).removeAttribute('tabindex');
+  document.querySelector(contactLink).removeAttribute('tabindex');
+
+  // remove overflow menu close button from the tab order
+  closeMenuBtnOverflow.setAttribute('tabindex', '-1');
+
+  // put menuTriggerLg back in tab order
+  menuTriggerLg.setAttribute('tabindex', '0');
+
+  // set focus on lg menu trigger
+  setTimeout(() => {
+    menuTriggerLg.focus();
+  }, 10);
 }
 
 function closeSubMenu() {

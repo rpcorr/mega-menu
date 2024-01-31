@@ -91,10 +91,6 @@ a {
   margin-left: 25px;
 }
 
-/*.header .menu > ul.menu-priority {
-  justify-self: left; 
-}*/
-
 .header .menu > ul > li > a {
   font-size: 15px;
   font-weight: 500;
@@ -270,6 +266,7 @@ a {
   white-space: nowrap !important;
 }
 
+/* Responsive */
 @media screen and (min-width: 0px) and (max-width: 825px) {
   .sm-screens > nav {
     display: block;
@@ -410,9 +407,149 @@ a {
   .sm-screens > .menu-p {
     display: none;
   } /* hide it elsewhere */
+
+  .header .menu-trigger-lg {
+    display: flex;
+    height: 30px;
+    width: 30px;
+    margin-left: 15px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header .menu-trigger-lg span {
+    display: block;
+    height: 2px;
+    background-color: #333;
+    width: 24px;
+    position: relative;
+  }
+
+  .header .menu-trigger-lg span:before,
+  .header .menu-trigger-lg span:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+  }
+
+  .header .menu-trigger-lg span:before {
+    top: -6px;
+  }
+
+  .header .menu-trigger-lg span:after {
+    top: 6px;
+  }
+
+  .header .menu-overflow {
+    position: fixed;
+    width: 320px;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    transform: translate(-100%);
+    -webkit-transform: translate(-100%);
+    -moz-transform: translate(-100%);
+    -ms-transform: translate(-100%);
+    -o-transform: translate(-100%);
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    z-index: 1099;
+  }
+
+  .header .menu-overflow.active {
+    transform: translate(0%);
+    -webkit-transform: translate(0%);
+    -moz-transform: translate(0%);
+    -ms-transform: translate(0%);
+    -o-transform: translate(0%);
+  }
+
+  .header .menu-overflow .menu-head {
+    display: flex;
+    height: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 501;
+    position: sticky;
+    background-color: #fff;
+    top: 0;
+  }
+
+  .header .menu-overflow .menu-head .go-back {
+    height: 50px;
+    width: 50px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    color: #000;
+    font-size: 16px;
+    display: none;
+  }
+
+  .header .menu-overflow .menu-head.active .go-back {
+    display: block;
+  }
+
+  .header .menu-overflow .menu-head .current-menu-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  .header .menu-overflow .menu-head .menu-close {
+    height: 50px;
+    width: 50px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    color: #000;
+    font-size: 25px;
+  }
+
+  .header .menu-overflow > ul > li > a {
+    line-height: 50px;
+    height: 50px;
+    padding: 0 50px 0 15px;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1098;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+  }
+
+  .menu-overlay.active {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
-/* Responsive */
 @media (max-width: 825px) {
   .header .item-center {
     order: 3;
@@ -703,6 +840,12 @@ a {
   .menu-overlay.active {
     visibility: visible;
     opacity: 1;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 944px) {
+  .menu-overflow {
+    display: none;
   }
 }
 
