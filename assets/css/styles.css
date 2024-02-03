@@ -251,7 +251,7 @@ ul#menu-main-menu li.menu-item-has-children > a {
   padding-right: 1.75rem;
 }
 
-ul#menu-main-menu li.menu-item-has-children::after {
+ul#menuu-main-menu li.menu-item-has-children::after {
   content: ' ';
   display: block;
   position: absolute;
@@ -412,7 +412,7 @@ ul#menu-main-menu li.menu-item-has-children > a {
   padding-right: 1.75rem;
 }
 
-ul#menu-main-menu li.menu-item-has-children::after {
+ul#menuu-main-menu li.menu-item-has-children::after {
   content: ' ';
   display: block;
   position: absolute;
