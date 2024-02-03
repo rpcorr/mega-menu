@@ -8,55 +8,55 @@ var navItemVisible = [];
 var moreWidth = 0;
 var winWidth = 0;
 
-jQuery(document).ready(function () {
-  winWidth = jQuery(window).width();
+$(document).ready(function () {
+  winWidth = $(window).width();
 
-  navItems = jQuery('#menu-main-menu > li');
+  navItems = $('#menu-main-menu > li');
 
   // get width of each item, and list each as visible
   navItems.each(function () {
-    var itemWidth = jQuery(this).outerWidth();
+    var itemWidth = $(this).outerWidth();
     navItemWidth.push(itemWidth);
     navItemVisible.push(true);
   });
 
   // add more link
-  jQuery('#menu-main-menu').append(
+  $('#menu-main-menu').append(
     '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#">More</a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
   );
-  moreWidth = jQuery('#menu-more').outerWidth();
+  moreWidth = $('#menu-more').outerWidth();
 
   // toggle sub-menu
-  jQuery('#menuMoreLink').click(function (event) {
+  $('#menuMoreLink').click(function (event) {
     event.preventDefault();
-    jQuery('.menu-item-has-children:not(#menu-more)').removeClass('visible');
-    jQuery(this).parent('.menu-item-has-children').toggleClass('visible');
+    $('.menu-item-has-children:not(#menu-more)').removeClass('visible');
+    $(this).parent('.menu-item-has-children').toggleClass('visible');
   });
 
   // collapse all sub-menus when user clicks off
-  jQuery('body').click(function (event) {
-    if (!jQuery(event.target).closest('li').length) {
-      jQuery('.menu-item-has-children').removeClass('visible');
+  $('body').click(function (event) {
+    if (!$(event.target).closest('li').length) {
+      $('.menu-item-has-children').removeClass('visible');
     }
   });
 
-  jQuery('.menu-item-has-children a').click(function (e) {
+  $('.menu-item-has-children a').click(function (e) {
     e.stopPropagation();
   });
-  jQuery('.menu-item-has-children ul').click(function (e) {
+  $('.menu-item-has-children ul').click(function (e) {
     e.stopPropagation();
   });
-  jQuery('.menu-item-has-children li').click(function (e) {
+  $('.menu-item-has-children li').click(function (e) {
     e.stopPropagation();
   });
 
   // toggle all sub-menus
-  jQuery('.menu-item-has-children').click(function (event) {
-    if (!jQuery(this).hasClass('visible')) {
-      jQuery(this).siblings('.menu-item-has-children').removeClass('visible');
-      jQuery(this).addClass('visible');
+  $('.menu-item-has-children').click(function (event) {
+    if (!$(this).hasClass('visible')) {
+      $(this).siblings('.menu-item-has-children').removeClass('visible');
+      $(this).addClass('visible');
     } else {
-      jQuery(this).removeClass('visible');
+      $(this).removeClass('visible');
     }
   });
 
@@ -69,30 +69,30 @@ jQuery(document).ready(function () {
 
 // format navigation on page resize
 var id;
-jQuery(window).resize(function () {
+$(window).resize(function () {
   clearTimeout(id);
   id = setTimeout(onResize, 500);
 });
 
 function onResize() {
-  if (winWidth != jQuery(window).width()) {
+  if (winWidth != $(window).width()) {
     // get width of each item, and list each as visible
     var count = 0;
     navItems.each(function () {
-      var itemWidth = jQuery(this).outerWidth();
+      var itemWidth = $(this).outerWidth();
       if (itemWidth > 0) {
         navItemWidth[count] = itemWidth;
       }
     });
 
-    moreWidth = jQuery('#menu-more').outerWidth();
+    moreWidth = $('#menu-more').outerWidth();
 
     // hide all submenus
-    jQuery('.menu-item-has-children').removeClass('visible');
+    $('.menu-item-has-children').removeClass('visible');
 
     formatNav();
 
-    winWidth = jQuery(window).width();
+    winWidth = $(window).width();
   }
 }
 
@@ -102,7 +102,7 @@ function formatNav() {
   var count = 0;
   var tempWidth = 0;
   var totalWidth = 0;
-  var containerWidth = jQuery('.menu-main-menu-container').innerWidth();
+  var containerWidth = $('.menu-main-menu-container').innerWidth();
   var navPadding = 5; // for spacing around items
   var numItems = navItems.length - 1;
 
@@ -123,13 +123,13 @@ function formatNav() {
       // show menu item
       if (navItemVisible[count] != true) {
         // move back to main menu
-        jQuery('#menu-more').before(jQuery('#moreSubMenu').children().first());
+        $('#menu-more').before($('#moreSubMenu').children().first());
 
         navItemVisible[count] = true;
 
         // if all are visible, hide More
         if (count == numItems) {
-          jQuery('#menu-more').hide();
+          $('#menu-more').hide();
         }
       }
     }
@@ -141,18 +141,18 @@ function formatNav() {
 
         // change text to "Menu" if no links are showing
         if (count == 0) {
-          jQuery('nav').addClass('all-hidden');
-          jQuery('#menuMoreLink').text('Menu');
+          $('nav').addClass('all-hidden');
+          $('#menuMoreLink').text('Menu');
         } else {
-          jQuery('nav').removeClass('all-hidden');
-          jQuery('#menuMoreLink').text('More');
+          $('nav').removeClass('all-hidden');
+          $('#menuMoreLink').text('More');
         }
 
-        jQuery('#menu-more').show();
+        $('#menu-more').show();
       }
 
       // move menu item to More dropdown
-      jQuery(this).appendTo(jQuery('#moreSubMenu'));
+      $(this).appendTo($('#moreSubMenu'));
 
       navItemVisible[count] = false;
     }
@@ -171,14 +171,14 @@ function watchForHover() {
     if (new Date() - lastTouchTime < 500) return;
     if (hasHoverClass) return;
 
-    jQuery('body').addClass('has-hover');
+    $('body').addClass('has-hover');
     hasHoverClass = true;
   }
 
   function disableHover() {
     if (!hasHoverClass) return;
 
-    jQuery('body').removeClass('has-hover');
+    $('body').removeClass('has-hover');
     hasHoverClass = false;
   }
 
