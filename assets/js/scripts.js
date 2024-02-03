@@ -2,11 +2,11 @@
 /* flexbox priority navigation */
 
 // global variables
-var navItems = [];
-var navItemWidth = [];
-var navItemVisible = [];
-var moreWidth = 0;
-var winWidth = 0;
+let navItems = [];
+const navItemWidth = [];
+const navItemVisible = [];
+let moreWidth = 0;
+let winWidth = 0;
 
 $(document).ready(function () {
   winWidth = $(window).width();
@@ -15,8 +15,7 @@ $(document).ready(function () {
 
   // get width of each item, and list each as visible
   navItems.each(function () {
-    var itemWidth = $(this).outerWidth();
-    navItemWidth.push(itemWidth);
+    navItemWidth.push($(this).outerWidth());
     navItemVisible.push(true);
   });
 
@@ -68,7 +67,7 @@ $(document).ready(function () {
 });
 
 // format navigation on page resize
-var id;
+let id;
 $(window).resize(function () {
   clearTimeout(id);
   id = setTimeout(onResize, 500);
@@ -77,9 +76,9 @@ $(window).resize(function () {
 function onResize() {
   if (winWidth != $(window).width()) {
     // get width of each item, and list each as visible
-    var count = 0;
+    let count = 0;
     navItems.each(function () {
-      var itemWidth = $(this).outerWidth();
+      let itemWidth = $(this).outerWidth();
       if (itemWidth > 0) {
         navItemWidth[count] = itemWidth;
       }
@@ -98,13 +97,13 @@ function onResize() {
 
 function formatNav() {
   // initial variables
-  var room = true;
-  var count = 0;
-  var tempWidth = 0;
-  var totalWidth = 0;
-  var containerWidth = $('.menu-main-menu-container').innerWidth();
-  var navPadding = 5; // for spacing around items
-  var numItems = navItems.length - 1;
+  let room = true;
+  let count = 0;
+  let tempWidth = 0;
+  let totalWidth = 0;
+  const containerWidth = $('.menu-main-menu-container').innerWidth();
+  const navPadding = 5; // for spacing around items
+  const numItems = navItems.length - 1;
 
   // for each menu item
   navItems.each(function () {
@@ -163,8 +162,8 @@ function formatNav() {
 }
 
 function watchForHover() {
-  var hasHoverClass = false;
-  var lastTouchTime = 0;
+  let hasHoverClass = false;
+  let lastTouchTime = 0;
 
   function enableHover() {
     // filter emulated events coming from touch events
