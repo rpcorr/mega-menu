@@ -35,7 +35,7 @@ jQuery(document).ready(function () {
 
   // collapse all sub-menus when user clicks off
   jQuery('body').click(function (event) {
-    if (!jQuery(event.target).closest('.menu-item').length) {
+    if (!jQuery(event.target).closest('li').length) {
       jQuery('.menu-item-has-children').removeClass('visible');
     }
   });
