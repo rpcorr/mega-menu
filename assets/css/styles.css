@@ -523,6 +523,8 @@ ul#menu-main-menu li.menu-item-has-children.visible > a::after {
   -webkit-box-shadow: 0 0 0.2rem 0 rgba(50, 50, 50, 0.75);
   -moz-box-shadow: 0 0 0.2rem 0 rgba(50, 50, 50, 0.75);
   box-shadow: 0 0 0.2rem 0 rgba(50, 50, 50, 0.75);
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
 @media (max-width: 27em) {
