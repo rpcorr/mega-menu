@@ -45,6 +45,10 @@ $(document).ready(function () {
     if (!$(event.target).closest('li').length) {
       $('.menu-item-has-children').removeClass('visible');
     }
+
+    // reset arrows to down position
+    $('.fa').removeClass('fa-angle-up');
+    $('.fa').addClass('fa-angle-down');
   });
 
   $('.menu-item-has-children a').click(function (e) {
@@ -84,6 +88,10 @@ $(document).ready(function () {
         .parents('.menu-item-has-children')
         .siblings('.menu-item-has-children')
         .removeClass('visible');
+
+      // reset arrows to down position
+      $('.fa').removeClass('fa-angle-up');
+      $('.fa').addClass('fa-angle-down');
 
       // replace fa-angle-down with fa-angle-up
       $(this.children).removeClass('fa-angle-down');
