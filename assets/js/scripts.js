@@ -25,8 +25,10 @@ $(document).ready(function () {
   );
   moreWidth = $('#menu-more').outerWidth();
 
+  // select all anchor tags
   const megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
 
+  // add handleLinkClick to eventListener
   for (let i = 0; i < megaMenuLinks.length; i++) {
     megaMenuLinks[i].addEventListener('click', handleLinkClick);
   }
@@ -74,8 +76,10 @@ $(document).ready(function () {
   watchForHover();
 
   function handleLinkClick(e) {
+    console.log('handleLinkClick');
     e.preventDefault();
     if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
+      console.log('link has sub menu');
       $(this)
         .parents('.menu-item-has-children')
         .siblings('.menu-item-has-children')
@@ -87,16 +91,41 @@ $(document).ready(function () {
 
       // check if link doesn't have an id - in other words the More link
       if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
+        console.log('open sub menu');
         $(this).parents('.menu-item-has-children').addClass('visible');
       }
     } else {
-      // replace fa-angle-up with fa-angle-down
-      $(this.children).removeClass('fa-angle-up');
-      $(this.children).addClass('fa-angle-down');
+      console.log('close');
 
-      // check if link doesn't have an id - in other words the More link
-      if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
-        $(this).parents('.menu-item-has-children').removeClass('visible');
+      // check if menu item has a sub menu
+      if ($(this).parents('.menu-item-has-children').length === 2) {
+        // toggle sub menu
+        if (!$(this).closest('li').hasClass('visible')) {
+          console.log('show sub menu');
+          $(this).closest('li').addClass('visible');
+
+          // replace fa-angle-down with fa-angle-up
+          $(this.children).removeClass('fa-angle-down');
+          $(this.children).addClass('fa-angle-up');
+        } else {
+          $(this).closest('li').removeClass('visible');
+
+          // replace fa-angle-up with fa-angle-down
+          $(this.children).removeClass('fa-angle-up');
+          $(this.children).addClass('fa-angle-down');
+        }
+      } else {
+        // close "More" menu
+
+        // replace fa-angle-up with fa-angle-down on "More" menu item
+        $(this.children).removeClass('fa-angle-up');
+        $(this.children).addClass('fa-angle-down');
+
+        // check if link doesn't have an id - in other words the More link
+        if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
+          console.log('close sub menu that is not the more link');
+          $(this).parents('.menu-item-has-children').removeClass('visible');
+        }
       }
     }
   }
