@@ -117,6 +117,10 @@ $(document).ready(function () {
       } else {
         // close "More" menu
 
+        // reset arrows to down position
+        $('.fa').removeClass('fa-angle-up');
+        $('.fa').addClass('fa-angle-down');
+
         // replace fa-angle-up with fa-angle-down on "More" menu item
         $(this.children).removeClass('fa-angle-up');
         $(this.children).addClass('fa-angle-down');
@@ -153,6 +157,10 @@ function onResize() {
 
     // hide all submenus
     $('.menu-item-has-children').removeClass('visible');
+
+    // reset arrows to down position
+    $('.fa').removeClass('fa-angle-up');
+    $('.fa').addClass('fa-angle-down');
 
     formatNav();
 
