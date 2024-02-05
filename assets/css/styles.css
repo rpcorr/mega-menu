@@ -485,7 +485,12 @@ ul#menu-main-menu
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.25;
+  /* the style below may not be needed any more after completing the mega-menu */
   padding: 1rem 1.5rem;
+}
+
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a {
+  padding: 1rem 0;
 }
 
 .menu-main-menu-container
@@ -569,6 +574,18 @@ ul.sub-menu li > ul.sub-menu {
   background-color: #fff;
 }
 
+.menu-main-menu-container
+  > #menu-main-menu
+  > li
+  > .sub-menu
+  .sub-menu-div
+  .title {
+  color: #ea4636;
+  text-align: left;
+  margin-top: 1em;
+  margin-left: 1.5em;
+}
+
 .menu-main-menu-container > #menu-main-menu > li li > .sub-menu a {
   padding-left: 2rem;
 }
@@ -615,11 +632,9 @@ ul.sub-menu li > ul.sub-menu {
 /* Styles from Mega menu */
 header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
   position: absolute;
-  /*z-index: 500;*/
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: -2px 2px 70px -25px rgba(0, 0, 0, 0.3);
   text-align: left;
-  /* padding: 5px 10px; */
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -633,10 +648,14 @@ header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
 
 header nav ul.menu > li.menu-item-has-children:hover .sub-menu-div,
 header nav ul.menu > li.menu-item-has-children.visible .sub-menu-div {
-  /* margin-top: 0; */
   visibility: visible;
   opacity: 1;
 }
+
+header nav ul.menu > li.menu-item-has-children > .sub-menu-div a {
+  padding-left: 15px !important;
+}
+
 header nav ul.menu > li > .sub-menu-div > ul li {
   line-height: 1;
 }
@@ -646,6 +665,7 @@ header nav ul.menu > li > .sub-menu-div > ul li a {
   padding: 10px 0;
   font-size: 25px;
   color: #555555;
+  padding-left: 1.5rem;
   transition: color 0.3s ease;
   -webkit-transition: color 0.3s ease;
   -moz-transition: color 0.3s ease;
@@ -655,11 +675,61 @@ header nav ul.menu > li > .sub-menu-div > ul li a {
 }
 
 header nav ul.menu > li > .single-column-menu {
-  min-width: 280px;
   min-width: 20rem;
   max-width: 350px;
 }
 
+header nav ul.menu > li > .mega-menu > .list-item > ul > li {
+  line-height: 1;
+  display: block;
+}
+header nav ul.menu > li > .mega-menu > .list-item > ul > li > a {
+  text-decoration: none;
+  color: #555555;
+  font-size: 15px;
+  display: block;
+  transition: color 0.3s ease;
+  padding: 5px 0;
+}
+
+header nav ul.menu > li > .mega-menu {
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 {
+  max-width: 1100px;
+  width: 55rem;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0px;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item {
+  flex: 0 0 25%;
+  flex-grow: 1;
+  padding: 0 15px;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item .title {
+  font-size: 16px;
+  color: #ea4636;
+  font-weight: 600;
+  line-height: 1;
+  padding: 10px 0;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item img {
+  max-width: 100%;
+  width: 100%;
+  vertical-align: middle;
+}
+
+header nav ul.menu > li > .mega-menu > .list-item > ul > li > a:hover,
 .menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:hover,
 .menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:focus {
   background-color: #fff;
