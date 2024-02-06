@@ -390,6 +390,15 @@ ul#menu-main-menu li.menu-item-has-children.visible > ul {
 body.has-hover
   ul#menu-main-menu
   li.menu-item-has-children:hover
+  > .sub-menu-div {
+  display: inline-flex;
+  position: absolute;
+  top: 54px;
+}
+
+body.has-hover
+  ul#menu-main-menu
+  li.menu-item-has-children:hover
   > ul
   ul.sub-menu,
 ul#menu-main-menu li.menu-item-has-children.visible > ul ul.sub-menu {
@@ -692,7 +701,8 @@ header nav ul.menu > li > .mega-menu > .list-item > ul > li > a {
   padding: 5px 0;
 }
 
-header nav ul.menu > li > .mega-menu {
+header nav ul.menu > li > .mega-menu,
+header nav ul.menu > li > .single-column-menu {
   left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
