@@ -387,20 +387,13 @@ ul#menu-main-menu li.menu-item-has-children.visible > ul {
   display: block;
 }
 
-body.has-hover
-  ul#menu-main-menu
-  li.menu-item-has-children:hover
-  > .sub-menu-div {
+body.has-hover ul#menu-main-menu .hover:hover > .sub-menu-div {
   display: inline-flex;
   position: absolute;
   top: 54px;
 }
 
-body.has-hover
-  ul#menu-main-menu
-  li.menu-item-has-children:hover
-  > ul
-  ul.sub-menu,
+body.has-hover ul#menu-main-menu .hover:hover > ul ul.sub-menu,
 ul#menu-main-menu li.menu-item-has-children.visible > ul ul.sub-menu {
   position: relative;
 }

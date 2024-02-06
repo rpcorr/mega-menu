@@ -13,6 +13,13 @@ $(document).ready(function () {
 
   navItems = $('#menu-main-menu > li');
 
+  // add hover class to those with class menu-item-has-children
+  navItems.each(function () {
+    if ($(this).hasClass('menu-item-has-children')) {
+      $(this).addClass('hover');
+    }
+  });
+
   // get width of each item, and list each as visible
   navItems.each(function () {
     navItemWidth.push($(this).outerWidth());
@@ -155,6 +162,11 @@ function onResize() {
     // get width of each item, and list each as visible
     let count = 0;
     navItems.each(function () {
+      // add hover class to those with class menu-item-has-children
+      if ($(this).hasClass('menu-item-has-children')) {
+        $(this).addClass('hover');
+      }
+
       let itemWidth = $(this).outerWidth();
       if (itemWidth > 0) {
         navItemWidth[count] = itemWidth;
@@ -230,6 +242,9 @@ function formatNav() {
 
         $('#menu-more').show();
       }
+
+      // remove hover class for items under "More"
+      $(this).removeClass('hover');
 
       // move menu item to More dropdown
       $(this).appendTo($('#moreSubMenu'));
