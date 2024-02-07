@@ -388,7 +388,7 @@ ul#menu-main-menu li.menu-item-has-children.visible > ul {
 }
 
 body.has-hover ul#menu-main-menu .hover:hover > .sub-menu-div {
-  display: inline-flex;
+  display: flex;
   position: absolute;
   top: 54px;
 }
