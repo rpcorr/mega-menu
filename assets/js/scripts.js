@@ -89,16 +89,19 @@ $(document).ready(function () {
   function handleLinkClick(e) {
     console.log('handleLinkClick');
     e.preventDefault();
+
     if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
-      console.log('link has sub menu');
+      // link has sub menu
+
+      // remove class visible
       $(this)
         .parents('.menu-item-has-children')
         .siblings('.menu-item-has-children')
         .removeClass('visible');
 
       // reset arrows to down position
-      $('.fa').removeClass('fa-angle-up');
-      $('.fa').addClass('fa-angle-down');
+      // $('.fa').removeClass('fa-angle-up');
+      // $('.fa').addClass('fa-angle-down');
 
       // replace fa-angle-down with fa-angle-up
       $(this.children).removeClass('fa-angle-down');
@@ -110,7 +113,7 @@ $(document).ready(function () {
         $(this).parents('.menu-item-has-children').addClass('visible');
       }
     } else {
-      console.log('close');
+      // close menu
 
       // check if menu item has a sub menu
       if ($(this).parents('.menu-item-has-children').length === 2) {
@@ -123,15 +126,24 @@ $(document).ready(function () {
           $(this.children).removeClass('fa-angle-down');
           $(this.children).addClass('fa-angle-up');
         } else {
+          // remove visible class
           $(this).closest('li').removeClass('visible');
 
           // replace fa-angle-up with fa-angle-down
           $(this.children).removeClass('fa-angle-up');
           $(this.children).addClass('fa-angle-down');
         }
+
+        // remove all visible class from sub menus
+        let submenuItems = $(e.currentTarget).nextAll('.sub-menu').find('li');
+
+        submenuItems.each(function () {
+          if ($(this).hasClass('menu-item-has-children')) {
+            $(this).removeClass('visible');
+          }
+        });
       } else {
         // close "More" menu
-
         // reset arrows to down position
         $('.fa').removeClass('fa-angle-up');
         $('.fa').addClass('fa-angle-down');
@@ -142,8 +154,41 @@ $(document).ready(function () {
 
         // check if link doesn't have an id - in other words the More link
         if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
-          console.log('close sub menu that is not the more link');
-          $(this).parents('.menu-item-has-children').removeClass('visible');
+          // determine whether target tag as a sub menu
+          const targetTag = $(e.currentTarget).parent();
+          if (targetTag.hasClass('menu-item-has-children')) {
+            if (targetTag.hasClass('visible')) {
+              // remove visible class from target <li>
+              targetTag.removeClass('visible');
+            } else {
+              // add visible class to target <li>
+              targetTag.addClass('visible');
+            }
+
+            // remove all visible class from sub menus
+            let submenuItems = $(e.currentTarget)
+              .nextAll('.sub-menu')
+              .find('li');
+
+            submenuItems.each(function () {
+              if ($(this).hasClass('menu-item-has-children')) {
+                $(this).removeClass('visible');
+              }
+            });
+          } else {
+            // close sub menu that is not the more link
+            $(this).parents('.menu-item-has-children').removeClass('visible');
+
+            // remove class visible from sub menu if left open
+            const submenu = $(this).parents('ul')[0];
+            const subMenuItems = submenu.querySelectorAll('li');
+
+            $.each(subMenuItems, (_, value) => {
+              if ($(value).hasClass('visible')) {
+                $(value).removeClass('visible');
+              }
+            });
+          }
         }
       }
     }
