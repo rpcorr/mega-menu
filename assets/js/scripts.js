@@ -109,7 +109,7 @@ $(document).ready(function () {
 
       // check if link doesn't have an id - in other words the More link
       if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
-        console.log('open sub menu');
+        // open sub menu
         $(this).parents('.menu-item-has-children').addClass('visible');
       }
     } else {
@@ -119,7 +119,7 @@ $(document).ready(function () {
       if ($(this).parents('.menu-item-has-children').length === 2) {
         // toggle sub menu
         if (!$(this).closest('li').hasClass('visible')) {
-          console.log('show sub menu');
+          // show sub menu
           $(this).closest('li').addClass('visible');
 
           // replace fa-angle-down with fa-angle-up
@@ -143,14 +143,7 @@ $(document).ready(function () {
           }
         });
       } else {
-        // close "More" menu
-        // reset arrows to down position
-        $('.fa').removeClass('fa-angle-up');
-        $('.fa').addClass('fa-angle-down');
-
-        // replace fa-angle-up with fa-angle-down on "More" menu item
-        $(this.children).removeClass('fa-angle-up');
-        $(this.children).addClass('fa-angle-down');
+        // handle "More" sub menu and determine whether to close "More" menu
 
         // check if link doesn't have an id - in other words the More link
         if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
@@ -160,9 +153,18 @@ $(document).ready(function () {
             if (targetTag.hasClass('visible')) {
               // remove visible class from target <li>
               targetTag.removeClass('visible');
+
+              if ($(targetTag).find('a i').hasClass('fa-angle-up')) {
+                $(targetTag).find('a i').removeClass('fa-angle-up');
+                $(targetTag).find('a i').addClass('fa-angle-down');
+              }
             } else {
-              // add visible class to target <li>
+              // add visible class to target submenu and handle arrows
               targetTag.addClass('visible');
+              if ($(targetTag).find('a i').hasClass('fa-angle-down')) {
+                $(targetTag).find('a i').removeClass('fa-angle-down');
+                $(targetTag).find('a i').addClass('fa-angle-up');
+              }
             }
 
             // remove all visible class from sub menus
@@ -189,6 +191,10 @@ $(document).ready(function () {
               }
             });
           }
+        } else {
+          // reset arrows to down position
+          $('.fa').removeClass('fa-angle-up');
+          $('.fa').addClass('fa-angle-down');
         }
       }
     }
