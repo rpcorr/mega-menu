@@ -651,7 +651,8 @@ header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
   margin-top: 25px;
   opacity: 0;
   visibility: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
+  max-height: 85vh;
 }
 
 header nav ul.menu > li.menu-item-has-children:hover .sub-menu-div,
