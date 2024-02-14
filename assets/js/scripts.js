@@ -11,6 +11,19 @@ let winWidth = 0;
 $(document).ready(function () {
   winWidth = $(window).width();
 
+  $('#menu-main-menu').on('keydown', function (e) {
+    if (e.key == 'Escape') {
+      console.log('Esc key pressed');
+
+      // close all submenus
+      $('li').removeClass('visible');
+
+      // reset arrows to down position
+      $('.fa').removeClass('fa-angle-up');
+      $('.fa').addClass('fa-angle-down');
+    }
+  });
+
   navItems = $('#menu-main-menu > li');
 
   // add hover class to those with class menu-item-has-children
