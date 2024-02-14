@@ -131,8 +131,15 @@ $(document).ready(function () {
       if ($(this).parents('.menu-item-has-children').length === 2) {
         // toggle sub menu
         if (!$(this).closest('li').hasClass('visible')) {
+          console.log('show sub menu');
           // show sub menu
           $(this).closest('li').addClass('visible');
+
+          // update the current menu aria to close submenu
+          $(this).attr(
+            'aria-label',
+            `Click Enter to close ${$(this).text()}sub menu`
+          );
 
           // replace fa-angle-down with fa-angle-up
           $(this.children).removeClass('fa-angle-down');
@@ -160,6 +167,12 @@ $(document).ready(function () {
 
         // check if link doesn't have an id - in other words the More link
         if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
+          // update the current menu aria to close submenu
+          $(this).attr(
+            'aria-label',
+            `Click Enter to close ${$(this).text()}sub menu`
+          );
+
           // determine whether target tag as a sub menu
           const targetTag = $(e.currentTarget).parent();
           if (targetTag.hasClass('menu-item-has-children')) {
@@ -167,7 +180,7 @@ $(document).ready(function () {
             if (targetTag.hasClass('visible')) {
               // remove visible class from target <li>
               targetTag.removeClass('visible');
-              console.log('close sub menu here');
+              console.log('close 2nd- level sub menu');
 
               // set the current menu aria-label to open sub menu
               $(this).attr(
