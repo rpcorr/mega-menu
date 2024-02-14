@@ -158,8 +158,15 @@ $(document).ready(function () {
           $(this.children).removeClass('fa-angle-down');
           $(this.children).addClass('fa-angle-up');
         } else {
+          console.log('close sub sub menu');
           // remove visible class
           $(this).closest('li').removeClass('visible');
+
+          // update the current menu aria to close submenu
+          $(this).attr(
+            'aria-label',
+            `${$(this).text()} has a sub menu. Click enter to open`
+          );
 
           // replace fa-angle-up with fa-angle-down
           $(this.children).removeClass('fa-angle-up');
