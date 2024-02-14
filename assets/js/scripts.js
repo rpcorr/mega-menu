@@ -71,7 +71,6 @@ $(document).ready(function () {
   // toggle all sub-menus
   // $('.menu-item-has-children').click(function (e) {
   //   e.preventDefault();
-  //   console.log('here I am');
   //   if (!$(this).hasClass('visible')) {
   //     $(this).siblings('.menu-item-has-children').removeClass('visible');
   //     $(this).addClass('visible');
@@ -111,6 +110,19 @@ $(document).ready(function () {
       if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
         // open sub menu
         $(this).parents('.menu-item-has-children').addClass('visible');
+
+        // set aria-label of the current menu to click enter to close sub menu
+        $(this).attr(
+          'aria-label',
+          `Click Enter to close ${$(this).text()}sub menu`
+        );
+      } else {
+        // handle More menu on open
+
+        $(this).attr(
+          'aria-label',
+          `Click Enter to close ${$(this).text()}sub menu`
+        );
       }
     } else {
       // close menu
@@ -144,15 +156,24 @@ $(document).ready(function () {
         });
       } else {
         // handle "More" sub menu and determine whether to close "More" menu
+        console.log('close sub menu');
 
         // check if link doesn't have an id - in other words the More link
         if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
           // determine whether target tag as a sub menu
           const targetTag = $(e.currentTarget).parent();
           if (targetTag.hasClass('menu-item-has-children')) {
+            //close sub menu
             if (targetTag.hasClass('visible')) {
               // remove visible class from target <li>
               targetTag.removeClass('visible');
+              console.log('close sub menu here');
+
+              // set the current menu aria-label to open sub menu
+              $(this).attr(
+                'aria-label',
+                `${$(this).text()} has a submenu. Click Enter to open`
+              );
 
               if ($(targetTag).find('a i').hasClass('fa-angle-up')) {
                 $(targetTag).find('a i').removeClass('fa-angle-up');
@@ -192,6 +213,12 @@ $(document).ready(function () {
             });
           }
         } else {
+          // handle "More" menu on close
+
+          $(this).attr(
+            'aria-label',
+            ` ${$(this).text()} has a sub menu. Click Enter to open`
+          );
           // reset arrows to down position
           $('.fa').removeClass('fa-angle-up');
           $('.fa').addClass('fa-angle-down');
