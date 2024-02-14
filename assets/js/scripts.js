@@ -13,6 +13,13 @@ $(document).ready(function () {
 
   navItems = $('#menu-main-menu > li');
 
+  // add hover class to those with class menu-item-has-children
+  navItems.each(function () {
+    if ($(this).hasClass('menu-item-has-children')) {
+      $(this).addClass('hover');
+    }
+  });
+
   // get width of each item, and list each as visible
   navItems.each(function () {
     navItemWidth.push($(this).outerWidth());
@@ -21,7 +28,7 @@ $(document).ready(function () {
 
   // add more link
   $('#menu-main-menu').append(
-    '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#"></a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
+    '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#" aria-label="More has a sub menu. Click enter to open"></a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
   );
   moreWidth = $('#menu-more').outerWidth();
 
@@ -82,16 +89,19 @@ $(document).ready(function () {
   function handleLinkClick(e) {
     console.log('handleLinkClick');
     e.preventDefault();
+
     if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
-      console.log('link has sub menu');
+      // link has sub menu
+
+      // remove class visible
       $(this)
         .parents('.menu-item-has-children')
         .siblings('.menu-item-has-children')
         .removeClass('visible');
 
       // reset arrows to down position
-      $('.fa').removeClass('fa-angle-up');
-      $('.fa').addClass('fa-angle-down');
+      // $('.fa').removeClass('fa-angle-up');
+      // $('.fa').addClass('fa-angle-down');
 
       // replace fa-angle-down with fa-angle-up
       $(this.children).removeClass('fa-angle-down');
@@ -99,44 +109,92 @@ $(document).ready(function () {
 
       // check if link doesn't have an id - in other words the More link
       if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
-        console.log('open sub menu');
+        // open sub menu
         $(this).parents('.menu-item-has-children').addClass('visible');
       }
     } else {
-      console.log('close');
+      // close menu
 
       // check if menu item has a sub menu
       if ($(this).parents('.menu-item-has-children').length === 2) {
         // toggle sub menu
         if (!$(this).closest('li').hasClass('visible')) {
-          console.log('show sub menu');
+          // show sub menu
           $(this).closest('li').addClass('visible');
 
           // replace fa-angle-down with fa-angle-up
           $(this.children).removeClass('fa-angle-down');
           $(this.children).addClass('fa-angle-up');
         } else {
+          // remove visible class
           $(this).closest('li').removeClass('visible');
 
           // replace fa-angle-up with fa-angle-down
           $(this.children).removeClass('fa-angle-up');
           $(this.children).addClass('fa-angle-down');
         }
+
+        // remove all visible class from sub menus
+        let submenuItems = $(e.currentTarget).nextAll('.sub-menu').find('li');
+
+        submenuItems.each(function () {
+          if ($(this).hasClass('menu-item-has-children')) {
+            $(this).removeClass('visible');
+          }
+        });
       } else {
-        // close "More" menu
-
-        // reset arrows to down position
-        $('.fa').removeClass('fa-angle-up');
-        $('.fa').addClass('fa-angle-down');
-
-        // replace fa-angle-up with fa-angle-down on "More" menu item
-        $(this.children).removeClass('fa-angle-up');
-        $(this.children).addClass('fa-angle-down');
+        // handle "More" sub menu and determine whether to close "More" menu
 
         // check if link doesn't have an id - in other words the More link
         if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
-          console.log('close sub menu that is not the more link');
-          $(this).parents('.menu-item-has-children').removeClass('visible');
+          // determine whether target tag as a sub menu
+          const targetTag = $(e.currentTarget).parent();
+          if (targetTag.hasClass('menu-item-has-children')) {
+            if (targetTag.hasClass('visible')) {
+              // remove visible class from target <li>
+              targetTag.removeClass('visible');
+
+              if ($(targetTag).find('a i').hasClass('fa-angle-up')) {
+                $(targetTag).find('a i').removeClass('fa-angle-up');
+                $(targetTag).find('a i').addClass('fa-angle-down');
+              }
+            } else {
+              // add visible class to target submenu and handle arrows
+              targetTag.addClass('visible');
+              if ($(targetTag).find('a i').hasClass('fa-angle-down')) {
+                $(targetTag).find('a i').removeClass('fa-angle-down');
+                $(targetTag).find('a i').addClass('fa-angle-up');
+              }
+            }
+
+            // remove all visible class from sub menus
+            let submenuItems = $(e.currentTarget)
+              .nextAll('.sub-menu')
+              .find('li');
+
+            submenuItems.each(function () {
+              if ($(this).hasClass('menu-item-has-children')) {
+                $(this).removeClass('visible');
+              }
+            });
+          } else {
+            // close sub menu that is not the more link
+            $(this).parents('.menu-item-has-children').removeClass('visible');
+
+            // remove class visible from sub menu if left open
+            const submenu = $(this).parents('ul')[0];
+            const subMenuItems = submenu.querySelectorAll('li');
+
+            $.each(subMenuItems, (_, value) => {
+              if ($(value).hasClass('visible')) {
+                $(value).removeClass('visible');
+              }
+            });
+          }
+        } else {
+          // reset arrows to down position
+          $('.fa').removeClass('fa-angle-up');
+          $('.fa').addClass('fa-angle-down');
         }
       }
     }
@@ -155,6 +213,11 @@ function onResize() {
     // get width of each item, and list each as visible
     let count = 0;
     navItems.each(function () {
+      // add hover class to those with class menu-item-has-children
+      if ($(this).hasClass('menu-item-has-children')) {
+        $(this).addClass('hover');
+      }
+
       let itemWidth = $(this).outerWidth();
       if (itemWidth > 0) {
         navItemWidth[count] = itemWidth;
@@ -230,6 +293,9 @@ function formatNav() {
 
         $('#menu-more').show();
       }
+
+      // remove hover class for items under "More"
+      $(this).removeClass('hover');
 
       // move menu item to More dropdown
       $(this).appendTo($('#moreSubMenu'));

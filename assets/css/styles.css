@@ -377,7 +377,8 @@ ul#menu-main-menu li > ul {
   padding: 0;
 }
 
-ul#menu-main-menu li.menu-item-has-children:not(.visible) > ul {
+ul#menu-main-menu li.menu-item-has-children:not(.visible) > ul,
+ul#menu-main-menu li.menu-item-has-children:not(.visible) > div {
   display: none;
 }
 
@@ -386,11 +387,17 @@ ul#menu-main-menu li.menu-item-has-children.visible > ul {
   display: block;
 }
 
-body.has-hover
-  ul#menu-main-menu
-  li.menu-item-has-children:hover
-  > ul
-  ul.sub-menu,
+body.has-hover ul#menu-main-menu .hover:hover > .sub-menu-div {
+  display: flex;
+  position: absolute;
+  top: 54px;
+}
+
+body.has-hover ul#menu-main-menu > .sub-menu-div > li {
+  /* display: block !important; */
+}
+
+body.has-hover ul#menu-main-menu .hover:hover > ul ul.sub-menu,
 ul#menu-main-menu li.menu-item-has-children.visible > ul ul.sub-menu {
   position: relative;
 }
@@ -400,7 +407,8 @@ ul#menu-main-menu li.menu-item-has-children.visible > ul ul.sub-menu {
   position: relative;
 }
 
-ul#menu-main-menu li > ul > li a {
+ul#menu-main-menu li > ul > li a,
+ul#menu-main-menu li > .sub-menu-div > a {
   text-decoration: none;
   padding: 0.5em 1em;
   display: block;
@@ -475,14 +483,21 @@ ul#menu-main-menu
   padding-right: 0;
 }
 
-.menu-main-menu-container > #menu-main-menu > li > .sub-menu a {
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a {
   text-align: left;
   color: #000;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.25;
+  /* the style below may not be needed any more after completing the mega-menu */
   padding: 1rem 1.5rem;
+  display: block !important;
+}
+
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a {
+  padding: 1rem 0;
 }
 
 .menu-main-menu-container
@@ -557,11 +572,25 @@ ul.sub-menu li > ul.sub-menu {
 
 .menu-main-menu-container > #menu-main-menu > li li > .sub-menu a,
 .menu-main-menu-container > #menu-main-menu > li li li > .sub-menu a,
-.menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a {
+.menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu .sub-menu-div a {
   font-weight: 400;
   padding-top: 0.5rem;
   padding-right: 1.5rem;
   padding-bottom: 0.5rem;
+  background-color: #fff;
+}
+
+.menu-main-menu-container
+  > #menu-main-menu
+  > li
+  > .sub-menu
+  .sub-menu-div
+  .title {
+  color: #ea4636;
+  text-align: left;
+  margin-top: 1em;
+  margin-left: 1.5em;
 }
 
 .menu-main-menu-container > #menu-main-menu > li li > .sub-menu a {
@@ -605,4 +634,108 @@ ul.sub-menu li > ul.sub-menu {
   top: -0.6rem;
   box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(50, 50, 50, 0.75);
   z-index: -1;
+}
+
+/* Styles from Mega menu */
+header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  box-shadow: -2px 2px 70px -25px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  margin-top: 25px;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  max-height: 85vh;
+}
+
+header nav ul.menu > li.menu-item-has-children:hover .sub-menu-div,
+header nav ul.menu > li.menu-item-has-children.visible .sub-menu-div {
+  visibility: visible;
+  opacity: 1;
+}
+
+header nav ul.menu > li > .sub-menu-div > ul li {
+  line-height: 1;
+}
+
+header nav ul.menu > li > .sub-menu-div > ul li a {
+  display: block;
+  padding: 10px 0;
+  font-size: 25px;
+  color: #555555;
+  padding-left: 1.5rem;
+  transition: color 0.3s ease;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+header nav ul.menu > li > .mega-menu > .list-item > ul > li {
+  line-height: 1;
+  display: block;
+}
+header nav ul.menu > li > .mega-menu > .list-item > ul > li > a {
+  text-decoration: none;
+  color: #555555;
+  font-size: 15px;
+  display: block;
+  transition: color 0.3s ease;
+  padding: 5px 0;
+}
+
+header nav ul.menu > li > .mega-menu {
+  top: 50;
+  right: 50%;
+  transform: translateX(25%);
+  -webkit-transform: translateX(20%);
+  -moz-transform: translateX(25%);
+  -ms-transform: translateX(25%);
+  -o-transform: translateX(25%);
+  -webkit-transform: translateX(25%);
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 {
+  max-width: 1100px;
+  width: 55rem;
+  /* width: 100%; */
+  /* overflow-wrap: normal; */
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0px;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item {
+  flex: 0 0 25%;
+  flex-grow: 1;
+  padding: 0 15px;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item .title {
+  font-size: 16px;
+  color: #ea4636;
+  font-weight: 600;
+  line-height: 1;
+  padding: 10px 0;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item img {
+  max-width: 100%;
+  width: 100%;
+  vertical-align: middle;
+}
+
+header nav ul.menu > li > .mega-menu > .list-item > ul > li > a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:focus {
+  background-color: #fff;
+  color: #afacd1;
 }
