@@ -28,7 +28,7 @@ $(document).ready(function () {
 
   // add more link
   $('#menu-main-menu').append(
-    '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#"></a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
+    '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#" aria-label="More has a sub menu. Click enter to open"></a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
   );
   moreWidth = $('#menu-more').outerWidth();
 
