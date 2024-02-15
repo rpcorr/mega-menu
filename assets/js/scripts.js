@@ -13,14 +13,7 @@ $(document).ready(function () {
 
   $('#menu-main-menu').on('keydown', function (e) {
     if (e.key == 'Escape') {
-      console.log('Esc key pressed');
-
-      // close all submenus
-      $('li').removeClass('visible');
-
-      // reset arrows to down position
-      $('.fa').removeClass('fa-angle-up');
-      $('.fa').addClass('fa-angle-down');
+      closeAllMenus();
     }
   });
 
@@ -102,10 +95,69 @@ $(document).ready(function () {
     console.log('handleLinkClick');
     e.preventDefault();
 
-    if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
+    console.log($(this));
+
+    if ($(this).parents().hasClass('menu-item-has-children')) {
+      //if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
       // link has sub menu
 
-      // remove class visible
+      // determine if click link is not "More"
+      if ($(this).attr('id') === undefined) {
+        console.log('link has a sub menu');
+
+        //close all current open menus
+        //closeAllMenus();
+
+        // replace fa-angle-down with fa-angle-up
+        //$(this.children).removeClass('fa-angle-down');
+        //$(this.children).addClass('fa-angle-up');
+
+        // Toggle top-level menus
+        toggleTopLevelMenu($(this));
+      } else {
+        console.log('More link is clicked');
+
+        toggleTopLevelMenu($(this));
+
+        // if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
+        //   console.log('open menu');
+
+        //   //$(this).parents('.menu-item-has-children').addClass('visible');
+
+        //   // toggle arrows
+        //   $(this.children).removeClass('fa-angle-down');
+        //   $(this.children).addClass('fa-angle-up');
+
+        //   // set the current menu aria-label to close sub menu
+        //   $(this).attr(
+        //     'aria-label',
+        //     `Click Enter to close ${$(this).text()}sub menu`
+        //   );
+        // } else {
+        //   console.log('close menu');
+
+        //   //$(this).parents('.menu-item-has-children').removeClass('visible');
+
+        //   // toggle arrows
+        //   $(this.children).removeClass('fa-angle-up');
+        //   $(this.children).addClass('fa-angle-down');
+
+        //   // set the current menu aria-label to open sub menu
+        //   $(this).attr(
+        //     'aria-label',
+        //     `${$(this).text()} has a submenu. Click Enter to open`
+        //   );
+        // }
+
+        console.log($(this));
+        // toggle arrows
+        //$(this.children.children).removeClass('fa-angle-up');
+        //$(this.children.children).addClass('fa-angle-down');
+      }
+
+      /*
+      
+      // remove class visible from all submenu
       $(this)
         .parents('.menu-item-has-children')
         .siblings('.menu-item-has-children')
@@ -137,9 +189,11 @@ $(document).ready(function () {
           `Click Enter to close ${$(this).text()}sub menu`
         );
       }
+      */
     } else {
+      console.log('hello');
       // close menu
-
+      /*
       // check if menu item has a sub menu
       if ($(this).parents('.menu-item-has-children').length === 2) {
         // toggle sub menu
@@ -256,7 +310,7 @@ $(document).ready(function () {
           $('.fa').removeClass('fa-angle-up');
           $('.fa').addClass('fa-angle-down');
         }
-      }
+      }*/
     }
   }
 });
@@ -397,4 +451,65 @@ function watchForHover() {
   document.addEventListener('mousemove', enableHover, true);
 
   enableHover();
+}
+
+function closeAllMenus() {
+  // close all submenus
+  $('li').removeClass('visible');
+
+  // reset arrows to down position
+  $('.fa').removeClass('fa-angle-up');
+  $('.fa').addClass('fa-angle-down');
+
+  //  reset aria-labels to Click enter to open
+  $('.menu-item-has-children > a').each(function () {
+    console.log($(this));
+
+    $(this).attr(
+      'aria-label',
+      `${$(this).text()}has a sub menu. Click enter to open`
+    );
+  });
+}
+
+function toggleTopLevelMenu(menuLink) {
+  console.log($(menuLink));
+
+  if (!$(menuLink).parents('.menu-item-has-children').hasClass('visible')) {
+    console.log('open menu');
+
+    console.log($(menuLink).attr('id'));
+
+    if (!$(menuLink).attr('id')) {
+      //show menu
+      $(menuLink).parents('.menu-item-has-children').addClass('visible');
+    }
+
+    // // toggle arrows
+    $(menuLink).children('i').removeClass('fa-angle-down');
+    $(menuLink).children('i').addClass('fa-angle-up');
+
+    // // set the current menu aria-label to close sub menu
+    $(menuLink).attr(
+      'aria-label',
+      `Click Enter to close ${$(menuLink).text()}sub menu`
+    );
+  } else {
+    console.log('close menu');
+
+    if (!$(menuLink).attr('id')) {
+      // close menu
+      $(menuLink).parents('.menu-item-has-children').removeClass('visible');
+    }
+
+    // toggle arrows
+    $(menuLink).children('i').removeClass('fa-angle-up');
+    $(menuLink).children('i').addClass('fa-angle-down');
+
+    // set the current menu aria-label to open sub menu
+    $(menuLink).attr(
+      'aria-label',
+      `${$(menuLink).text()} has a submenu. Click Enter to open`
+    );
+  }
 }
