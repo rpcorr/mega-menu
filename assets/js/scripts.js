@@ -98,219 +98,19 @@ $(document).ready(function () {
     console.log($(this));
 
     if ($(this).parents().hasClass('menu-item-has-children')) {
-      //if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
       // link has sub menu
 
       // determine if click link is not "More"
       if ($(this).attr('id') === undefined) {
-        console.log('link has a sub menu');
-
-        //close all current open menus
-        //closeAllMenus();
-
-        // replace fa-angle-down with fa-angle-up
-        //$(this.children).removeClass('fa-angle-down');
-        //$(this.children).addClass('fa-angle-up');
-
-        // Toggle top-level menus
+        // current link has a sub menu
         toggleTopLevelMenu($(this));
       } else {
-        console.log('More link is clicked');
-
+        // More link is clicked
         toggleTopLevelMenu($(this));
-
-        // if (!$(this).parents('.menu-item-has-children').hasClass('visible')) {
-        //   console.log('open menu');
-
-        //   //$(this).parents('.menu-item-has-children').addClass('visible');
-
-        //   // toggle arrows
-        //   $(this.children).removeClass('fa-angle-down');
-        //   $(this.children).addClass('fa-angle-up');
-
-        //   // set the current menu aria-label to close sub menu
-        //   $(this).attr(
-        //     'aria-label',
-        //     `Click Enter to close ${$(this).text()}sub menu`
-        //   );
-        // } else {
-        //   console.log('close menu');
-
-        //   //$(this).parents('.menu-item-has-children').removeClass('visible');
-
-        //   // toggle arrows
-        //   $(this.children).removeClass('fa-angle-up');
-        //   $(this.children).addClass('fa-angle-down');
-
-        //   // set the current menu aria-label to open sub menu
-        //   $(this).attr(
-        //     'aria-label',
-        //     `${$(this).text()} has a submenu. Click Enter to open`
-        //   );
-        // }
-
-        console.log($(this));
-        // toggle arrows
-        //$(this.children.children).removeClass('fa-angle-up');
-        //$(this.children.children).addClass('fa-angle-down');
       }
-
-      /*
-      
-      // remove class visible from all submenu
-      $(this)
-        .parents('.menu-item-has-children')
-        .siblings('.menu-item-has-children')
-        .removeClass('visible');
-
-      // reset arrows to down position
-      // $('.fa').removeClass('fa-angle-up');
-      // $('.fa').addClass('fa-angle-down');
-
-      // replace fa-angle-down with fa-angle-up
-      $(this.children).removeClass('fa-angle-down');
-      $(this.children).addClass('fa-angle-up');
-
-      // check if link doesn't have an id - in other words the More link
-      if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
-        // open sub menu
-        $(this).parents('.menu-item-has-children').addClass('visible');
-
-        // set aria-label of the current menu to click enter to close sub menu
-        $(this).attr(
-          'aria-label',
-          `Click Enter to close ${$(this).text()}sub menu`
-        );
-      } else {
-        // handle More menu on open
-
-        $(this).attr(
-          'aria-label',
-          `Click Enter to close ${$(this).text()}sub menu`
-        );
-      }
-      */
     } else {
       console.log('hello');
       // close menu
-      /*
-      // check if menu item has a sub menu
-      if ($(this).parents('.menu-item-has-children').length === 2) {
-        // toggle sub menu
-        if (!$(this).closest('li').hasClass('visible')) {
-          console.log('show sub menu');
-          // show sub menu
-          $(this).closest('li').addClass('visible');
-
-          // update the current menu aria to close submenu
-          $(this).attr(
-            'aria-label',
-            `Click Enter to close ${$(this).text()}sub menu`
-          );
-
-          // replace fa-angle-down with fa-angle-up
-          $(this.children).removeClass('fa-angle-down');
-          $(this.children).addClass('fa-angle-up');
-        } else {
-          console.log('close sub sub menu');
-          // remove visible class
-          $(this).closest('li').removeClass('visible');
-
-          // update the current menu aria to close submenu
-          $(this).attr(
-            'aria-label',
-            `${$(this).text()} has a sub menu. Click enter to open`
-          );
-
-          // replace fa-angle-up with fa-angle-down
-          $(this.children).removeClass('fa-angle-up');
-          $(this.children).addClass('fa-angle-down');
-        }
-
-        // remove all visible class from sub menus
-        let submenuItems = $(e.currentTarget).nextAll('.sub-menu').find('li');
-
-        submenuItems.each(function () {
-          if ($(this).hasClass('menu-item-has-children')) {
-            $(this).removeClass('visible');
-          }
-        });
-      } else {
-        // handle "More" sub menu and determine whether to close "More" menu
-        console.log('close sub menu');
-
-        // check if link doesn't have an id - in other words the More link
-        if (!$(this).parents('.menu-item-has-children').prevObject[0].id) {
-          // update the current menu aria to close submenu
-          $(this).attr(
-            'aria-label',
-            `Click Enter to close ${$(this).text()}sub menu`
-          );
-
-          // determine whether target tag as a sub menu
-          const targetTag = $(e.currentTarget).parent();
-          if (targetTag.hasClass('menu-item-has-children')) {
-            //close sub menu
-            if (targetTag.hasClass('visible')) {
-              // remove visible class from target <li>
-              targetTag.removeClass('visible');
-              console.log('close 2nd- level sub menu');
-
-              // set the current menu aria-label to open sub menu
-              $(this).attr(
-                'aria-label',
-                `${$(this).text()} has a submenu. Click Enter to open`
-              );
-
-              if ($(targetTag).find('a i').hasClass('fa-angle-up')) {
-                $(targetTag).find('a i').removeClass('fa-angle-up');
-                $(targetTag).find('a i').addClass('fa-angle-down');
-              }
-            } else {
-              // add visible class to target submenu and handle arrows
-              targetTag.addClass('visible');
-              if ($(targetTag).find('a i').hasClass('fa-angle-down')) {
-                $(targetTag).find('a i').removeClass('fa-angle-down');
-                $(targetTag).find('a i').addClass('fa-angle-up');
-              }
-            }
-
-            // remove all visible class from sub menus
-            let submenuItems = $(e.currentTarget)
-              .nextAll('.sub-menu')
-              .find('li');
-
-            submenuItems.each(function () {
-              if ($(this).hasClass('menu-item-has-children')) {
-                $(this).removeClass('visible');
-              }
-            });
-          } else {
-            // close sub menu that is not the more link
-            $(this).parents('.menu-item-has-children').removeClass('visible');
-
-            // remove class visible from sub menu if left open
-            const submenu = $(this).parents('ul')[0];
-            const subMenuItems = submenu.querySelectorAll('li');
-
-            $.each(subMenuItems, (_, value) => {
-              if ($(value).hasClass('visible')) {
-                $(value).removeClass('visible');
-              }
-            });
-          }
-        } else {
-          // handle "More" menu on close
-
-          $(this).attr(
-            'aria-label',
-            ` ${$(this).text()} has a sub menu. Click Enter to open`
-          );
-          // reset arrows to down position
-          $('.fa').removeClass('fa-angle-up');
-          $('.fa').addClass('fa-angle-down');
-        }
-      }*/
     }
   }
 });
@@ -458,8 +258,7 @@ function closeAllMenus() {
   $('li').removeClass('visible');
 
   // reset arrows to down position
-  $('.fa').removeClass('fa-angle-up');
-  $('.fa').addClass('fa-angle-down');
+  $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
 
   //  reset aria-labels to Click enter to open
   $('.menu-item-has-children > a').each(function () {
@@ -473,21 +272,23 @@ function closeAllMenus() {
 }
 
 function toggleTopLevelMenu(menuLink) {
-  console.log($(menuLink));
+  //console.log($(menuLink));
 
   if (!$(menuLink).parents('.menu-item-has-children').hasClass('visible')) {
     console.log('open menu');
 
-    console.log($(menuLink).attr('id'));
+    //console.log($(menuLink).attr('id'));
 
     if (!$(menuLink).attr('id')) {
       //show menu
       $(menuLink).parents('.menu-item-has-children').addClass('visible');
     }
 
-    // // toggle arrows
-    $(menuLink).children('i').removeClass('fa-angle-down');
-    $(menuLink).children('i').addClass('fa-angle-up');
+    // toggle arrows
+    $(menuLink)
+      .children('i')
+      .removeClass('fa-angle-down')
+      .addClass('fa-angle-up');
 
     // // set the current menu aria-label to close sub menu
     $(menuLink).attr(
@@ -495,21 +296,57 @@ function toggleTopLevelMenu(menuLink) {
       `Click Enter to close ${$(menuLink).text()}sub menu`
     );
   } else {
-    console.log('close menu');
+    // before closing menu - check if link has a sub menu
 
-    if (!$(menuLink).attr('id')) {
-      // close menu
-      $(menuLink).parents('.menu-item-has-children').removeClass('visible');
+    if ($(menuLink).parent().parent().is('ul#menu-main-menu.menu')) {
+      // menu item is the top menu
+      console.log('menu item is the the top item');
+
+      // toggle menu visibility
+      if (!$(menuLink).parent().hasClass('visible')) {
+        $(menuLink).parent().addClass('visible');
+      } else {
+        closeAllMenus();
+      }
+    } else {
+      console.log('menu item is NOT the top item');
+
+      // determine if menu item has a sub menu
+      if ($(menuLink).parent().hasClass('menu-item-has-children')) {
+        // add menu visibility
+        if (!$(menuLink).parent().hasClass('visible')) {
+          $(menuLink).parent().addClass('visible');
+
+          // address the arrows
+          $(menuLink)
+            .children('i')
+            .removeClass('fa-angle-down')
+            .addClass('fa-angle-up');
+        } else {
+          // remove submenu class visible
+          $(menuLink).parent().removeClass('visible');
+
+          // address the arrows
+          $(menuLink)
+            .children('i')
+            .removeClass('fa-angle-up')
+            .addClass('fa-angle-down');
+
+          // remove visible class and toggle arrows from all menus under the current one
+          $(menuLink)
+            .parent()
+            .find('li.menu-item-has-children')
+            .removeClass('visible');
+
+          $(menuLink)
+            .parent()
+            .find('li.menu-item-has-children > a > i')
+            .removeClass('fa-angle-up')
+            .addClass('fa-angle-down');
+        }
+      } else {
+        closeAllMenus();
+      }
     }
-
-    // toggle arrows
-    $(menuLink).children('i').removeClass('fa-angle-up');
-    $(menuLink).children('i').addClass('fa-angle-down');
-
-    // set the current menu aria-label to open sub menu
-    $(menuLink).attr(
-      'aria-label',
-      `${$(menuLink).text()} has a submenu. Click Enter to open`
-    );
   }
 }
