@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   $('#menu-main-menu').on('keydown', function (e) {
     if (e.key == 'Escape') {
-      closeAllMenus();
+      closeAllMenus('esc');
     }
   });
 
@@ -253,16 +253,20 @@ function watchForHover() {
   enableHover();
 }
 
-function closeAllMenus() {
-  // close all submenus
-  $('li').removeClass('visible');
+function closeAllMenus(menuLink) {
+  console.log('close all menu');
+
+  if (menuLink.attr('id') === undefined) {
+    // close all submenus
+    $('li').removeClass('visible');
+  }
 
   // reset arrows to down position
   $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
 
   //  reset aria-labels to Click enter to open
   $('.menu-item-has-children > a').each(function () {
-    console.log($(this));
+    // console.log($(this));
 
     $(this).attr(
       'aria-label',
@@ -277,24 +281,29 @@ function toggleTopLevelMenu(menuLink) {
   if (!$(menuLink).parents('.menu-item-has-children').hasClass('visible')) {
     console.log('open menu');
 
-    //console.log($(menuLink).attr('id'));
-
     if (!$(menuLink).attr('id')) {
-      //show menu
+      //show menu that is not "More"
       $(menuLink).parents('.menu-item-has-children').addClass('visible');
+
+      // toggle arrows
+      $(menuLink)
+        .children('i')
+        .removeClass('fa-angle-down')
+        .addClass('fa-angle-up');
+
+      // set the current menu aria-label to close sub menu
+      $(menuLink).attr(
+        'aria-label',
+        `Click Enter to close ${$(menuLink).text()}sub menu`
+      );
+    } else {
+      console.log('more menu');
+      // address the arrows
+      $(menuLink)
+        .children('i')
+        .removeClass('fa-angle-down')
+        .addClass('fa-angle-up');
     }
-
-    // toggle arrows
-    $(menuLink)
-      .children('i')
-      .removeClass('fa-angle-down')
-      .addClass('fa-angle-up');
-
-    // // set the current menu aria-label to close sub menu
-    $(menuLink).attr(
-      'aria-label',
-      `Click Enter to close ${$(menuLink).text()}sub menu`
-    );
   } else {
     // before closing menu - check if link has a sub menu
 
@@ -306,7 +315,7 @@ function toggleTopLevelMenu(menuLink) {
       if (!$(menuLink).parent().hasClass('visible')) {
         $(menuLink).parent().addClass('visible');
       } else {
-        closeAllMenus();
+        closeAllMenus($(menuLink));
       }
     } else {
       console.log('menu item is NOT the top item');
@@ -345,7 +354,7 @@ function toggleTopLevelMenu(menuLink) {
             .addClass('fa-angle-down');
         }
       } else {
-        closeAllMenus();
+        closeAllMenus($(menuLink));
       }
     }
   }
