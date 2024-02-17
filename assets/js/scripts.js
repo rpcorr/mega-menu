@@ -63,6 +63,14 @@ $(document).ready(function () {
     // reset arrows to down position
     $('.fa').removeClass('fa-angle-up');
     $('.fa').addClass('fa-angle-down');
+
+    //  reset aria-labels to Click enter to open
+    $('.menu-item-has-children > a').each(function () {
+      $(this).attr(
+        'aria-label',
+        `${$(this).text()}has a sub menu. Click enter to open`
+      );
+    });
   });
 
   $('.menu-item-has-children a').click(function (e) {
