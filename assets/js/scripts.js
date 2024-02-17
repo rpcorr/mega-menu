@@ -303,6 +303,11 @@ function toggleTopLevelMenu(menuLink) {
         .children('i')
         .removeClass('fa-angle-down')
         .addClass('fa-angle-up');
+
+      $(menuLink).attr(
+        'aria-label',
+        `Click Enter to close ${$(menuLink).text()}sub menu`
+      );
     }
   } else {
     // before closing menu - check if link has a sub menu
