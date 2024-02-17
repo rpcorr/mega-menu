@@ -55,6 +55,7 @@ $(document).ready(function () {
 
   // collapse all sub-menus when user clicks off
   $('body').click(function (event) {
+    console.log('here I am');
     if (!$(event.target).closest('li').length) {
       $('.menu-item-has-children').removeClass('visible');
     }
@@ -256,6 +257,27 @@ function watchForHover() {
 function closeAllMenus(menuLink) {
   console.log('close all menu');
 
+  // run if the esc key was pressed
+  if (menuLink === 'esc') {
+    // close all submenus
+    $('li').removeClass('visible');
+
+    // reset arrows to down position
+    $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+
+    //  reset aria-labels to Click enter to open
+    $('.menu-item-has-children > a').each(function () {
+      $(this).attr(
+        'aria-label',
+        `${$(this).text()}has a sub menu. Click enter to open`
+      );
+    });
+
+    // exit function early to avoid crash with menuLink.attr('id')
+    return;
+  }
+
+  // handle case if link is NOT the More link
   if (menuLink.attr('id') === undefined) {
     // close all submenus
     $('li').removeClass('visible');
@@ -266,8 +288,6 @@ function closeAllMenus(menuLink) {
 
   //  reset aria-labels to Click enter to open
   $('.menu-item-has-children > a').each(function () {
-    // console.log($(this));
-
     $(this).attr(
       'aria-label',
       `${$(this).text()}has a sub menu. Click enter to open`
