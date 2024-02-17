@@ -331,7 +331,14 @@ function toggleTopLevelMenu(menuLink) {
             .children('i')
             .removeClass('fa-angle-down')
             .addClass('fa-angle-up');
+
+          // set the current menu aria-label to close sub menu
+          $(menuLink).attr(
+            'aria-label',
+            `Click Enter to close ${$(menuLink).text()}sub menu`
+          );
         } else {
+          console.log('here');
           // remove submenu class visible
           $(menuLink).parent().removeClass('visible');
 
@@ -340,6 +347,11 @@ function toggleTopLevelMenu(menuLink) {
             .children('i')
             .removeClass('fa-angle-up')
             .addClass('fa-angle-down');
+
+          $(menuLink).attr(
+            'aria-label',
+            `${$(menuLink).text()}has a sub menu. Click enter to open`
+          );
 
           // remove visible class and toggle arrows from all menus under the current one
           $(menuLink)
@@ -352,6 +364,15 @@ function toggleTopLevelMenu(menuLink) {
             .find('li.menu-item-has-children > a > i')
             .removeClass('fa-angle-up')
             .addClass('fa-angle-down');
+
+          // update the link's aria message
+          $(menuLink)
+            .parent()
+            .find('li.menu-item-has-children > a')
+            .attr(
+              'aria-label',
+              `${$(menuLink).text()}has a sub menu. Click enter to open`
+            );
         }
       } else {
         closeAllMenus($(menuLink));
