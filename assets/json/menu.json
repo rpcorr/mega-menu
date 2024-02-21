@@ -1,0 +1,304 @@
+{
+  "menuItems": [
+    {
+      "name": "Home",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liClass": ""
+    },
+    {
+      "name": "About Us",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liClass": ""
+    },
+    {
+      "name": "Services",
+      "link": "#",
+      "liClass": "menu-item-has-children",
+      "linkAriaLabel": "Services has a sub menu. Click enter to open",
+      "subMenuType": "regularLinks",
+      "subMenuItems": [
+        {
+          "name": "Service 1",
+          "link": "#"
+        },
+        {
+          "name": "Service 2",
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "name": "New",
+      "link": "#",
+      "liClass": "menu-item-has-children",
+      "linkAriaLabel": "New has a sub menu. Click enter to open",
+      "subMenuType": "photoLinks",
+      "subMenuItems": [
+        {
+          "title": "Rain Forest",
+          "link": "#rainForest",
+          "imgSrc": "p1"
+        },
+        {
+          "title": "Mountains",
+          "link": "#mountains",
+          "imgSrc": "p2"
+        },
+        {
+          "title": "Waterfall",
+          "link": "#waterfall",
+          "imgSrc": "p3"
+        },
+        {
+          "title": "Owl",
+          "link": "#owl",
+          "imgSrc": "p4"
+        }
+      ]
+    },
+    {
+      "name": "Shop",
+      "link": "#",
+      "liClass": "menu-item-has-children",
+      "linkAriaLabel": "Shop has a sub menu. Click enter to open",
+      "subMenuType": "categorizedLinks",
+      "subMenuItems": [
+        {
+          "contentType": "text",
+          "titleId": "na",
+          "title": "North America",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            },
+            {
+              "name": "Package 5",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "sa",
+          "title": "South America",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "au",
+          "title": "Australia",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "af",
+          "title": "Africa",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "text",
+          "titleId": "eu",
+          "title": "Europe",
+          "links": [
+            {
+              "name": "Package 1",
+              "link": "#"
+            },
+            {
+              "name": "Package 2",
+              "link": "#"
+            },
+            {
+              "name": "Package 3",
+              "link": "#"
+            },
+            {
+              "name": "Package 4",
+              "link": "#"
+            },
+            {
+              "name": "Package 5",
+              "link": "#"
+            },
+            {
+              "name": "Package 6",
+              "link": "#"
+            },
+            {
+              "name": "Package 7",
+              "link": "#"
+            },
+            {
+              "name": "Package 8",
+              "link": "#"
+            },
+            {
+              "name": "Package 9",
+              "link": "#"
+            }
+          ]
+        },
+        {
+          "contentType": "photo",
+          "title": "Mountain goats",
+          "imgSrc": "p5"
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "link": "#",
+      "liClass": "menu-item-has-children",
+      "linkAriaLabel": "Blog has a sub menu. Click enter to open",
+      "subMenuType": "regularLinks",
+      "subMenuItems": [
+        {
+          "name": "Standard Layout",
+          "link": "#"
+        },
+        {
+          "name": "Grid Layout",
+          "link": "#"
+        },
+        {
+          "name": "Single Layout",
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "link": "#",
+      "liClass": "menu-item-has-children",
+      "linkAriaLabel": "Products has a sub menu. Click enter to open",
+      "subMenuType": "regularLinks",
+      "subMenuItems": [
+        {
+          "name": "Product 1",
+          "link": "#",
+          "subMenuItems": [
+            {
+              "name": "Product 1a",
+              "link": "#p1a"
+            },
+            {
+              "name": "Product 1b",
+              "link": "#p1b",
+              "subMenuItems": [
+                {
+                  "name": "Product 1b a",
+                  "link": "#p1ba"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Product 2",
+          "link": "#",
+          "subMenuItems": [
+            {
+              "name": "Test 1",
+              "link": "#test1"
+            },
+            {
+              "name": "Test 2",
+              "link": "#test2"
+            }
+          ]
+        },
+        {
+          "name": "Product 3",
+          "link": "#"
+        }
+      ]
+    },
+
+    {
+      "name": "Portfolio",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liClass": ""
+    },
+    {
+      "name": "Resources",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liClass": ""
+    },
+    {
+      "name": "Careers",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liClass": ""
+    },
+    {
+      "name": "Contact",
+      "link": "#",
+      "linkAriaLabel": "",
+      "liClass": ""
+    }
+  ]
+}

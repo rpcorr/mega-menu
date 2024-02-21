@@ -7,88 +7,109 @@ const navItemWidth = [];
 const navItemVisible = [];
 let moreWidth = 0;
 let winWidth = 0;
+let output = '';
+let megaMenuLinks = '';
 
 $(document).ready(function () {
-  winWidth = $(window).width();
+  // read in the Menu JSON file
+  let count = 0;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // Typical action to be performed when the document is ready:
 
-  $('#menu-main-menu').on('keydown', function (e) {
-    if (e.key == 'Escape') {
-      closeAllMenus('esc');
-    }
-  });
+      let response = JSON.parse(xhttp.responseText);
 
-  navItems = $('#menu-main-menu > li');
+      response.menuItems.forEach((mI) => {
+        output = createMenu(mI);
+      });
 
-  // add hover class to those with class menu-item-has-children
-  navItems.each(function () {
-    if ($(this).hasClass('menu-item-has-children')) {
-      $(this).addClass('hover');
-    }
-  });
+      document.getElementById('menu-main-menu').innerHTML = output;
 
-  // get width of each item, and list each as visible
-  navItems.each(function () {
-    navItemWidth.push($(this).outerWidth());
-    navItemVisible.push(true);
-  });
+      // select all anchor tags
+      megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
 
-  // add more link
-  $('#menu-main-menu').append(
-    '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#" aria-label="More has a sub menu. Click enter to open"></a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
-  );
-  moreWidth = $('#menu-more').outerWidth();
+      // add handleLinkClick to eventListener
+      for (let i = 0; i < megaMenuLinks.length; i++) {
+        megaMenuLinks[i].addEventListener('click', handleLinkClick);
+      }
 
-  // select all anchor tags
-  const megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');
+      winWidth = $(window).width();
 
-  // add handleLinkClick to eventListener
-  for (let i = 0; i < megaMenuLinks.length; i++) {
-    megaMenuLinks[i].addEventListener('click', handleLinkClick);
-  }
+      $('#menu-main-menu').on('keydown', function (e) {
+        if (e.key == 'Escape') {
+          closeAllMenus('esc');
+        }
+      });
 
-  // toggle sub-menu
-  $('#menuMoreLink').click(function (event) {
-    event.preventDefault();
-    $('.menu-item-has-children:not(#menu-more)').removeClass('visible');
-    $(this).parent('.menu-item-has-children').toggleClass('visible');
-  });
+      navItems = $('#menu-main-menu > li');
 
-  // collapse all sub-menus when user clicks off
-  $('body').click(function (event) {
-    console.log('body');
-    if (!$(event.target).closest('li').length) {
-      $('.menu-item-has-children').removeClass('visible');
-    }
+      // add hover class to those with class menu-item-has-children
+      navItems.each(function () {
+        if ($(this).hasClass('menu-item-has-children')) {
+          $(this).addClass('hover');
+        }
+      });
 
-    // reset arrows to down position
-    $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+      // get width of each item, and list each as visible
+      navItems.each(function () {
+        navItemWidth.push($(this).outerWidth());
+        navItemVisible.push(true);
+      });
 
-    //  reset aria-labels to Click enter to open
-    $('.menu-item-has-children > a').each(function () {
-      $(this).attr(
-        'aria-label',
-        `${$(this).text()}has a sub menu. Click enter to open`
+      // add more link
+      $('#menu-main-menu').append(
+        '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#" aria-label="More has a sub menu. Click enter to open"></a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
       );
-    });
-  });
+      moreWidth = $('#menu-more').outerWidth();
 
-  $('.menu-item-has-children a').click(function (e) {
-    e.stopPropagation();
-  });
+      // toggle sub-menu
+      $('#menuMoreLink').click(function (event) {
+        event.preventDefault();
+        $('.menu-item-has-children:not(#menu-more)').removeClass('visible');
+        $(this).parent('.menu-item-has-children').toggleClass('visible');
+      });
 
-  $('.menu-item-has-children ul').click(function (e) {
-    e.stopPropagation();
-  });
+      // collapse all sub-menus when user clicks off
+      $('body').click(function (event) {
+        console.log('body');
+        if (!$(event.target).closest('li').length) {
+          $('.menu-item-has-children').removeClass('visible');
+        }
 
-  $('.menu-item-has-children li').click(function (e) {
-    e.stopPropagation();
-  });
+        // reset arrows to down position
+        $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
 
-  // format navigation on page load
-  formatNav();
+        //  reset aria-labels to Click enter to open
+        $('.menu-item-has-children > a').each(function () {
+          $(this).attr(
+            'aria-label',
+            `${$(this).text()}has a sub menu. Click enter to open`
+          );
+        });
+      });
 
-  // watch for difference between touchscreen and mouse
-  watchForHover();
+      $('.menu-item-has-children a').click(function (e) {
+        e.stopPropagation();
+      });
+
+      $('.menu-item-has-children ul').click(function (e) {
+        e.stopPropagation();
+      });
+
+      $('.menu-item-has-children li').click(function (e) {
+        e.stopPropagation();
+      });
+
+      // format navigation on page load
+      formatNav();
+
+      // watch for difference between touchscreen and mouse
+      watchForHover();
+    }
+  };
+  xhttp.open('GET', 'assets/json/menu.json', true);
+  xhttp.send();
 
   function handleLinkClick(e) {
     e.preventDefault();
@@ -117,6 +138,123 @@ $(window).resize(function () {
   clearTimeout(id);
   id = setTimeout(onResize, 500);
 });
+
+function createMenu(mI) {
+  let liClass =
+    mI.liClass === 'menu-item-has-children'
+      ? 'class="menu-item-has-children"'
+      : '';
+
+  let downArrow =
+    mI.liClass === 'menu-item-has-children'
+      ? '<i class="fa fa-angle-down"></i>'
+      : '';
+
+  output += `<li ${liClass}><a href="${mI.link}">${mI.name} ${downArrow}</a>`;
+
+  if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
+    output += '<ul class="sub-menu">';
+    mI.subMenuItems.forEach((_, i) => {
+      if (mI.subMenuItems[i].subMenuItems) {
+        // a second level menu is present
+        output += `<li class="menu-item-has-children">
+        <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
+        let secondLevel;
+
+        secondLevel = '<ul class="sub-menu">';
+
+        mI.subMenuItems[i].subMenuItems.forEach((_, j) => {
+          if (mI.subMenuItems[i].subMenuItems[j].subMenuItems) {
+            // a third level is present
+            secondLevel += `<li class="menu-item-has-children"><a href="${mI.subMenuItems[i].subMenuItems[j].link}">${mI.subMenuItems[i].subMenuItems[j].name} <i class="fa fa-angle-down"></i></a>`;
+            let thirdLevel;
+
+            thirdLevel = '<ul class="sub-menu">';
+
+            // loop through the links
+            mI.subMenuItems[i].subMenuItems[j].subMenuItems.forEach((_, k) => {
+              thirdLevel += `<li><a href="${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].link}">${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].name}</a></li>`;
+            });
+
+            thirdLevel += '</ul>';
+
+            secondLevel += `${thirdLevel}</li>`;
+          } else {
+            console.log('here I am');
+            secondLevel += `<li>
+          <a href="${mI.subMenuItems[i].subMenuItems[j].link}" target="_blank">
+            ${mI.subMenuItems[i].subMenuItems[j].name}</i>
+          </a></li>`;
+          }
+        });
+
+        output += `${secondLevel}</ul></li>`;
+      } else {
+        output += `<li>
+      <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a>
+    </li>`;
+      }
+    });
+    output += '</ul>';
+  }
+
+  if (mI.subMenuItems && mI.subMenuType === 'photoLinks') {
+    output += '<div class="sub-menu-div mega-menu mega-menu-column-4">';
+
+    mI.subMenuItems.forEach((_, i) => {
+      output += `<div class="list-item text-center">
+                <a href="${mI.subMenuItems[i].link}">
+                  <img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />
+                  <p>${mI.subMenuItems[i].title}</p>
+                </a>
+              </div>`;
+    });
+
+    output += '</div>';
+  }
+
+  if (mI.subMenuItems && mI.subMenuType === 'categorizedLinks') {
+    output += '<div class="sub-menu-div mega-menu mega-menu-column-4">';
+
+    let subMenuContainerContent = '';
+
+    mI.subMenuItems.forEach((_, i) => {
+      let subMenuContainerInnerContent = '';
+
+      if (mI.subMenuItems[i].contentType === 'text') {
+        if (i === 0 || i === 2 || i === 4)
+          subMenuContainerInnerContent += `<div class="list-item">`;
+
+        subMenuContainerInnerContent += `<h4 class="title" id="${mI.subMenuItems[i].titleId}">${mI.subMenuItems[i].title}</h4>`;
+
+        let listItemValues = '<ul>';
+        mI.subMenuItems[i].links.forEach((_, j) => {
+          listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}"><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
+        });
+        listItemValues += '</ul>';
+
+        subMenuContainerInnerContent += `${listItemValues}`;
+
+        if (i === 1 || i === 3 || i === 4)
+          subMenuContainerInnerContent += '</div>';
+      }
+
+      if (mI.subMenuItems[i].contentType === 'photo') {
+        subMenuContainerInnerContent += '<div class="list-item">';
+
+        let columnValue = `<img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />`;
+
+        subMenuContainerInnerContent += `${columnValue}</div>`;
+      }
+      subMenuContainerContent += `${subMenuContainerInnerContent}`;
+    });
+
+    output += `${subMenuContainerContent}</div>`;
+  }
+  output += `</li>`;
+
+  return output;
+}
 
 function onResize() {
   if (winWidth != $(window).width()) {
