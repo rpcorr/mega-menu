@@ -1,22 +1,39 @@
 {
+  "users": [
+    {
+      "username": "user1",
+      "userType": "admin"
+    },
+    {
+      "username": "user2",
+      "userType": "premium"
+    },
+    {
+      "username": "user3",
+      "userType": "regular"
+    }
+  ],
+
   "menuItems": [
     {
       "name": "Home",
       "link": "#",
       "linkAriaLabel": "",
-      "liClass": ""
+      "liClass": "",
+      "availableFor": ["regular", "premium", "admin"]
     },
     {
       "name": "About Us",
       "link": "#",
       "linkAriaLabel": "",
-      "liClass": ""
+      "liClass": "",
+      "availableFor": ["regular", "premium", "admin"]
     },
     {
       "name": "Services",
       "link": "#",
-      "liClass": "menu-item-has-children",
       "linkAriaLabel": "Services has a sub menu. Click enter to open",
+      "liClass": "menu-item-has-children",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
@@ -27,13 +44,14 @@
           "name": "Service 2",
           "link": "#"
         }
-      ]
+      ],
+      "availableFor": ["premium", "admin"]
     },
     {
       "name": "New",
       "link": "#",
-      "liClass": "menu-item-has-children",
       "linkAriaLabel": "New has a sub menu. Click enter to open",
+      "liClass": "menu-item-has-children",
       "subMenuType": "photoLinks",
       "subMenuItems": [
         {
@@ -56,7 +74,8 @@
           "link": "#owl",
           "imgSrc": "p4"
         }
-      ]
+      ],
+      "availableFor": ["premium", "admin"]
     },
     {
       "name": "Shop",
@@ -205,7 +224,8 @@
           "title": "Mountain goats",
           "imgSrc": "p5"
         }
-      ]
+      ],
+      "availableFor": ["premium", "admin"]
     },
     {
       "name": "Blog",
@@ -226,7 +246,8 @@
           "name": "Single Layout",
           "link": "#"
         }
-      ]
+      ],
+      "availableFor": ["regular", "premium", "admin"]
     },
     {
       "name": "Products",
@@ -273,32 +294,37 @@
           "name": "Product 3",
           "link": "#"
         }
-      ]
+      ],
+      "availableFor": ["premium", "admin"]
     },
 
     {
       "name": "Portfolio",
       "link": "#",
       "linkAriaLabel": "",
-      "liClass": ""
+      "liClass": "",
+      "availableFor": ["regular", "admin"]
     },
     {
       "name": "Resources",
       "link": "#",
       "linkAriaLabel": "",
-      "liClass": ""
+      "liClass": "",
+      "availableFor": ["regular", "admin"]
     },
     {
       "name": "Careers",
       "link": "#",
       "linkAriaLabel": "",
-      "liClass": ""
+      "liClass": "",
+      "availableFor": ["premium", "admin"]
     },
     {
       "name": "Contact",
       "link": "#",
       "linkAriaLabel": "",
-      "liClass": ""
+      "liClass": "",
+      "availableFor": ["regular", "premium", "admin"]
     }
   ]
 }

@@ -11,8 +11,13 @@ let output = '';
 let megaMenuLinks = '';
 
 $(document).ready(function () {
+  // define the user who is browsing the page
+  const user = {
+    username: 'user1',
+    userType: 'admin',
+  };
+
   // read in the Menu JSON file
-  let count = 0;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -21,7 +26,7 @@ $(document).ready(function () {
       let response = JSON.parse(xhttp.responseText);
 
       response.menuItems.forEach((mI) => {
-        output = createMenu(mI);
+        output = createMenu(mI, user);
       });
 
       document.getElementById('menu-main-menu').innerHTML = output;
@@ -155,7 +160,8 @@ $(document).ready(function () {
         toggleTopLevelMenu($(this));
       }
     } else {
-      // close menu - program never reach here????
+      // close menu
+      // program reach here when user clicks on a link that direct him to another location
       console.log('hello');
     }
   }
@@ -168,7 +174,7 @@ $(window).resize(function () {
   id = setTimeout(onResize, 500);
 });
 
-function createMenu(mI) {
+function createMenu(mI, user) {
   let liClass =
     mI.liClass === 'menu-item-has-children'
       ? 'class="menu-item-has-children"'
@@ -179,108 +185,115 @@ function createMenu(mI) {
       ? '<i class="fa fa-angle-down"></i>'
       : '';
 
-  output += `<li ${liClass}><a href="${mI.link}">${mI.name} ${downArrow}</a>`;
+  if (findValueInArray(user.userType, $(mI.availableFor))) {
+    output += `<li ${liClass}><a href="${mI.link}">${mI.name} ${downArrow}</a>`;
 
-  if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
-    output += '<ul class="sub-menu" aria-expanded="false">';
-    mI.subMenuItems.forEach((_, i) => {
-      if (mI.subMenuItems[i].subMenuItems) {
-        // a second level menu is present
-        output += `<li class="menu-item-has-children">
-        <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
-        let secondLevel;
+    if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
+      output += '<ul class="sub-menu" aria-expanded="false">';
+      mI.subMenuItems.forEach((_, i) => {
+        if (mI.subMenuItems[i].subMenuItems) {
+          // a second level menu is present
+          output += `<li class="menu-item-has-children">
+          <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
+          let secondLevel;
 
-        secondLevel = '<ul class="sub-menu" aria-expanded="false">';
+          secondLevel = '<ul class="sub-menu" aria-expanded="false">';
 
-        mI.subMenuItems[i].subMenuItems.forEach((_, j) => {
-          if (mI.subMenuItems[i].subMenuItems[j].subMenuItems) {
-            // a third level is present
-            secondLevel += `<li class="menu-item-has-children"><a href="${mI.subMenuItems[i].subMenuItems[j].link}">${mI.subMenuItems[i].subMenuItems[j].name} <i class="fa fa-angle-down"></i></a>`;
-            let thirdLevel;
+          mI.subMenuItems[i].subMenuItems.forEach((_, j) => {
+            if (mI.subMenuItems[i].subMenuItems[j].subMenuItems) {
+              // a third level is present
+              secondLevel += `<li class="menu-item-has-children"><a href="${mI.subMenuItems[i].subMenuItems[j].link}">${mI.subMenuItems[i].subMenuItems[j].name} <i class="fa fa-angle-down"></i></a>`;
+              let thirdLevel;
 
-            thirdLevel = '<ul class="sub-menu" aria-expanded="false">';
+              thirdLevel = '<ul class="sub-menu" aria-expanded="false">';
 
-            // loop through the links
-            mI.subMenuItems[i].subMenuItems[j].subMenuItems.forEach((_, k) => {
-              thirdLevel += `<li><a href="${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].link}">${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].name}</a></li>`;
-            });
+              // loop through the links
+              mI.subMenuItems[i].subMenuItems[j].subMenuItems.forEach(
+                (_, k) => {
+                  thirdLevel += `<li><a href="${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].link}">${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].name}</a></li>`;
+                }
+              );
 
-            thirdLevel += '</ul>';
+              thirdLevel += '</ul>';
 
-            secondLevel += `${thirdLevel}</li>`;
-          } else {
-            secondLevel += `<li>
-          <a href="${mI.subMenuItems[i].subMenuItems[j].link}" target="_blank">
-            ${mI.subMenuItems[i].subMenuItems[j].name}</i>
-          </a></li>`;
-          }
-        });
+              secondLevel += `${thirdLevel}</li>`;
+            } else {
+              secondLevel += `<li>
+            <a href="${mI.subMenuItems[i].subMenuItems[j].link}" target="_blank">
+              ${mI.subMenuItems[i].subMenuItems[j].name}</i>
+            </a></li>`;
+            }
+          });
 
-        output += `${secondLevel}</ul></li>`;
-      } else {
-        output += `<li>
-      <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a>
-    </li>`;
-      }
-    });
-    output += '</ul>';
+          output += `${secondLevel}</ul></li>`;
+        } else {
+          output += `<li>
+        <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a>
+      </li>`;
+        }
+      });
+      output += '</ul>';
+    }
+
+    if (mI.subMenuItems && mI.subMenuType === 'photoLinks') {
+      output +=
+        '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
+
+      mI.subMenuItems.forEach((_, i) => {
+        output += `<div class="list-item text-center">
+                  <a href="${mI.subMenuItems[i].link}">
+                    <img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />
+                    <p>${mI.subMenuItems[i].title}</p>
+                  </a>
+                </div>`;
+      });
+
+      output += '</div>';
+    }
+
+    if (mI.subMenuItems && mI.subMenuType === 'categorizedLinks') {
+      output +=
+        '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
+
+      let subMenuContainerContent = '';
+
+      mI.subMenuItems.forEach((_, i) => {
+        let subMenuContainerInnerContent = '';
+
+        if (mI.subMenuItems[i].contentType === 'text') {
+          if (i === 0 || i === 2 || i === 4)
+            subMenuContainerInnerContent += `<div class="list-item">`;
+
+          subMenuContainerInnerContent += `<h4 class="title" id="${mI.subMenuItems[i].titleId}">${mI.subMenuItems[i].title}</h4>`;
+
+          let listItemValues = '<ul>';
+          mI.subMenuItems[i].links.forEach((_, j) => {
+            listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}"><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
+          });
+          listItemValues += '</ul>';
+
+          subMenuContainerInnerContent += `${listItemValues}`;
+
+          if (i === 1 || i === 3 || i === 4)
+            subMenuContainerInnerContent += '</div>';
+        }
+
+        if (mI.subMenuItems[i].contentType === 'photo') {
+          subMenuContainerInnerContent += '<div class="list-item">';
+
+          let columnValue = `<img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />`;
+
+          subMenuContainerInnerContent += `${columnValue}</div>`;
+        }
+        subMenuContainerContent += `${subMenuContainerInnerContent}`;
+      });
+
+      output += `${subMenuContainerContent}</div>`;
+    }
+  } else {
+    // user is not present
   }
 
-  if (mI.subMenuItems && mI.subMenuType === 'photoLinks') {
-    output +=
-      '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
-
-    mI.subMenuItems.forEach((_, i) => {
-      output += `<div class="list-item text-center">
-                <a href="${mI.subMenuItems[i].link}">
-                  <img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />
-                  <p>${mI.subMenuItems[i].title}</p>
-                </a>
-              </div>`;
-    });
-
-    output += '</div>';
-  }
-
-  if (mI.subMenuItems && mI.subMenuType === 'categorizedLinks') {
-    output +=
-      '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
-
-    let subMenuContainerContent = '';
-
-    mI.subMenuItems.forEach((_, i) => {
-      let subMenuContainerInnerContent = '';
-
-      if (mI.subMenuItems[i].contentType === 'text') {
-        if (i === 0 || i === 2 || i === 4)
-          subMenuContainerInnerContent += `<div class="list-item">`;
-
-        subMenuContainerInnerContent += `<h4 class="title" id="${mI.subMenuItems[i].titleId}">${mI.subMenuItems[i].title}</h4>`;
-
-        let listItemValues = '<ul>';
-        mI.subMenuItems[i].links.forEach((_, j) => {
-          listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}"><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
-        });
-        listItemValues += '</ul>';
-
-        subMenuContainerInnerContent += `${listItemValues}`;
-
-        if (i === 1 || i === 3 || i === 4)
-          subMenuContainerInnerContent += '</div>';
-      }
-
-      if (mI.subMenuItems[i].contentType === 'photo') {
-        subMenuContainerInnerContent += '<div class="list-item">';
-
-        let columnValue = `<img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />`;
-
-        subMenuContainerInnerContent += `${columnValue}</div>`;
-      }
-      subMenuContainerContent += `${subMenuContainerInnerContent}`;
-    });
-
-    output += `${subMenuContainerContent}</div>`;
-  }
   output += `</li>`;
 
   return output;
@@ -314,6 +327,19 @@ function onResize() {
 
     winWidth = $(window).width();
   }
+}
+
+function findValueInArray(value, arr) {
+  let bFound = false;
+
+  for (let i = 0; i < arr.length; i++) {
+    let name = arr[i];
+    if (name == value) {
+      bFound = true;
+      break;
+    }
+  }
+  return bFound;
 }
 
 function formatNav() {
