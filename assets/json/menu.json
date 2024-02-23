@@ -10,7 +10,7 @@
     },
     {
       "username": "user3",
-      "userType": "regular"
+      "userType": "basic"
     }
   ],
 
@@ -20,25 +20,26 @@
       "link": "#",
       "linkAriaLabel": "",
       "liClass": "",
-      "availableFor": ["regular", "premium", "admin"]
+      "availableFor": ["basic", "premium"]
     },
     {
       "name": "About Us",
       "link": "#",
       "linkAriaLabel": "",
       "liClass": "",
-      "availableFor": ["regular", "premium", "admin"]
+      "availableFor": ["basic", "premium"]
     },
     {
       "name": "Services",
       "link": "#",
       "linkAriaLabel": "Services has a sub menu. Click enter to open",
       "liClass": "menu-item-has-children",
-      "subMenuType": "regularLinks",
+      "subMenuType": "basicLinks",
       "subMenuItems": [
         {
           "name": "Service 1",
-          "link": "#"
+          "link": "#",
+          "availableFor": ["premium"]
         },
         {
           "name": "Service 2",
@@ -62,7 +63,8 @@
         {
           "title": "Mountains",
           "link": "#mountains",
-          "imgSrc": "p2"
+          "imgSrc": "p2",
+          "availableFor": ["premium"]
         },
         {
           "title": "Waterfall",
@@ -75,7 +77,7 @@
           "imgSrc": "p4"
         }
       ],
-      "availableFor": ["premium", "admin"]
+      "availableFor": ["premium"]
     },
     {
       "name": "Shop",
@@ -225,7 +227,7 @@
           "imgSrc": "p5"
         }
       ],
-      "availableFor": ["premium", "admin"]
+      "availableFor": ["premium"]
     },
     {
       "name": "Blog",
@@ -236,7 +238,8 @@
       "subMenuItems": [
         {
           "name": "Standard Layout",
-          "link": "#"
+          "link": "#",
+          "availableFor": ["premium"]
         },
         {
           "name": "Grid Layout",
@@ -244,10 +247,11 @@
         },
         {
           "name": "Single Layout",
-          "link": "#"
+          "link": "#",
+          "availableFor": ["basic", "premium"]
         }
       ],
-      "availableFor": ["regular", "premium", "admin"]
+      "availableFor": ["basic", "premium"]
     },
     {
       "name": "Products",
@@ -262,7 +266,8 @@
           "subMenuItems": [
             {
               "name": "Product 1a",
-              "link": "#p1a"
+              "link": "#p1a",
+              "availableFor": ["premium"]
             },
             {
               "name": "Product 1b",
@@ -274,7 +279,9 @@
                 }
               ]
             }
-          ]
+          ],
+
+          "availableFor": ["premium"]
         },
         {
           "name": "Product 2",
@@ -282,20 +289,23 @@
           "subMenuItems": [
             {
               "name": "Test 1",
-              "link": "#test1"
+              "link": "#test1",
+              "availableFor": ["premium"]
             },
             {
               "name": "Test 2",
               "link": "#test2"
             }
-          ]
+          ],
+          "availableFor": ["premium"]
         },
         {
           "name": "Product 3",
-          "link": "#"
+          "link": "#",
+          "availableFor": ["premium"]
         }
       ],
-      "availableFor": ["premium", "admin"]
+      "availableFor": ["premium"]
     },
 
     {
@@ -303,28 +313,28 @@
       "link": "#",
       "linkAriaLabel": "",
       "liClass": "",
-      "availableFor": ["regular", "admin"]
+      "availableFor": ["basic"]
     },
     {
       "name": "Resources",
       "link": "#",
       "linkAriaLabel": "",
       "liClass": "",
-      "availableFor": ["regular", "admin"]
+      "availableFor": ["basic"]
     },
     {
       "name": "Careers",
       "link": "#",
       "linkAriaLabel": "",
       "liClass": "",
-      "availableFor": ["premium", "admin"]
+      "availableFor": ["premium"]
     },
     {
       "name": "Contact",
       "link": "#",
       "linkAriaLabel": "",
       "liClass": "",
-      "availableFor": ["regular", "premium", "admin"]
+      "availableFor": ["basic", "premium"]
     }
   ]
 }
