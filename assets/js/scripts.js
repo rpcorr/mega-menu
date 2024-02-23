@@ -67,7 +67,37 @@ $(document).ready(function () {
       $('#menuMoreLink').click(function (event) {
         event.preventDefault();
         $('.menu-item-has-children:not(#menu-more)').removeClass('visible');
+
         $(this).parent('.menu-item-has-children').toggleClass('visible');
+
+        if ($(this).parent('.menu-item-has-children').hasClass('visible')) {
+          // set the arrow to the up position (open)
+          $(this)
+            .children('i')
+            .removeClass('fa-angle-down')
+            .addClass('fa-angle-up');
+
+          // update aria-label to close menu
+          $(this).attr('aria-label', 'Click Enter to close More sub menu');
+
+          // set the More sub menu aria-expanded attr to true
+          $(this).siblings('ul').attr('aria-expanded', true);
+        } else {
+          // set the arrow to the down position (close)
+          $(this)
+            .children('i')
+            .removeClass('fa-angle-up')
+            .addClass('fa-angle-down');
+
+          // update aria-label to open menu
+          $(this).attr(
+            'aria-label',
+            'More has a sub menu. Click enter to open'
+          );
+
+          // set the More sub menu aria-expanded attr to false
+          $(this).siblings('ul').attr('aria-expanded', false);
+        }
       });
 
       // collapse all sub-menus when user clicks off
