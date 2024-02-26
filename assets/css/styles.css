@@ -222,7 +222,7 @@ ul#menu-main-menu li.menu-item-has-children:not(.visible) > ul {
 
 body.has-hover ul#menu-main-menu li.menu-item-has-children:hover > ul,
 ul#menu-main-menu li.menu-item-has-children.visible > ul {
-  display: block;
+  /* display: block; */
 }
 
 body.has-hover
@@ -384,17 +384,29 @@ ul#menu-main-menu li.menu-item-has-children:not(.visible) > div {
 
 body.has-hover ul#menu-main-menu li.menu-item-has-children:hover > ul,
 ul#menu-main-menu li.menu-item-has-children.visible > ul {
+  /* display: block; */
+}
+
+ul#menu-main-menu li.menu-item-has-children.visible > ul {
   display: block;
 }
 
-body.has-hover ul#menu-main-menu .hover:hover > .sub-menu-div {
-  display: flex;
-  position: absolute;
-  top: 54px;
+/****  This is the style to open sub-menu on hover under the More Menu ... ***/
+/* Is it efficient for the user though? */
+body.has-hover
+  ul#menu-main-menu
+  li.menu-item-has-children:hover
+  > ul
+  > li.menu-item-has-children:hover
+  .sub-menu-div {
+  /* display: block; */
 }
+/****  ...This is the style to open sub-menu on hover under the More Menu  ***/
 
-body.has-hover ul#menu-main-menu > .sub-menu-div > li {
-  /* display: block !important; */
+body.has-hover ul#menu-main-menu .hover:hover > .sub-menu-div {
+  /* display: flex;
+  position: absolute;
+  top: 54px; */
 }
 
 body.has-hover ul#menu-main-menu .hover:hover > ul ul.sub-menu,
