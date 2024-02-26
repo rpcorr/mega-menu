@@ -110,6 +110,7 @@ $(document).ready(function () {
 
           // set the More sub menu aria-expanded attr to false
           $(this).siblings('ul').attr('aria-expanded', false);
+          $(this).siblings('div').attr('aria-expanded', false);
         }
       });
 
@@ -120,7 +121,8 @@ $(document).ready(function () {
         }
 
         // reset arrows to down position
-        $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+        //$('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+        resetArrows();
 
         //  reset aria-labels to Click enter to open
         $('.menu-item-has-children > a').each(function () {
@@ -152,34 +154,24 @@ $(document).ready(function () {
   };
   xhttp.open('GET', 'assets/json/menu.json', true);
   xhttp.send();
-
-  function handleLinkClick(e) {
-    e.preventDefault();
-
-    if ($(this).parents().hasClass('menu-item-has-children')) {
-      // link has sub menu
-
-      // determine if click link is not "More"
-      if ($(this).attr('id') === undefined) {
-        // current link has a sub menu
-        toggleTopLevelMenu($(this));
-      } else {
-        // More link is clicked
-        toggleTopLevelMenu($(this));
-      }
-    } else {
-      // close menu
-      // program reach here when user clicks on a link that direct him to another location
-      console.log('hello');
-    }
-  }
 });
 
-// get params
+function handleLinkClick(e) {
+  e.preventDefault();
+
+  // link has sub menu
+  if ($(this).parents().hasClass('menu-item-has-children'))
+    toggleTopLevelMenu($(this));
+}
+
+// get params for determining the current user
+// input: userType
+// returns: userType value (string)
 $.urlParam = function (name) {
   var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(
     window.location.href
   );
+
   if (results == null) {
     return null;
   }
@@ -193,6 +185,56 @@ $(window).resize(function () {
   id = setTimeout(onResize, 500);
 });
 
+// close all open menus
+// input: current menu item or a string
+function closeAllMenus(menuItem) {
+  // run if the esc key was pressed
+  if (menuItem === 'esc') {
+    // close all submenus
+    $('li').removeClass('visible');
+
+    // reset arrows to down position
+    //$('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+    resetArrows();
+
+    //  reset aria-labels to Click enter to open
+    $('.menu-item-has-children > a').each(function () {
+      $(this).attr(
+        'aria-label',
+        `${$(this).text()}has a sub menu. Click enter to open`
+      );
+    });
+
+    // exit function early to avoid crash with menuLink.attr('id')
+    return;
+  }
+
+  // handle case if link is NOT the More link
+  if (menuItem.attr('id') === undefined) {
+    // close all submenus
+    $('li').removeClass('visible');
+  }
+
+  // reset arrows to down position
+  //$('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+  resetArrows();
+
+  //  reset aria-labels to Click enter to open
+  $('.menu-item-has-children > a').each(function () {
+    $(this).attr(
+      'aria-label',
+      `${$(this).text()}has a sub menu. Click enter to open`
+    );
+
+    // reset ul's or div's aria-expanded attribute to false
+    $(this).siblings('ul').attr('aria-expanded', false);
+    $(this).siblings('div').attr('aria-expanded', false);
+  });
+}
+
+// create menus base on user type
+// input: current menu item and current user
+// return: a string that builds the menu
 function createMenu(mI, user) {
   let liClass =
     mI.liClass === 'menu-item-has-children'
@@ -350,36 +392,6 @@ function createMenu(mI, user) {
   return output;
 }
 
-function onResize() {
-  if (winWidth != $(window).width()) {
-    // get width of each item, and list each as visible
-    let count = 0;
-    navItems.each(function () {
-      // add hover class to those with class menu-item-has-children
-      if ($(this).hasClass('menu-item-has-children')) {
-        $(this).addClass('hover');
-      }
-
-      let itemWidth = $(this).outerWidth();
-      if (itemWidth > 0) {
-        navItemWidth[count] = itemWidth;
-      }
-    });
-
-    moreWidth = $('#menu-more').outerWidth();
-
-    // hide all submenus
-    $('.menu-item-has-children').removeClass('visible');
-
-    // reset arrows to down position
-    $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
-
-    formatNav();
-
-    winWidth = $(window).width();
-  }
-}
-
 function findValueInArray(value, arr) {
   let bFound = false;
 
@@ -462,79 +474,39 @@ function formatNav() {
   });
 }
 
-function watchForHover() {
-  let hasHoverClass = false;
-  let lastTouchTime = 0;
-
-  function enableHover() {
-    // filter emulated events coming from touch events
-    if (new Date() - lastTouchTime < 500) return;
-    if (hasHoverClass) return;
-
-    $('body').addClass('has-hover');
-    hasHoverClass = true;
-  }
-
-  function disableHover() {
-    if (!hasHoverClass) return;
-
-    $('body').removeClass('has-hover');
-    hasHoverClass = false;
-  }
-
-  function updateLastTouchTime() {
-    lastTouchTime = new Date();
-  }
-
-  document.addEventListener('touchstart', updateLastTouchTime, true);
-  document.addEventListener('touchstart', disableHover, true);
-  document.addEventListener('mousemove', enableHover, true);
-
-  enableHover();
+function resetArrows() {
+  $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
 }
 
-function closeAllMenus(menuLink) {
-  // close all menus
-  // run if the esc key was pressed
-  if (menuLink === 'esc') {
-    // close all submenus
-    $('li').removeClass('visible');
+function onResize() {
+  if (winWidth != $(window).width()) {
+    // get width of each item, and list each as visible
+    let count = 0;
+    navItems.each(function () {
+      // add hover class to those with class menu-item-has-children
+      if ($(this).hasClass('menu-item-has-children')) {
+        $(this).addClass('hover');
+      }
 
-    // reset arrows to down position
-    $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
-
-    //  reset aria-labels to Click enter to open
-    $('.menu-item-has-children > a').each(function () {
-      $(this).attr(
-        'aria-label',
-        `${$(this).text()}has a sub menu. Click enter to open`
-      );
+      let itemWidth = $(this).outerWidth();
+      if (itemWidth > 0) {
+        navItemWidth[count] = itemWidth;
+      }
     });
 
-    // exit function early to avoid crash with menuLink.attr('id')
-    return;
+    moreWidth = $('#menu-more').outerWidth();
+
+    // hide all submenus
+    $('.menu-item-has-children').removeClass('visible');
+
+    // reset arrows to down position
+    //$('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+    resetArrows();
+
+    formatNav();
+
+    winWidth = $(window).width();
   }
-
-  // handle case if link is NOT the More link
-  if (menuLink.attr('id') === undefined) {
-    // close all submenus
-    $('li').removeClass('visible');
-  }
-
-  // reset arrows to down position
-  $('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
-
-  //  reset aria-labels to Click enter to open
-  $('.menu-item-has-children > a').each(function () {
-    $(this).attr(
-      'aria-label',
-      `${$(this).text()}has a sub menu. Click enter to open`
-    );
-
-    // reset ul's or div's aria-expanded attribute to false
-    $(this).siblings('ul').attr('aria-expanded', false);
-    $(this).siblings('div').attr('aria-expanded', false);
-  });
 }
 
 function toggleTopLevelMenu(menuLink) {
@@ -652,4 +624,35 @@ function toggleTopLevelMenu(menuLink) {
       }
     }
   }
+}
+
+function watchForHover() {
+  let hasHoverClass = false;
+  let lastTouchTime = 0;
+
+  function enableHover() {
+    // filter emulated events coming from touch events
+    if (new Date() - lastTouchTime < 500) return;
+    if (hasHoverClass) return;
+
+    $('body').addClass('has-hover');
+    hasHoverClass = true;
+  }
+
+  function disableHover() {
+    if (!hasHoverClass) return;
+
+    $('body').removeClass('has-hover');
+    hasHoverClass = false;
+  }
+
+  function updateLastTouchTime() {
+    lastTouchTime = new Date();
+  }
+
+  document.addEventListener('touchstart', updateLastTouchTime, true);
+  document.addEventListener('touchstart', disableHover, true);
+  document.addEventListener('mousemove', enableHover, true);
+
+  enableHover();
 }
