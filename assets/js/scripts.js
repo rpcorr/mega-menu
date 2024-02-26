@@ -12,9 +12,17 @@ let megaMenuLinks = '';
 
 $(document).ready(function () {
   // define the user who is browsing the page
+  let userType = $.urlParam('userType');
+
+  //set admin as the default userType
+  if (!userType) userType = 'admin';
+
+  // display current user on screen
+  $('#currentUser').text(userType);
+
   const user = {
     username: 'user1',
-    userType: 'admin',
+    userType: userType,
   };
 
   // read in the Menu JSON file
@@ -166,6 +174,17 @@ $(document).ready(function () {
     }
   }
 });
+
+// get params
+$.urlParam = function (name) {
+  var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(
+    window.location.href
+  );
+  if (results == null) {
+    return null;
+  }
+  return decodeURI(results[1]) || 0;
+};
 
 // format navigation on page resize
 let id;

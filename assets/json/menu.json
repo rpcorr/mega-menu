@@ -34,7 +34,7 @@
       "link": "#",
       "linkAriaLabel": "Services has a sub menu. Click enter to open",
       "liClass": "menu-item-has-children",
-      "subMenuType": "basicLinks",
+      "subMenuType": "regularLinks",
       "subMenuItems": [
         {
           "name": "Service 1",

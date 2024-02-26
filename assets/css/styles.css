@@ -739,3 +739,38 @@ header nav ul.menu > li > .mega-menu > .list-item > ul > li > a:hover,
   background-color: #fff;
   color: #afacd1;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 20vw;
+  height: 25vh;
+  text-align: center;
+  margin: auto;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.user-type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  max-width: 20em;
+  text-align: center;
+}
+
+#currentUser {
+  font-weight: bold;
+  text-transform: capitalize;
+}
