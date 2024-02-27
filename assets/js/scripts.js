@@ -239,14 +239,10 @@ function closeAllMenus(menuItem) {
 // returns: a string that builds the menu
 function createMenu(mI, user) {
   const liClass =
-    mI.liClass === 'menu-item-has-children'
-      ? 'class="menu-item-has-children"'
-      : '';
+    mI.subMenuType != undefined ? 'class="menu-item-has-children"' : '';
 
   const downArrow =
-    mI.liClass === 'menu-item-has-children'
-      ? '<i class="fa fa-angle-down"></i>'
-      : '';
+    mI.subMenuType != undefined ? '<i class="fa fa-angle-down"></i>' : '';
 
   const ariaLabel =
     mI.subMenuType != undefined

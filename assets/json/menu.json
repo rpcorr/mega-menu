@@ -18,19 +18,16 @@
     {
       "name": "Home",
       "link": "#",
-      "liClass": "",
       "availableFor": ["basic", "premium"]
     },
     {
       "name": "About Us",
       "link": "#",
-      "liClass": "",
       "availableFor": ["basic", "premium"]
     },
     {
       "name": "Services",
       "link": "#",
-      "liClass": "menu-item-has-children",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
@@ -48,7 +45,6 @@
     {
       "name": "New",
       "link": "#",
-      "liClass": "menu-item-has-children",
       "subMenuType": "photoLinks",
       "subMenuItems": [
         {
@@ -78,7 +74,6 @@
     {
       "name": "Shop",
       "link": "#",
-      "liClass": "menu-item-has-children",
       "subMenuType": "categorizedLinks",
       "subMenuItems": [
         {
@@ -227,7 +222,6 @@
     {
       "name": "Blog",
       "link": "#",
-      "liClass": "menu-item-has-children",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
@@ -250,7 +244,6 @@
     {
       "name": "Products",
       "link": "#",
-      "liClass": "menu-item-has-children",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
@@ -304,25 +297,21 @@
     {
       "name": "Portfolio",
       "link": "#",
-      "liClass": "",
       "availableFor": ["basic"]
     },
     {
       "name": "Resources",
       "link": "#",
-      "liClass": "",
       "availableFor": ["basic"]
     },
     {
       "name": "Careers",
       "link": "#",
-      "liClass": "",
       "availableFor": ["premium"]
     },
     {
       "name": "Contact",
       "link": "#",
-      "liClass": "",
       "availableFor": ["basic", "premium"]
     }
   ]
