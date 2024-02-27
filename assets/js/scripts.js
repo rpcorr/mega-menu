@@ -121,7 +121,6 @@ $(document).ready(function () {
         }
 
         // reset arrows to down position
-        //$('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
         resetArrows();
 
         //  reset aria-labels to Click enter to open
@@ -187,6 +186,7 @@ $(window).resize(function () {
 
 // close all open menus
 // input: current menu item or a string
+// returns: void
 function closeAllMenus(menuItem) {
   // run if the esc key was pressed
   if (menuItem === 'esc') {
@@ -236,7 +236,7 @@ function closeAllMenus(menuItem) {
 
 // create menus base on user type
 // input: current menu item and current user
-// return: a string that builds the menu
+// returns: a string that builds the menu
 function createMenu(mI, user) {
   const liClass =
     mI.liClass === 'menu-item-has-children'
@@ -505,7 +505,6 @@ function onResize() {
     $('.menu-item-has-children').removeClass('visible');
 
     // reset arrows to down position
-    //$('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
     resetArrows();
 
     formatNav();
