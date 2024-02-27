@@ -236,21 +236,25 @@ function closeAllMenus(menuItem) {
 // input: current menu item and current user
 // return: a string that builds the menu
 function createMenu(mI, user) {
-  let liClass =
+  const liClass =
     mI.liClass === 'menu-item-has-children'
       ? 'class="menu-item-has-children"'
       : '';
 
-  let downArrow =
+  const downArrow =
     mI.liClass === 'menu-item-has-children'
       ? '<i class="fa fa-angle-down"></i>'
       : '';
+
+  const ariaLabel =
+    mI.linkAriaLabel != '' ? `aria-label="${mI.linkAriaLabel}"` : '';
+  console.log(mI.linkAriaLabel);
 
   if (
     findValueInArray(user.userType, $(mI.availableFor)) ||
     user.userType === 'admin'
   ) {
-    output += `<li ${liClass}><a href="${mI.link}">${mI.name} ${downArrow}</a>`;
+    output += `<li ${liClass}><a href="${mI.link}" ${ariaLabel}>${mI.name} ${downArrow}</a>`;
 
     if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
       output += '<ul class="sub-menu" aria-expanded="false">';
