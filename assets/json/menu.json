@@ -18,21 +18,18 @@
     {
       "name": "Home",
       "link": "#",
-      "linkAriaLabel": "",
       "liClass": "",
       "availableFor": ["basic", "premium"]
     },
     {
       "name": "About Us",
       "link": "#",
-      "linkAriaLabel": "",
       "liClass": "",
       "availableFor": ["basic", "premium"]
     },
     {
       "name": "Services",
       "link": "#",
-      "linkAriaLabel": "Services has a sub menu. Click enter to open",
       "liClass": "menu-item-has-children",
       "subMenuType": "regularLinks",
       "subMenuItems": [
@@ -51,7 +48,6 @@
     {
       "name": "New",
       "link": "#",
-      "linkAriaLabel": "New has a sub menu. Click enter to open",
       "liClass": "menu-item-has-children",
       "subMenuType": "photoLinks",
       "subMenuItems": [
@@ -83,7 +79,6 @@
       "name": "Shop",
       "link": "#",
       "liClass": "menu-item-has-children",
-      "linkAriaLabel": "Shop has a sub menu. Click enter to open",
       "subMenuType": "categorizedLinks",
       "subMenuItems": [
         {
@@ -233,7 +228,6 @@
       "name": "Blog",
       "link": "#",
       "liClass": "menu-item-has-children",
-      "linkAriaLabel": "Blog has a sub menu. Click enter to open",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
@@ -257,7 +251,6 @@
       "name": "Products",
       "link": "#",
       "liClass": "menu-item-has-children",
-      "linkAriaLabel": "Products has a sub menu. Click enter to open",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
@@ -311,28 +304,24 @@
     {
       "name": "Portfolio",
       "link": "#",
-      "linkAriaLabel": "",
       "liClass": "",
       "availableFor": ["basic"]
     },
     {
       "name": "Resources",
       "link": "#",
-      "linkAriaLabel": "",
       "liClass": "",
       "availableFor": ["basic"]
     },
     {
       "name": "Careers",
       "link": "#",
-      "linkAriaLabel": "",
       "liClass": "",
       "availableFor": ["premium"]
     },
     {
       "name": "Contact",
       "link": "#",
-      "linkAriaLabel": "",
       "liClass": "",
       "availableFor": ["basic", "premium"]
     }

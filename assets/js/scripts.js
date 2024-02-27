@@ -249,7 +249,9 @@ function createMenu(mI, user) {
       : '';
 
   const ariaLabel =
-    mI.linkAriaLabel != '' ? `aria-label="${mI.linkAriaLabel}"` : '';
+    mI.subMenuType != undefined
+      ? `aria-label="${mI.name} has a sub menu. Click enter to open"`
+      : '';
 
   if (
     findValueInArray(user.userType, $(mI.availableFor)) ||
