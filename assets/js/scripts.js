@@ -672,10 +672,12 @@ function closeSiblingSubMenus(menuLink) {
   $(menuLink)
     .parent()
     .find('li.menu-item-has-children > a')
-    .attr(
-      'aria-label',
-      `${$(menuLink).text()}has a sub menu. Click enter to open`
-    );
+    .each(function () {
+      $(this).attr(
+        'aria-label',
+        `${$(this).text()}has a sub menu. Click enter to open`
+      );
+    });
 
   // 4. set sub-menu container aria-expanded to false
   $(menuLink).siblings().find('ul').attr('aria-expanded', false);
