@@ -358,8 +358,8 @@ function createMenu(mI, user) {
         ) {
           output += `<div class="list-item text-center">
                   <a href="${mI.subMenuItems[i].link}" ${hRefTarget}>
-                    <img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />
-                    <p>${mI.subMenuItems[i].title}</p>
+                    <img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].name}" />
+                    <p>${mI.subMenuItems[i].name}</p>
                   </a>
                 </div>`;
         }
@@ -377,7 +377,7 @@ function createMenu(mI, user) {
       mI.subMenuItems.forEach((_, i) => {
         let subMenuContainerInnerContent = '';
 
-        if (mI.subMenuItems[i].contentType === 'text') {
+        if (mI.subMenuItems[i].contentType === 'link') {
           if (i === 0 || i === 2 || i === 4)
             subMenuContainerInnerContent += `<div class="list-item">`;
 
@@ -401,7 +401,7 @@ function createMenu(mI, user) {
         if (mI.subMenuItems[i].contentType === 'photo') {
           subMenuContainerInnerContent += '<div class="list-item">';
 
-          let columnValue = `<img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />`;
+          let columnValue = `<img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].alt}" />`;
 
           subMenuContainerInnerContent += `${columnValue}</div>`;
         }

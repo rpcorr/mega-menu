@@ -48,23 +48,23 @@
       "subMenuType": "photoLinks",
       "subMenuItems": [
         {
-          "title": "Rain Forest",
+          "name": "Rain Forest",
           "link": "#rainForest",
           "imgSrc": "p1"
         },
         {
-          "title": "Mountains",
+          "name": "Mountains",
           "link": "#mountains",
           "imgSrc": "p2",
           "availableFor": ["premium"]
         },
         {
-          "title": "Waterfall",
+          "name": "Waterfall",
           "link": "#waterfall",
           "imgSrc": "p3"
         },
         {
-          "title": "Owl",
+          "name": "Owl",
           "link": "#owl",
           "imgSrc": "p4"
         }
@@ -77,7 +77,7 @@
       "subMenuType": "categorizedLinks",
       "subMenuItems": [
         {
-          "contentType": "text",
+          "contentType": "link",
           "titleId": "na",
           "title": "North America",
           "links": [
@@ -104,7 +104,7 @@
           ]
         },
         {
-          "contentType": "text",
+          "contentType": "link",
           "titleId": "sa",
           "title": "South America",
           "links": [
@@ -123,7 +123,7 @@
           ]
         },
         {
-          "contentType": "text",
+          "contentType": "link",
           "titleId": "au",
           "title": "Australia",
           "links": [
@@ -146,7 +146,7 @@
           ]
         },
         {
-          "contentType": "text",
+          "contentType": "link",
           "titleId": "af",
           "title": "Africa",
           "links": [
@@ -169,7 +169,7 @@
           ]
         },
         {
-          "contentType": "text",
+          "contentType": "link",
           "titleId": "eu",
           "title": "Europe",
           "links": [
@@ -213,8 +213,8 @@
         },
         {
           "contentType": "photo",
-          "title": "Mountain goats",
-          "imgSrc": "p5"
+          "imgSrc": "p5",
+          "alt": "Mountain goats"
         }
       ],
       "availableFor": ["premium"]
