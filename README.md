@@ -88,7 +88,7 @@ NOTE: the photos are not links
 
 A. Ensure the navigation is accessible when users interact with it using a keyboard and a screen reader
 
-B. Screen readers announcing whether the selected menu item is a sub-menu and how to open it by use of aria labels
+B. Screen readers announce whether the selected menu item is a sub-menu and how to open it by use of aria labels
 
 C. Toggle submenus containers have aria-expanded attributes and are either set to false (closed) or true (open)
 
@@ -97,4 +97,4 @@ D. Screen reader users know how to use a keyboard when navigating the site. Belo
 - TAB: takes users through the focus elements as they appear in the DOM
 - SHIFT + TAB: the reverse order of TAB
 - ENTER: activate a link (takes the user to the URL assigned in the HREF)/toggle the dropdown menu (open/close)
-- ESC: close top-level and sub-level dropdown menu
+- ESC: close sub-level dropdown menu
