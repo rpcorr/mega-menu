@@ -65,7 +65,7 @@ Note: Currently, the program can accept three levels of menus.
 
 subMenuType can have one of three values: "regularLinks", "photoLinks", "categorizedLinks"
 
-D-1: regularLinks have name and link properties. Name is the link text, and the link is the destination value, e.g. <a href="[link]">[name]</a>
+D-1: regularLinks have name and link properties. Name is the link text, and the link is the destination value, e.g. [\<a href="[link]"\>\[name\]\</a\>]
 
 D-2: photoLinks have name, link, and imgSrc properties. imgSrc is the name of the jpg file. There is no need to add the photo extension or the file path. Images are under assets/images/
 
