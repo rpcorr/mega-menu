@@ -238,26 +238,43 @@ function closeAllMenus(menuItem) {
 // input: current menu item and current user
 // returns: a string that builds the menu
 function createMenu(mI, user) {
+  // define liClass
   const liClass =
     mI.subMenuType != undefined ? 'class="menu-item-has-children"' : '';
 
+  // define downArrow
   const downArrow =
     mI.subMenuType != undefined ? '<i class="fa fa-angle-down"></i>' : '';
 
+  // define ariaLable
   const ariaLabel =
     mI.subMenuType != undefined
       ? `aria-label="${mI.name} has a sub menu. Click enter to open"`
+      : '';
+
+  // define hRefTarget
+  const hRefTarget =
+    mI.link.charAt(0) !== '#' &&
+    (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
+      ? 'target="_blank"'
       : '';
 
   if (
     findValueInArray(user.userType, $(mI.availableFor)) ||
     user.userType === 'admin'
   ) {
-    output += `<li ${liClass}><a href="${mI.link}" ${ariaLabel}>${mI.name} ${downArrow}</a>`;
+    output += `<li ${liClass}><a href="${mI.link}" ${ariaLabel} ${hRefTarget}>${mI.name} ${downArrow}</a>`;
 
     if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
       output += '<ul class="sub-menu" aria-expanded="false">';
       mI.subMenuItems.forEach((_, i) => {
+        // define hRefTarget
+        const hRefTarget =
+          mI.subMenuItems[i].link.charAt(0) !== '#' &&
+          (mI.subMenuItems[i].link.indexOf('http') !== -1 ||
+            mI.subMenuItems[i].link.indexOf('.pdf') !== -1)
+            ? 'target="_blank"'
+            : '';
         if (
           findValueInArray(user.userType, $(mI.subMenuItems[i].availableFor)) ||
           user.userType === 'admin'
@@ -271,6 +288,16 @@ function createMenu(mI, user) {
             secondLevel = '<ul class="sub-menu" aria-expanded="false">';
 
             mI.subMenuItems[i].subMenuItems.forEach((_, j) => {
+              // define hRefTarget
+              const hRefTarget =
+                mI.subMenuItems[i].subMenuItems[j].link.charAt(0) !== '#' &&
+                (mI.subMenuItems[i].subMenuItems[j].link.indexOf('http') !==
+                  -1 ||
+                  mI.subMenuItems[i].subMenuItems[j].link.indexOf('.pdf') !==
+                    -1)
+                  ? 'target="_blank"'
+                  : '';
+
               if (
                 findValueInArray(
                   user.userType,
@@ -288,6 +315,20 @@ function createMenu(mI, user) {
                   // loop through the links
                   mI.subMenuItems[i].subMenuItems[j].subMenuItems.forEach(
                     (_, k) => {
+                      // define hRefTarget
+                      const hRefTarget =
+                        mI.subMenuItems[i].subMenuItems[j].subMenuItems[
+                          k
+                        ].link.charAt(0) !== '#' &&
+                        (mI.subMenuItems[i].subMenuItems[j].subMenuItems[
+                          k
+                        ].link.indexOf('http') !== -1 ||
+                          mI.subMenuItems[i].subMenuItems[j].subMenuItems[
+                            k
+                          ].link.indexOf('.pdf') !== -1)
+                          ? 'target="_blank"'
+                          : '';
+
                       if (
                         findValueInArray(
                           user.userType,
@@ -298,7 +339,7 @@ function createMenu(mI, user) {
                         ) ||
                         user.userType === 'admin'
                       ) {
-                        thirdLevel += `<li><a href="${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].link}">${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].name}</a></li>`;
+                        thirdLevel += `<li><a href="${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].link}" ${hRefTarget}>${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].name}</a></li>`;
                       }
                     }
                   );
@@ -308,8 +349,8 @@ function createMenu(mI, user) {
                   secondLevel += `${thirdLevel}</li>`;
                 } else {
                   secondLevel += `<li>
-        <a href="${mI.subMenuItems[i].subMenuItems[j].link}" target="_blank">
-          ${mI.subMenuItems[i].subMenuItems[j].name}</i>
+        <a href="${mI.subMenuItems[i].subMenuItems[j].link}" ${hRefTarget}>
+          ${mI.subMenuItems[i].subMenuItems[j].name}
         </a></li>`;
                 }
               }
@@ -318,7 +359,7 @@ function createMenu(mI, user) {
             output += `${secondLevel}</ul></li>`;
           } else {
             output += `<li>
-          <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name}</a>
+          <a href="${mI.subMenuItems[i].link}" ${hRefTarget}>${mI.subMenuItems[i].name}</a>
         </li>`;
           }
         }
@@ -331,12 +372,18 @@ function createMenu(mI, user) {
         '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
 
       mI.subMenuItems.forEach((_, i) => {
+        const hRefTarget =
+          mI.link.charAt(0) !== '#' &&
+          (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
+            ? 'target="_blank"'
+            : '';
+
         if (
           findValueInArray(user.userType, $(mI.subMenuItems[i].availableFor)) ||
           user.userType === 'admin'
         ) {
           output += `<div class="list-item text-center">
-                  <a href="${mI.subMenuItems[i].link}">
+                  <a href="${mI.subMenuItems[i].link}" ${hRefTarget}>
                     <img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].title}" />
                     <p>${mI.subMenuItems[i].title}</p>
                   </a>
@@ -364,7 +411,14 @@ function createMenu(mI, user) {
 
           let listItemValues = '<ul>';
           mI.subMenuItems[i].links.forEach((_, j) => {
-            listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}"><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
+            // define hRefTarget
+            const hRefTarget =
+              mI.subMenuItems[i].links[j].link.charAt(0) !== '#' &&
+              (mI.subMenuItems[i].links[j].link.indexOf('http') !== -1 ||
+                mI.subMenuItems[i].links[j].link.indexOf('.pdf') !== -1)
+                ? 'target="_blank"'
+                : '';
+            listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}" ${hRefTarget}><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
           });
           listItemValues += '</ul>';
 
