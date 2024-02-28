@@ -246,18 +246,14 @@ function createMenu(mI, user) {
   const downArrow =
     mI.subMenuType != undefined ? '<i class="fa fa-angle-down"></i>' : '';
 
-  // define ariaLable
+  // define ariaLabel
   const ariaLabel =
     mI.subMenuType != undefined
       ? `aria-label="${mI.name} has a sub menu. Click enter to open"`
       : '';
 
   // define hRefTarget
-  const hRefTarget =
-    mI.link.charAt(0) !== '#' &&
-    (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
-      ? 'target="_blank"'
-      : '';
+  const hRefTarget = determineHREFTarget(mI);
 
   if (
     findValueInArray(user.userType, $(mI.availableFor)) ||
@@ -269,12 +265,8 @@ function createMenu(mI, user) {
       output += '<ul class="sub-menu" aria-expanded="false">';
       mI.subMenuItems.forEach((_, i) => {
         // define hRefTarget
-        const hRefTarget =
-          mI.subMenuItems[i].link.charAt(0) !== '#' &&
-          (mI.subMenuItems[i].link.indexOf('http') !== -1 ||
-            mI.subMenuItems[i].link.indexOf('.pdf') !== -1)
-            ? 'target="_blank"'
-            : '';
+        const hRefTarget = determineHREFTarget(mI.subMenuItems[i]);
+
         if (
           findValueInArray(user.userType, $(mI.subMenuItems[i].availableFor)) ||
           user.userType === 'admin'
@@ -289,14 +281,9 @@ function createMenu(mI, user) {
 
             mI.subMenuItems[i].subMenuItems.forEach((_, j) => {
               // define hRefTarget
-              const hRefTarget =
-                mI.subMenuItems[i].subMenuItems[j].link.charAt(0) !== '#' &&
-                (mI.subMenuItems[i].subMenuItems[j].link.indexOf('http') !==
-                  -1 ||
-                  mI.subMenuItems[i].subMenuItems[j].link.indexOf('.pdf') !==
-                    -1)
-                  ? 'target="_blank"'
-                  : '';
+              const hRefTarget = determineHREFTarget(
+                mI.subMenuItems[i].subMenuItems[j]
+              );
 
               if (
                 findValueInArray(
@@ -316,18 +303,9 @@ function createMenu(mI, user) {
                   mI.subMenuItems[i].subMenuItems[j].subMenuItems.forEach(
                     (_, k) => {
                       // define hRefTarget
-                      const hRefTarget =
-                        mI.subMenuItems[i].subMenuItems[j].subMenuItems[
-                          k
-                        ].link.charAt(0) !== '#' &&
-                        (mI.subMenuItems[i].subMenuItems[j].subMenuItems[
-                          k
-                        ].link.indexOf('http') !== -1 ||
-                          mI.subMenuItems[i].subMenuItems[j].subMenuItems[
-                            k
-                          ].link.indexOf('.pdf') !== -1)
-                          ? 'target="_blank"'
-                          : '';
+                      const hRefTarget = determineHREFTarget(
+                        mI.subMenuItems[i].subMenuItems[j].subMenuItems[k]
+                      );
 
                       if (
                         findValueInArray(
@@ -372,11 +350,7 @@ function createMenu(mI, user) {
         '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
 
       mI.subMenuItems.forEach((_, i) => {
-        const hRefTarget =
-          mI.link.charAt(0) !== '#' &&
-          (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
-            ? 'target="_blank"'
-            : '';
+        const hRefTarget = determineHREFTarget(mI);
 
         if (
           findValueInArray(user.userType, $(mI.subMenuItems[i].availableFor)) ||
@@ -412,12 +386,8 @@ function createMenu(mI, user) {
           let listItemValues = '<ul>';
           mI.subMenuItems[i].links.forEach((_, j) => {
             // define hRefTarget
-            const hRefTarget =
-              mI.subMenuItems[i].links[j].link.charAt(0) !== '#' &&
-              (mI.subMenuItems[i].links[j].link.indexOf('http') !== -1 ||
-                mI.subMenuItems[i].links[j].link.indexOf('.pdf') !== -1)
-                ? 'target="_blank"'
-                : '';
+            const hRefTarget = determineHREFTarget(mI.subMenuItems[i].links[j]);
+
             listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}" ${hRefTarget}><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
           });
           listItemValues += '</ul>';
@@ -732,4 +702,11 @@ function closeSiblingSubMenus(menuLink) {
 
   // 4. set sub-menu container aria-expanded to false
   $(menuLink).siblings().find('ul').attr('aria-expanded', false);
+}
+
+function determineHREFTarget(mI) {
+  return mI.link.charAt(0) !== '#' &&
+    (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
+    ? 'target="_blank"'
+    : '';
 }
