@@ -94,7 +94,7 @@ C. Toggle submenus containers have aria-expanded attributes and are either set t
 
 D. Screen reader users know how to use a keyboard when navigating the site. Below are some of the key features:
 
-TAB: takes users through the focus elements as they appear in the DOM
-SHIFT + TAB: the reverse order of TAB
-ENTER: activate a link (takes the user to the URL assigned in the HREF)/toggle the dropdown menu (open/close)
-ESC: close top-level and sub-level dropdown menu
+- TAB: takes users through the focus elements as they appear in the DOM
+- SHIFT + TAB: the reverse order of TAB
+- ENTER: activate a link (takes the user to the URL assigned in the HREF)/toggle the dropdown menu (open/close)
+- ESC: close top-level and sub-level dropdown menu
