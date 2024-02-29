@@ -27,7 +27,7 @@
     },
     {
       "name": "Services",
-      "link": "#",
+      "link": "services.html",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
@@ -37,14 +37,14 @@
         },
         {
           "name": "Service 2",
-          "link": "#"
+          "link": "https://www.ctv.ca"
         }
       ],
       "availableFor": ["premium", "admin"]
     },
     {
       "name": "New",
-      "link": "#",
+      "link": "new.html",
       "subMenuType": "photoLinks",
       "subMenuItems": [
         {
@@ -73,7 +73,7 @@
     },
     {
       "name": "Shop",
-      "link": "#",
+      "link": "shop.html",
       "subMenuType": "categorizedLinks",
       "subMenuItems": [
         {
@@ -83,23 +83,23 @@
           "links": [
             {
               "name": "Package 1",
-              "link": "#"
+              "link": "napackage1.html"
             },
             {
               "name": "Package 2",
-              "link": "#"
+              "link": "napackage2.html"
             },
             {
               "name": "Package 3",
-              "link": "#"
+              "link": "napackage3.html"
             },
             {
               "name": "Package 4",
-              "link": "#"
+              "link": "napackage4.html"
             },
             {
               "name": "Package 5",
-              "link": "#"
+              "link": "napackage5.html"
             }
           ]
         },
@@ -110,15 +110,15 @@
           "links": [
             {
               "name": "Package 1",
-              "link": "#"
+              "link": "sapackage1.html"
             },
             {
               "name": "Package 2",
-              "link": "#"
+              "link": "sapackage2.html"
             },
             {
               "name": "Package 3",
-              "link": "#"
+              "link": "sapackage3.html"
             }
           ]
         },
@@ -129,19 +129,19 @@
           "links": [
             {
               "name": "Package 1",
-              "link": "#"
+              "link": "aupackage1.html"
             },
             {
               "name": "Package 2",
-              "link": "#"
+              "link": "aupackage2.html"
             },
             {
               "name": "Package 3",
-              "link": "#"
+              "link": "aupackage3.html"
             },
             {
               "name": "Package 4",
-              "link": "#"
+              "link": "aupackage4.html"
             }
           ]
         },
@@ -152,19 +152,19 @@
           "links": [
             {
               "name": "Package 1",
-              "link": "#"
+              "link": "afpackage1.html"
             },
             {
               "name": "Package 2",
-              "link": "#"
+              "link": "afpackage2.html"
             },
             {
               "name": "Package 3",
-              "link": "#"
+              "link": "afpackage3.html"
             },
             {
               "name": "Package 4",
-              "link": "#"
+              "link": "afpackage4.html"
             }
           ]
         },
@@ -175,39 +175,39 @@
           "links": [
             {
               "name": "Package 1",
-              "link": "#"
+              "link": "eupackage1.html"
             },
             {
               "name": "Package 2",
-              "link": "#"
+              "link": "eupackage2.html"
             },
             {
               "name": "Package 3",
-              "link": "#"
+              "link": "eupackage3.html"
             },
             {
               "name": "Package 4",
-              "link": "#"
+              "link": "eupackage4.html"
             },
             {
               "name": "Package 5",
-              "link": "#"
+              "link": "eupackage5.html"
             },
             {
               "name": "Package 6",
-              "link": "#"
+              "link": "eupackage6.html"
             },
             {
               "name": "Package 7",
-              "link": "#"
+              "link": "eupackage7.html"
             },
             {
               "name": "Package 8",
-              "link": "#"
+              "link": "eupackage8.html"
             },
             {
               "name": "Package 9",
-              "link": "#"
+              "link": "eupackage9.html"
             }
           ]
         },
@@ -221,21 +221,21 @@
     },
     {
       "name": "Blog",
-      "link": "#",
+      "link": "blog.html",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
           "name": "Standard Layout",
-          "link": "#",
+          "link": "standardLayout.html",
           "availableFor": ["premium"]
         },
         {
           "name": "Grid Layout",
-          "link": "#"
+          "link": "gridLayout.html"
         },
         {
           "name": "Single Layout",
-          "link": "#",
+          "link": "singleLayout.html",
           "availableFor": ["basic", "premium"]
         }
       ],
@@ -243,16 +243,16 @@
     },
     {
       "name": "Products",
-      "link": "#",
+      "link": "products.html",
       "subMenuType": "regularLinks",
       "subMenuItems": [
         {
           "name": "Product 1",
-          "link": "#",
+          "link": "product1.html",
           "subMenuItems": [
             {
               "name": "Product 1a",
-              "link": "#",
+              "link": "product1a.html",
               "availableFor": ["premium"]
             },
             {
@@ -271,11 +271,11 @@
         },
         {
           "name": "Product 2",
-          "link": "#",
+          "link": "product2.html",
           "subMenuItems": [
             {
               "name": "Test 1",
-              "link": "#",
+              "link": "test1.html",
               "availableFor": ["premium"]
             },
             {
@@ -287,7 +287,7 @@
         },
         {
           "name": "Product 3",
-          "link": "#",
+          "link": "product3.html",
           "availableFor": ["premium"]
         }
       ],
@@ -296,22 +296,22 @@
 
     {
       "name": "Portfolio",
-      "link": "#",
+      "link": "portfolio.html",
       "availableFor": ["basic"]
     },
     {
       "name": "Resources",
-      "link": "#",
+      "link": "resources.html",
       "availableFor": ["basic"]
     },
     {
       "name": "Careers",
-      "link": "#",
+      "link": "careers.html",
       "availableFor": ["premium"]
     },
     {
       "name": "Contact",
-      "link": "#",
+      "link": "contact.html",
       "availableFor": ["basic", "premium"]
     }
   ]

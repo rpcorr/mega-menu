@@ -255,17 +255,28 @@ function createMenu(mI, user) {
   // define hRefTarget
   const hRefTarget = determineHREFTarget(mI);
 
+  // define ariaCurrent
+  let ariaCurrent = '';
+
+  if (isCurrentPage(mI.link)) ariaCurrent = 'aria-current="page"';
+
   if (
     findValueInArray(user.userType, $(mI.availableFor)) ||
     user.userType === 'admin'
   ) {
-    output += `<li ${liClass}><a href="${mI.link}" ${ariaLabel} ${hRefTarget}>${mI.name} ${downArrow}</a>`;
+    output += `<li ${liClass}><a href="${mI.link}" ${ariaLabel} ${hRefTarget} ${ariaCurrent}>${mI.name} ${downArrow}</a>`;
 
     if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
       output += '<ul class="sub-menu" aria-expanded="false">';
       mI.subMenuItems.forEach((_, i) => {
         // define hRefTarget
         const hRefTarget = determineHREFTarget(mI.subMenuItems[i]);
+
+        // reset ariaCurrent
+        ariaCurrent = '';
+
+        if (isCurrentPage(mI.subMenuItems[i].link))
+          ariaCurrent = 'aria-current="page"';
 
         if (
           findValueInArray(user.userType, $(mI.subMenuItems[i].availableFor)) ||
@@ -274,7 +285,7 @@ function createMenu(mI, user) {
           if (mI.subMenuItems[i].subMenuItems) {
             // a second level menu is present
             output += `<li class="menu-item-has-children">
-            <a href="${mI.subMenuItems[i].link}">${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
+            <a href="${mI.subMenuItems[i].link}" ${ariaCurrent}>${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
             let secondLevel;
 
             secondLevel = '<ul class="sub-menu" aria-expanded="false">';
@@ -307,6 +318,17 @@ function createMenu(mI, user) {
                         mI.subMenuItems[i].subMenuItems[j].subMenuItems[k]
                       );
 
+                      // define ariaCurrent
+                      const ariaCurrent = '';
+
+                      if (
+                        isCurrentPage(
+                          mI.subMenuItems[i].subMenuItems[j].subMenuItems[k]
+                            .link
+                        )
+                      )
+                        ariaCurrent = 'aria-current="page"';
+
                       if (
                         findValueInArray(
                           user.userType,
@@ -317,7 +339,7 @@ function createMenu(mI, user) {
                         ) ||
                         user.userType === 'admin'
                       ) {
-                        thirdLevel += `<li><a href="${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].link}" ${hRefTarget}>${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].name}</a></li>`;
+                        thirdLevel += `<li><a href="${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].link}" ${hRefTarget}${ariaCurrent}>${mI.subMenuItems[i].subMenuItems[j].subMenuItems[k].name}</a></li>`;
                       }
                     }
                   );
@@ -352,12 +374,17 @@ function createMenu(mI, user) {
       mI.subMenuItems.forEach((_, i) => {
         const hRefTarget = determineHREFTarget(mI);
 
+        const ariaCurrent = '';
+
+        if (isCurrentPage(mI.subMenuItems[i].link))
+          ariaCurrent = 'aria-current="page"';
+
         if (
           findValueInArray(user.userType, $(mI.subMenuItems[i].availableFor)) ||
           user.userType === 'admin'
         ) {
           output += `<div class="list-item text-center">
-                  <a href="${mI.subMenuItems[i].link}" ${hRefTarget}>
+                  <a href="${mI.subMenuItems[i].link}" ${hRefTarget} ${ariaCurrent}>
                     <img src="assets/imgs/${mI.subMenuItems[i].imgSrc}.jpg" alt="${mI.subMenuItems[i].name}" />
                     <p>${mI.subMenuItems[i].name}</p>
                   </a>
@@ -388,7 +415,12 @@ function createMenu(mI, user) {
             // define hRefTarget
             const hRefTarget = determineHREFTarget(mI.subMenuItems[i].links[j]);
 
-            listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}" ${hRefTarget}><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
+            // define ariaCurrent
+            const ariaCurrent = '';
+
+            if (isCurrentPage(mI.link)) ariaCurrent = 'aria-current="page"';
+
+            listItemValues += `<li><a href="${mI.subMenuItems[i].links[j].link}" ${hRefTarget}${ariaCurrent}><span aria-labelledby="${mI.subMenuItems[i].titleId}"></span>${mI.subMenuItems[i].links[j].name}</a></li>`;
           });
           listItemValues += '</ul>';
 
@@ -709,4 +741,9 @@ function determineHREFTarget(mI) {
     (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
     ? 'target="_blank"'
     : '';
+}
+
+function isCurrentPage(page) {
+  if (window.location.href.indexOf(page) !== -1 || page === 'index.html')
+    return true;
 }

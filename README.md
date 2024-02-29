@@ -117,4 +117,4 @@ D. Screen reader users know how to use a keyboard when navigating the site. Belo
 
 - read user types from user object in the JSON file
 - add a login feature ?
-- add aria-current="page" to the current page
+- add aria-current="page" to the current page - DONE
