@@ -104,7 +104,7 @@ A. Ensure the navigation is accessible when users interact with it using a keybo
 
 B. Screen readers announce whether the selected menu item is a sub-menu and how to open it by use of aria labels
 
-C. The current page anchor tag, [\<a></a\>], is assign with aria-current="page" to let screen readers users the current page
+C. The current page anchor tag, [\<a></a\>], is assign with aria-current="page" to let screen readers users know the current page
 
 D. Toggle submenus containers have aria-expanded attributes and are either set to false (closed) or true (open)
 
