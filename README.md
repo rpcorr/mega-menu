@@ -12,7 +12,9 @@ TABLE OF CONTENT
 - Added Features
   - General
   - The JSON File
+  - Accessing the Menu Items
   - Accessibility
+- TO DO
 
 ## Added Features
 
@@ -30,7 +32,7 @@ basic - has access to menu items assigned with basic
 
 The navigation design shows all menu items and removes them if needed.
 
-ASSUMPTION
+**ASSUMPTION**
 Access level works from the top down, meaning admin level access can view admin, premium, and basic levels; premium level access can view premium and basic; basic level access can only view menu items assigned to the basic level.
 
 ### The JSON File
@@ -69,6 +71,8 @@ D-1: regularLinks have name and link properties. Name is the link text, and the 
 
 D-2: photoLinks have name, link, and imgSrc properties. imgSrc is the name of the jpg file. There is no need to add the photo extension or the file path. Images are under assets/images/
 
+There are a maximum of four photos to a row.
+
 D-3: categorizedLinks have two parts: the heading and the links that fall under the heading. The heading has three properties:
 
 - contentType
@@ -82,7 +86,17 @@ The content type determines whether a link or a photo should appear. The titleId
 
 To set the photo file name, use the imgSrc property without the directory or the photo's extension. The photo SHOULD BE A JPG. The alt property is a short description of the photo to help screen readers describe the photo to blind and low-vision users.
 
-NOTE: the photos are not links
+**NOTE:** the photos are not links
+
+### Accessing the Menus Items
+
+A: To open a sub menu, click on the menu item as if it is a link
+
+B: To close a sub menu, click on the menu item as if it is a link
+
+C: Multiple sub menus (under one parent menu) can be be visible at once
+
+D: When a user clicks another top menu item with a sub menu, the previous sub menu closes
 
 ### Accessibility
 
@@ -98,3 +112,9 @@ D. Screen reader users know how to use a keyboard when navigating the site. Belo
 - SHIFT + TAB: the reverse order of TAB
 - ENTER: activate a link (takes the user to the URL assigned in the HREF)/toggle the dropdown menu (open/close)
 - ESC: close sub-level dropdown menu
+
+## TODO
+
+- read user types from user object in the JSON file
+- add a login feature ?
+- add aria-current="page" to the current page
