@@ -11,33 +11,63 @@ let output = '';
 let megaMenuLinks = '';
 
 $(document).ready(function () {
-  // define the user who is browsing the page
-  let userType = $.urlParam('userType');
-
-  //set admin as the default userType
-  if (!userType) userType = 'admin';
-
-  // display current user on screen
-  $('#currentUser').text(userType);
-
-  const user = {
-    username: 'user1',
-    userType: userType,
-  };
-
   // read in the Menu JSON file
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       // Typical action to be performed when the document is ready:
 
+      let lsUser = localStorage.getItem('user');
+
       let response = JSON.parse(xhttp.responseText);
 
-      response.menuItems.forEach((mI) => {
-        output = createMenu(mI, user);
-      });
+      if (lsUser === null) {
+        let username = $.urlParam('username');
+        let userType = $.urlParam('userType');
+
+        for (let i = 0; i < response.users.length; i++) {
+          if (username === response.users[i].username) {
+            console.log('match');
+            console.log(response.users[i].username);
+            console.log(response.users[i].userType);
+
+            // store current user in user localstorage variable
+            localStorage.setItem('user', response.users[i].username);
+            localStorage.setItem('userType', response.users[i].userType);
+            // exit loop early
+            break;
+          }
+          // create a login link
+          output = '<li><a href="login.html">Login</a></li>';
+        }
+      } else {
+        // there is a user
+        const user = {
+          username: localStorage.getItem('user'),
+          userType: localStorage.getItem('userType'),
+        };
+
+        // create the menu base on the user
+        response.menuItems.forEach((mI) => {
+          output = createMenu(mI, user);
+        });
+
+        output += `<li><a href="logout.html">Logout ${user.username}</a></li>`;
+      }
 
       document.getElementById('menu-main-menu').innerHTML = output;
+
+      // // Get the full pathname of the current page
+      let pathname = window.location.pathname;
+
+      // Extract the file name from the pathname
+      let filename = pathname.split('/').pop();
+
+      // redirect user to the home page after login
+      if (localStorage.getItem('user') !== null && filename === 'login.html') {
+        //console.log('redirect user to index page');
+        window.location.href = 'index.html';
+      }
 
       // select all anchor tags
       megaMenuLinks = document.querySelectorAll('nav a[href^="#"]');

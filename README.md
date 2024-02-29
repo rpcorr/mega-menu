@@ -37,9 +37,19 @@ Access level works from the top down, meaning admin level access can view admin,
 
 ### The JSON File
 
-The JSON file (menu.json) lives under assets/json/menu.json
+The JSON file (menu.json) lives under assets/json/menu.json. It contains the Menu array and the users array to determine the menu items to display based on the logged in user.
 
-When the page loads, the navigation menu is created from the menu.json file to build the navigation menu. The structure of the file is as follows.
+There are three users - one for each types of user:
+
+- user1: admin
+- user2: premium
+- user3: basic
+
+The username and user type are stored as a localstorage variable so the status of the user is presist when browsing from page to page. Upon clicking the logout link, the localstorage variables are cleared and the user is directed back to the home page.
+
+**NOTE:** The program only checks if a user types in a valid username. The password field is not checked at this time.
+
+When the page loads, the navigation menu is created from the menu.json file to build the navigation menu based on the logged in user. The structure of the file is as follows.
 
 A. name: menu item text to appear in the menu (string)
 B. link: the page where the menu item will direct users (string)
@@ -117,6 +127,6 @@ E. Screen reader users know how to use a keyboard when navigating the site. Belo
 
 ## TODO
 
-- read user types from user object in the JSON file
-- add a login feature ?
+- read user types from user object in the JSON file - DONE
+- add a login feature - DONE
 - add aria-current="page" to the current page - DONE
