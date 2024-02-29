@@ -727,7 +727,7 @@ header nav ul.menu > li > .mega-menu.mega-menu-column-4 {
 
 header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item {
   flex: 0 0 25%;
-  flex-grow: 1;
+  flex-grow: 0;
   padding: 0 15px;
 }
 
