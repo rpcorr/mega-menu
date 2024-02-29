@@ -17,12 +17,12 @@
   "menuItems": [
     {
       "name": "Home",
-      "link": "about.html",
+      "link": "index.html",
       "availableFor": ["basic", "premium"]
     },
     {
       "name": "About Us",
-      "link": "#",
+      "link": "about.html",
       "availableFor": ["basic", "premium"]
     },
     {
