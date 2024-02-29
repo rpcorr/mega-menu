@@ -104,9 +104,11 @@ A. Ensure the navigation is accessible when users interact with it using a keybo
 
 B. Screen readers announce whether the selected menu item is a sub-menu and how to open it by use of aria labels
 
-C. Toggle submenus containers have aria-expanded attributes and are either set to false (closed) or true (open)
+C. The current page anchor tag, [\<a></a\>], is assign with aria-current="page" to let screen readers users the current page
 
-D. Screen reader users know how to use a keyboard when navigating the site. Below are some of the key features:
+D. Toggle submenus containers have aria-expanded attributes and are either set to false (closed) or true (open)
+
+E. Screen reader users know how to use a keyboard when navigating the site. Below are some of the key features:
 
 - TAB: takes users through the focus elements as they appear in the DOM
 - SHIFT + TAB: the reverse order of TAB
