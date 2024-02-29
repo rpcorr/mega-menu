@@ -290,11 +290,15 @@ function createMenu(mI, user) {
 
   if (isCurrentPage(mI.link)) ariaCurrent = 'aria-current="page"';
 
+  // define if hRef has a submenu
+  let hRef = mI.link;
+  if (mI.subMenuItems) hRef = '#';
+
   if (
     findValueInArray(user.userType, $(mI.availableFor)) ||
     user.userType === 'admin'
   ) {
-    output += `<li ${liClass}><a href="${mI.link}" ${ariaLabel} ${hRefTarget} ${ariaCurrent}>${mI.name} ${downArrow}</a>`;
+    output += `<li ${liClass}><a href="${hRef}" ${ariaLabel} ${hRefTarget} ${ariaCurrent}>${mI.name} ${downArrow}</a>`;
 
     if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
       output += '<ul class="sub-menu" aria-expanded="false">';
@@ -304,6 +308,10 @@ function createMenu(mI, user) {
 
         // reset ariaCurrent
         ariaCurrent = '';
+
+        // define if hRef has a submenu
+        let hRef = mI.subMenuItems[i].link;
+        if (mI.subMenuItems[i]) hRef = '#';
 
         if (isCurrentPage(mI.subMenuItems[i].link))
           ariaCurrent = 'aria-current="page"';
@@ -315,7 +323,7 @@ function createMenu(mI, user) {
           if (mI.subMenuItems[i].subMenuItems) {
             // a second level menu is present
             output += `<li class="menu-item-has-children">
-            <a href="${mI.subMenuItems[i].link}" ${ariaCurrent}>${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
+            <a href="${hRef}" ${ariaCurrent}>${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
             let secondLevel;
 
             secondLevel = '<ul class="sub-menu" aria-expanded="false">';
@@ -326,6 +334,10 @@ function createMenu(mI, user) {
                 mI.subMenuItems[i].subMenuItems[j]
               );
 
+              // define if hRef has a submenu
+              let hRef = mI.subMenuItems[i].subMenuItems[j].link;
+              if (mI.subMenuItems[i].subMenuItems[j]) hRef = '#';
+
               if (
                 findValueInArray(
                   user.userType,
@@ -335,7 +347,7 @@ function createMenu(mI, user) {
               ) {
                 if (mI.subMenuItems[i].subMenuItems[j].subMenuItems) {
                   // a third level is present
-                  secondLevel += `<li class="menu-item-has-children"><a href="${mI.subMenuItems[i].subMenuItems[j].link}">${mI.subMenuItems[i].subMenuItems[j].name} <i class="fa fa-angle-down"></i></a>`;
+                  secondLevel += `<li class="menu-item-has-children"><a href="${hRef}">${mI.subMenuItems[i].subMenuItems[j].name} <i class="fa fa-angle-down"></i></a>`;
                   let thirdLevel;
 
                   thirdLevel = '<ul class="sub-menu" aria-expanded="false">';
