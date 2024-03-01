@@ -38,8 +38,10 @@ $(document).ready(function () {
             break;
           }
           // create a login link
-          output =
-            '<li><a href="login.html" aria-current="page">Login</a></li>';
+          let ariaCurrent = '';
+
+          if (isCurrentPage('login.html')) ariaCurrent = 'aria-current="page"';
+          output = `<li><a href="login.html" ${ariaCurrent}>Login</a></li>`;
         }
       } else {
         // there is a user
