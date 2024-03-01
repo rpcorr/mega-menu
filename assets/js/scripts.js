@@ -38,7 +38,8 @@ $(document).ready(function () {
             break;
           }
           // create a login link
-          output = '<li><a href="login.html">Login</a></li>';
+          output =
+            '<li><a href="login.html" aria-current="page">Login</a></li>';
         }
       } else {
         // there is a user
@@ -67,6 +68,9 @@ $(document).ready(function () {
       if (localStorage.getItem('user') !== null && filename === 'login.html') {
         //console.log('redirect user to index page');
         window.location.href = 'index.html';
+        setTimeout(() => {
+          document.querySelector('#header').focus();
+        }, 10);
       }
 
       // select all anchor tags
