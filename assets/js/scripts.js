@@ -108,12 +108,13 @@ $(document).ready(function () {
 
       // add more link
       $('#menu-main-menu').append(
-        '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#" aria-label="More has a sub menu. Click enter to open"></a><ul id="moreSubMenu" class="sub-menu" aria-expanded="false"></ul></li>'
+        '<li id="menu-more" class="menu-item menu-item-has-children" style="display: none;"><a id="menuMoreLink" href="#" aria-label="More has a sub menu. Click enter to open" aria-expanded="false"></a><ul id="moreSubMenu" class="sub-menu"></ul></li>'
       );
       moreWidth = $('#menu-more').outerWidth();
 
       // toggle sub-menu
       $('#menuMoreLink').click(function (event) {
+        console.log('More Link');
         event.preventDefault();
         $('.menu-item-has-children:not(#menu-more)').removeClass('visible');
 
@@ -130,7 +131,7 @@ $(document).ready(function () {
           $(this).attr('aria-label', 'Click Enter to close More sub menu');
 
           // set the More sub menu aria-expanded attr to true
-          $(this).siblings('ul').attr('aria-expanded', true);
+          $(this).attr('aria-expanded', true);
         } else {
           // set the arrow to the down position (close)
           $(this)
@@ -144,9 +145,9 @@ $(document).ready(function () {
             'More has a sub menu. Click enter to open'
           );
 
-          // set the More sub menu aria-expanded attr to false
-          $(this).siblings('ul').attr('aria-expanded', false);
-          $(this).siblings('div').attr('aria-expanded', false);
+          // set the More link aria-expanded attr to false
+          $(this).attr('aria-expanded', false);
+          //$(this).siblings('div').attr('aria-expanded', false);
         }
       });
 
@@ -161,10 +162,12 @@ $(document).ready(function () {
 
         //  reset aria-labels to Click enter to open
         $('.menu-item-has-children > a').each(function () {
-          $(this).attr(
-            'aria-label',
-            `${$(this).text()}has a sub menu. Click enter to open`
-          );
+          $(this)
+            .attr(
+              'aria-label',
+              `${$(this).text()}has a sub menu. Click enter to open`
+            )
+            .attr('aria-expanded', 'false');
         });
       });
 
@@ -224,6 +227,7 @@ $(window).resize(function () {
 // input: current menu item or a string
 // returns: void
 function closeAllMenus(menuItem) {
+  console.log('close all menus');
   // run if the esc key was pressed
   if (menuItem === 'esc') {
     //1.  close all submenus
@@ -239,9 +243,9 @@ function closeAllMenus(menuItem) {
         `${$(this).text()}has a sub menu. Click enter to open`
       );
 
-      //4. reset ul's or div's aria-expanded attribute to false
-      $(this).siblings('ul').attr('aria-expanded', false);
-      $(this).siblings('div').attr('aria-expanded', false);
+      //4. reset aria-expanded attribute to false
+      $(this).attr('aria-expanded', false);
+      $(this).attr('aria-expanded', false);
     });
 
     // exit function early to avoid crash with menuLink.attr('id')
@@ -264,9 +268,9 @@ function closeAllMenus(menuItem) {
       `${$(this).text()}has a sub menu. Click enter to open`
     );
 
-    //4. reset ul's or div's aria-expanded attribute to false
-    $(this).siblings('ul').attr('aria-expanded', false);
-    $(this).siblings('div').attr('aria-expanded', false);
+    //4. reset aria-expanded attribute to false
+    $(this).attr('aria-expanded', false);
+    $(this).attr('aria-expanded', false);
   });
 }
 
@@ -298,16 +302,20 @@ function createMenu(mI, user) {
 
   // define if hRef has a submenu
   let hRef = mI.link;
-  if (mI.subMenuItems) hRef = '#';
+  let ariaExpanded = '';
+  if (mI.subMenuItems) {
+    hRef = '#';
+    ariaExpanded = 'aria-expanded="false"';
+  }
 
   if (
     findValueInArray(user.userType, $(mI.availableFor)) ||
     user.userType === 'admin'
   ) {
-    output += `<li ${liClass}><a href="${hRef}" ${ariaLabel} ${hRefTarget} ${ariaCurrent}>${mI.name} ${downArrow}</a>`;
+    output += `<li ${liClass}><a href="${hRef}" ${ariaExpanded} ${ariaLabel} ${hRefTarget} ${ariaCurrent}>${mI.name} ${downArrow}</a>`;
 
     if (mI.subMenuItems && mI.subMenuType === 'regularLinks') {
-      output += '<ul class="sub-menu" aria-expanded="false">';
+      output += '<ul class="sub-menu">';
       mI.subMenuItems.forEach((_, i) => {
         // define hRefTarget
         const hRefTarget = determineHREFTarget(mI.subMenuItems[i]);
@@ -332,7 +340,7 @@ function createMenu(mI, user) {
             <a href="${hRef}" ${ariaCurrent}>${mI.subMenuItems[i].name} <i class="fa fa-angle-down"></i></a>`;
             let secondLevel;
 
-            secondLevel = '<ul class="sub-menu" aria-expanded="false">';
+            secondLevel = '<ul class="sub-menu">';
 
             mI.subMenuItems[i].subMenuItems.forEach((_, j) => {
               // define hRefTarget
@@ -356,7 +364,7 @@ function createMenu(mI, user) {
                   secondLevel += `<li class="menu-item-has-children"><a href="${hRef}">${mI.subMenuItems[i].subMenuItems[j].name} <i class="fa fa-angle-down"></i></a>`;
                   let thirdLevel;
 
-                  thirdLevel = '<ul class="sub-menu" aria-expanded="false">';
+                  thirdLevel = '<ul class="sub-menu">';
 
                   // loop through the links
                   mI.subMenuItems[i].subMenuItems[j].subMenuItems.forEach(
@@ -416,8 +424,7 @@ function createMenu(mI, user) {
     }
 
     if (mI.subMenuItems && mI.subMenuType === 'photoLinks') {
-      output +=
-        '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
+      output += '<div class="sub-menu-div mega-menu mega-menu-column-4">';
 
       mI.subMenuItems.forEach((_, i) => {
         const hRefTarget = determineHREFTarget(mI);
@@ -444,8 +451,7 @@ function createMenu(mI, user) {
     }
 
     if (mI.subMenuItems && mI.subMenuType === 'categorizedLinks') {
-      output +=
-        '<div class="sub-menu-div mega-menu mega-menu-column-4" aria-expanded="false">';
+      output += '<div class="sub-menu-div mega-menu mega-menu-column-4">';
 
       let subMenuContainerContent = '';
 
@@ -641,12 +647,6 @@ function toggleTopLevelMenu(menuLink) {
     // 1-d. reset sub-menu aria-expanded to false
     $('li.menu-item-has-children > a')
       .not(focusedLink)
-      .siblings('ul')
-      .attr('aria-expanded', false);
-
-    $('li.menu-item-has-children > a')
-      .not(focusedLink)
-      .siblings('.sub-menu-div')
       .attr('aria-expanded', false);
 
     //-------------------------------------------------------------
@@ -667,9 +667,8 @@ function toggleTopLevelMenu(menuLink) {
       `Click Enter to close ${$(menuLink).text()}sub menu`
     );
 
-    // 2-d. set sub menu aria-expanded to true
-    $(menuLink).siblings('ul').attr('aria-expanded', true);
-    $(menuLink).siblings('div').attr('aria-expanded', true);
+    // 2-d. set aria-expanded to true
+    $(menuLink).attr('aria-expanded', true);
   } else {
     // BEFORE CLOSING MENU - CHECK IF LINK HAS A SUB MENU
     if ($(menuLink).parent().parent().is('ul#menu-main-menu.menu')) {
@@ -696,9 +695,8 @@ function toggleTopLevelMenu(menuLink) {
           `Click Enter to close ${$(menuLink).text()}sub menu`
         );
 
-        // 3-d. set sub menu aria-expanded to true
-        $(menuLink).siblings('ul').attr('aria-expanded', true);
-        $(menuLink).siblings('div').attr('aria-expanded', true);
+        // 3-d. set aria-expanded to true
+        $(menuLink).attr('aria-expanded', true);
       } else {
         // 4. CLOSE secondary menu
 
@@ -717,8 +715,8 @@ function toggleTopLevelMenu(menuLink) {
           `${$(menuLink).text()}has a sub menu. Click enter to open`
         );
 
-        // 4-d. reset sub-menu aria-expanded to false
-        $(menuLink).siblings('ul').attr('aria-expanded', false);
+        // 4-d. reset aria-expanded to false
+        $(menuLink).attr('aria-expanded', false);
 
         // 4-e. reset sibiling submenus attributes as well
         closeSiblingSubMenus(menuLink);
@@ -769,19 +767,18 @@ function closeSiblingSubMenus(menuLink) {
     .removeClass('fa-angle-up')
     .addClass('fa-angle-down');
 
-  // 3. update links aria-label
+  // 3. update links aria-label and aria-expanded to false
   $(menuLink)
     .parent()
     .find('li.menu-item-has-children > a')
     .each(function () {
-      $(this).attr(
-        'aria-label',
-        `${$(this).text()}has a sub menu. Click enter to open`
-      );
+      $(this)
+        .attr(
+          'aria-label',
+          `${$(this).text()}has a sub menu. Click enter to open`
+        )
+        .attr('aria-expanded', false);
     });
-
-  // 4. set sub-menu container aria-expanded to false
-  $(menuLink).siblings().find('ul').attr('aria-expanded', false);
 }
 
 function determineHREFTarget(mI) {
