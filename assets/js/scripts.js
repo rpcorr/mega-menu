@@ -42,9 +42,13 @@ $(document).ready(function () {
 
           if (isCurrentPage('login.html')) ariaCurrent = 'aria-current="page"';
           output = `<li><a href="login.html" ${ariaCurrent}>Login</a></li>`;
+
+          // update nav aria-label to reflect the user is logged out
+          $('nav').attr('aria-label', 'Menu will change once you log in');
         }
       } else {
         // there is a user
+        console.log('Here I am');
         const user = {
           username: localStorage.getItem('user'),
           userType: localStorage.getItem('userType'),
@@ -56,19 +60,26 @@ $(document).ready(function () {
         });
 
         output += `<li><a href="logout.html">Logout ${user.username}</a></li>`;
+
+        // update nav aria-label
+        $('nav').attr(
+          'aria-label',
+          'Menu items have since changed now that you are logged in'
+        );
       }
 
       document.getElementById('menu-main-menu').innerHTML = output;
 
-      // // Get the full pathname of the current page
+      // redirect user to the home page after login
+
+      // Get the full pathname of the current page
       let pathname = window.location.pathname;
 
       // Extract the file name from the pathname
       let filename = pathname.split('/').pop();
 
-      // redirect user to the home page after login
       if (localStorage.getItem('user') !== null && filename === 'login.html') {
-        //console.log('redirect user to index page');
+        // redirect user to index page;
         window.location.href = 'index.html';
         setTimeout(() => {
           document.querySelector('#header').focus();
