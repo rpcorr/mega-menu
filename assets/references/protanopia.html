@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorful and Accessible Web Page</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ffffff; /* White */
+        color: #000000; /* Black */
+      }
+
+      /* Header */
+      .header {
+        background-color: #e8f086; /* Yellow */
+        padding: 20px;
+        text-align: center;
+        color: #235fa4; /* Blue */
+      }
+
+      /* Dropdown menu */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #e8f086; /* Yellow */
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: #235fa4; /* Blue */
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #6fde6e; /* Green */
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        background-color: #235fa4; /* Blue */
+        padding: 20px;
+        color: #ffffff; /* White */
+        width: 30%;
+        float: left;
+      }
+
+      /* Form */
+      .form-container {
+        background-color: #6fde6e; /* Green */
+        padding: 20px;
+        color: #ffffff; /* White */
+        color: #333333; /* White */
+        margin-left: 35%; /* To accommodate the sidebar width */
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      input[type='text'],
+      input[type='email'],
+      input[type='password'],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: none;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      input[type='submit'] {
+        background-color: #ff4242; /* Red */
+        color: #ffffff; /* White */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type='submit']:hover {
+        background-color: #e8f086; /* Yellow */
+      }
+
+      /* Callout section */
+      .callout-section {
+        background-color: #235fa4; /* Blue */
+        color: #ffffff; /* White */
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      /* Headings */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: #235fa4; /* Blue */
+        /* background-color: #e8f086; Yellow */
+        padding: 10px;
+        margin-top: 20px;
+      }
+
+      .callout-section h2,
+      .sidebar h2 {
+        color: #e8f086;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Welcome to Accessible Web Page</h1>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Dropdown</button>
+      <div class="dropdown-content">
+        <a href="#">Option 1</a>
+        <div class="dropdown">
+          <a href="#">Option 2</a>
+          <div class="dropdown-content">
+            <a href="#">Sub-option 1</a>
+            <a href="#">Sub-option 2</a>
+            <div class="dropdown">
+              <a href="#">Sub-option 3</a>
+              <div class="dropdown-content">
+                <a href="#">Sub-sub-option 1</a>
+                <a href="#">Sub-sub-option 2</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <h2>Sidebar</h2>
+      <p>This is the sidebar content.</p>
+    </div>
+
+    <div class="form-container">
+      <h2>Form</h2>
+      <form>
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br />
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br />
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="password" required /><br />
+        <label for="message">Message:</label><br />
+        <textarea id="message" name="message" rows="4" required></textarea
+        ><br />
+        <label>Gender:</label><br />
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">Female</label><br />
+        <label for="country">Country:</label><br />
+        <select id="country" name="country" required>
+          <option value="">Select</option>
+          <option value="usa">USA</option>
+          <option value="uk">UK</option>
+          <option value="canada">Canada</option></select
+        ><br />
+        <input
+          type="checkbox"
+          id="subscribe"
+          name="subscribe"
+          value="subscribe"
+        />
+        <label for="subscribe">Subscribe to newsletter</label><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <div class="callout-section">
+      <h2>Callout Section</h2>
+      <p>This is a callout section with important information.</p>
+    </div>
+
+    <h1>Heading Level 1</h1>
+    <h2>Heading Level 2</h2>
+    <h3>Heading Level 3</h3>
+    <h4>Heading Level 4</h4>
+    <h5>Heading Level 5</h5>
+    <h6>Heading Level 6</h6>
+  </body>
+</html>
