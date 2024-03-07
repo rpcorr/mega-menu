@@ -753,8 +753,8 @@ header nav ul.menu > li > .mega-menu > .list-item > ul > li > a:hover,
 }
 
 main {
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
 }
 
 .container {
@@ -784,7 +784,8 @@ h2 {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  width: 50%;
+  width: 300px;
+  max-width: 80%;
 }
 
 .login-form h1 {
