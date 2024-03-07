@@ -59,6 +59,8 @@ $(document).ready(function () {
           output = createMenu(mI, user);
         });
 
+        output += `<li><a href="preferences.html">${user.username}'s Preferences</a></li>`;
+
         output += `<li><a href="logout.html">Logout ${user.username}</a></li>`;
 
         // update nav aria-label
