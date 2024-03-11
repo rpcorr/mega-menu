@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Section</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .hero-container {
+        max-width: 80%;
+        margin: 0 auto; /* Center the container */
+      }
+      .hero-background {
+        background-color: #0a556b;
+      }
+      .hero-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 50px;
+        flex-wrap: wrap; /* Allow items to wrap */
+      }
+      .hero-content {
+        flex: 1;
+        padding-right: 50px;
+        margin-bottom: 20px; /* Add margin bottom for spacing */
+      }
+      .hero-content h1 {
+        font-size: 36px;
+        color: #daf1f4;
+        margin-bottom: 20px;
+      }
+      .hero-content p {
+        font-size: 18px;
+        color: #daf1f4;
+        margin-bottom: 30px;
+      }
+      .hero-buttons {
+        display: flex;
+      }
+      .hero-buttons .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      .hero-buttons .btn.primary {
+        background-color: #218ab2;
+        color: white;
+      }
+
+      .hero-buttons .btn:hover.primary {
+        background-color: #00dfff;
+        color: #0a556b;
+      }
+      .hero-buttons .btn.secondary {
+        background-color: #00dfff;
+        color: #0a556b;
+      }
+      .hero-buttons .btn:hover {
+        background-color: #218ab2;
+        color: #ffffff;
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 768px) {
+        .hero-section {
+          flex-direction: column; /* Stack items vertically on small screens */
+          align-items: center;
+          text-align: center; /* Center align text */
+          padding: 0px;
+        }
+        .hero-content {
+          padding-right: 0;
+          margin-bottom: 0;
+        }
+        .hero-buttons {
+          margin: 20px 0; /* Add space between buttons and image */
+        }
+      }
+
+      @media screen and (max-width: 320px) {
+        .hero-content,
+        .hero-buttons {
+          padding: 0;
+        }
+        .hero-buttons .btn {
+          margin-right: 0;
+        }
+        .hero-image {
+          margin-top: 20px; /* Add space between image and buttons */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-background">
+      <div class="hero-container">
+        <div class="hero-section">
+          <div class="hero-content">
+            <h1>Title Goes Here</h1>
+            <p>This is the paragraph describing your hero section.</p>
+            <div class="hero-buttons">
+              <button class="btn primary">Primary Button</button>
+              <button class="btn secondary">Secondary Button</button>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              src="https://via.placeholder.com/800x400"
+              alt="Hero Image"
+              style="max-width: 100%"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

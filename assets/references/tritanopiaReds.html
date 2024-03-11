@@ -3,24 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Protanopia - HTML Elements Example Page</title>
+    <title>TritanopiaReds - HTML Elements Example Page</title>
     <style>
       body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #ffffff; /* Using white background for better readability */
-        color: #333333; /* Default text color */
+        background-color: #ffe4ed; /* Using light pink background for better readability */
+        color: #6d1129; /* Default text color */
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      header,
+      footer {
+        background-color: #6d1129; /* Header and footer background color */
+        color: #ffb9bd; /* Header and footer text color */
+        padding: 10px;
+        text-align: center;
       }
 
       /* Navigation ... */
 
-      /* ... Navigation */
-
       /* Style for the navigation menu */
       nav {
         text-align: center; /* Center align the menu items */
-        background-color: #6fde6e; /* Background color for the nav container */
+        background-color: #6d1129; /* Background color for the nav container */
       }
 
       nav ul {
@@ -36,8 +48,7 @@
       nav ul li a {
         display: block;
         padding: 10px 20px;
-        color: #e8f086; /* Top-level menu text color */
-        color: #fff; /* Top-level menu text color */
+        color: #ffb9bd; /* Text color for menu items */
         text-decoration: none;
       }
 
@@ -46,13 +57,14 @@
         top: 100%;
         left: 0;
         display: none;
-        background-color: #ff4242; /* Submenu background color */
+        background-color: #ffb9bd; /* Submenu background color */
       }
 
       nav ul ul ul {
         left: 100%;
         top: 0;
-        background-color: #a691ae; /* Sub-submenu background color */
+        background-color: #ffe4ed; /* Sub-submenu background color */
+        background-color: #ff004d; /* Sub-submenu background color */
       }
 
       nav ul li:hover > ul {
@@ -61,27 +73,36 @@
 
       /* Hover effect for menu items */
       nav ul li:hover > a {
-        background-color: #235fa4; /* Hover background color */
+        background-color: #785f6d; /* Hover background color */
+        color: #ffe4ed;
       }
 
       /* Text color for submenu items */
       nav ul ul li a {
-        color: #ffffff;
+        color: #6d1129;
       }
 
       /* Text color for third-level submenu items */
       nav ul ul ul li a {
-        color: #ffffff;
+        color: #6d1129;
+        color: #ffe4ed;
       }
 
-      /*  hero styles ... */
+      /* Hover color for third-level submenu items */
+      nav ul ul ul li a:hover {
+        color: #ffe4ed;
+      }
+
+      /* ...Navigation */
+
+      /* Hero ... */
 
       .hero-container {
         max-width: 80%;
         margin: 0 auto; /* Center the container */
       }
       .hero-background {
-        background-color: #e8f086;
+        background-color: #6d1129;
       }
       .hero-section {
         display: flex;
@@ -97,12 +118,12 @@
       }
       .hero-content h1 {
         font-size: 36px;
-        color: #235fa4;
+        color: #ffb9bd;
         margin-bottom: 20px;
       }
       .hero-content p {
         font-size: 18px;
-        color: #333333;
+        color: #ffe4ed;
         margin-bottom: 30px;
       }
       .hero-buttons {
@@ -119,15 +140,21 @@
         transition: background-color 0.3s;
       }
       .hero-buttons .btn.primary {
-        background-color: #6fde6e;
+        background-color: #ff004d;
         color: white;
+      }
+
+      .hero-buttons .btn:hover.primary {
+        background-color: #ffb9bd;
+        color: #6d1129;
       }
       .hero-buttons .btn.secondary {
-        background-color: #ff4242;
-        color: white;
+        background-color: #ffb9bd;
+        color: #6d1129;
       }
       .hero-buttons .btn:hover {
-        background-color: #4ba33d;
+        background-color: #ff004d;
+        color: white;
       }
 
       /* Responsive adjustments */
@@ -145,9 +172,6 @@
         .hero-buttons {
           margin: 20px 0; /* Add space between buttons and image */
         }
-        .hero-image img {
-          width: 100%; /* Set image width to 100% */
-        }
       }
 
       @media screen and (max-width: 320px) {
@@ -163,51 +187,32 @@
         }
       }
 
-      /* ...hero styles */
-
-      /* Base styles for the button */
-      .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #e8f086;
-        color: #000000; /* Black text for better contrast */
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s; /* Transition both background color and text color */
-      }
-
-      /* Hover state */
-      .btn:hover {
-        background-color: #6fde6e;
-        /* color: #ffffff; White text on hover for better contrast */
-      }
-
-      .error {
-        color: #ff4242;
-      }
-
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      header,
-      footer {
-        background-color: #6fde6e; /* Header and footer background color */
-        color: #ffffff; /* Header and footer text color */
-        padding: 10px;
-        text-align: center;
-      }
+      /* ... Hero */
 
       .callout {
-        background-color: #235fa4; /* Callout background color */
+        background-color: #ff004d; /* Callout background color */
         color: #ffffff; /* Callout text color */
         padding: 20px;
         margin-top: 20px;
         text-align: center;
+      }
+      /* button */
+      /* Base styles for the button */
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #6d1129;
+        color: #ffffff; /* White text for better contrast */
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      /* Hover state */
+      .btn:hover {
+        background-color: #ff004d;
       }
 
       /* table */
@@ -226,26 +231,23 @@
       }
 
       th {
-        background-color: #e8f086;
-        color: #333;
+        background-color: #6d1129;
+        color: #ffffff;
       }
 
       tr:nth-child(even) {
-        background-color: #6fde6e;
-        color: #333;
+        background-color: #ff004d;
+        color: #ffffff;
       }
 
       tr:nth-child(odd) {
-        background-color: #ff4242;
-        color: #fff;
+        background-color: #ffb9bd;
       }
 
       /* separators */
-
       .separator {
         width: 100%;
         height: 5px; /* Change this value to adjust thickness */
-        background-color: #e8f086; /* Change color as needed */
         margin: 20px 0; /* Adjust margin as needed */
       }
 
@@ -265,26 +267,30 @@
         height: 2px; /* Change this value to adjust thickness */
       }
 
-      .separator-green {
-        background-color: #6fde6e; /* Change color as needed */
+      .separator-maroon {
+        background-color: #6d1129; /* Change color as needed */
       }
 
       .separator-red {
-        background-color: #ff4242; /* Change color as needed */
+        background-color: #ff004d; /* Change color as needed */
+      }
+
+      .separator-pink {
+        background-color: #ffb9bd; /* Change color as needed */
+      }
+
+      .separator-light-pink {
+        background-color: #ffe4ed; /* Change color as needed */
       }
 
       .separator-purple {
-        background-color: #a691ae; /* Change color as needed */
-      }
-
-      .separator-blue {
-        background-color: #235fa4; /* Change color as needed */
+        background-color: #785f6d; /* Change color as needed */
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Protanopia</h1>
+      <h1>TritanopiaReds</h1>
     </header>
 
     <nav>
@@ -325,8 +331,6 @@
       </ul>
     </nav>
 
-    <!-- Hero section -->
-
     <div class="hero-background">
       <div class="hero-container">
         <div class="hero-section">
@@ -339,13 +343,15 @@
             </div>
           </div>
           <div class="hero-image">
-            <img src="https://via.placeholder.com/800x400" alt="Hero Image" />
+            <img
+              src="https://via.placeholder.com/800x400"
+              alt="Hero Image"
+              style="max-width: 100%"
+            />
           </div>
         </div>
       </div>
     </div>
-
-    <!-- end of Hero section -->
 
     <div class="container">
       <h2>Heading 2</h2>
@@ -405,8 +411,7 @@
 
       <form>
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
-        <span class="error">An error occurred</span><br />
+        <input type="text" id="name" name="name" required /><br />
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required /><br />
         <label for="message">Message:</label><br />
@@ -439,11 +444,11 @@
         <input type="submit" value="Submit" class="btn" />
       </form>
 
-      <div class="separator long-separator"></div>
-      <div class="separator medium-separator separator-green"></div>
-      <div class="separator short-separator separator-red"></div>
-      <div class="separator long-separator separator-purple"></div>
-      <div class="separator thin-separator separator-blue"></div>
+      <div class="separator long-separator separator-maroon"></div>
+      <div class="separator medium-separator separator-red"></div>
+      <div class="separator short-separator separator-pink"></div>
+      <div class="separator long-separator separator-red"></div>
+      <div class="separator thin-separator separator-purple"></div>
 
       <div class="callout">
         <h2>Callout Section</h2>

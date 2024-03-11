@@ -18,3 +18,26 @@ TODO:
 
 -> create a palette where users can choose
 -> save their choice under there account
+
+the colours:
+
+- protanopia
+- protanomaly
+- deuteranopia
+- deuteranomaly
+- achromatomaly
+- tritanopia
+- tritanopia2
+- tritanopiaRYGBV
+- tritanopiaRainbow
+- tritanopiaReds
+- tritanopiaBlues
+
+
+Completed components:
+
+- btn
+- table
+- menu
+- hero section
+- separators
