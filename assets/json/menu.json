@@ -26,6 +26,80 @@
       "availableFor": ["basic", "premium"]
     },
     {
+      "name": "Templates",
+      "link": "templates.html",
+      "subMenuType": "regularLinks",
+      "subMenuItems": [
+        {
+          "name": "Protanopia",
+          "link": "/assets/references/protanopia.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Protanomaly",
+          "link": "/assets/references/protanomaly.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Deuteranopia",
+          "link": "/assets/references/deuteranopia.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Deuteranomaly",
+          "link": "/assets/references/deuteranomaly.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Achromatomaly",
+          "link": "/assets/references/achromatomaly.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Tritanopia",
+          "link": "/assets/references/tritanopia.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Tritanopia 2",
+          "link": "/assets/references/tritanopia2.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Tritanopia RYGBV",
+          "link": "/assets/references/tritanopiaRYGBV.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Tritanopia Rainbow",
+          "link": "/assets/references/tritanopiaRainbow.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Tritanopia Reds",
+          "link": "/assets/references/tritanopiaReds.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        },
+        {
+          "name": "Tritanopia Blues",
+          "link": "/assets/references/tritanopiaBlues.html",
+          "target": "_blank",
+          "availableFor": ["basic", "premium"]
+        }
+      ],
+      "availableFor": ["basic", "premium"]
+    },
+    {
       "name": "Services",
       "link": "services.html",
       "subMenuType": "regularLinks",

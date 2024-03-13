@@ -795,10 +795,17 @@ function closeSiblingSubMenus(menuLink) {
 }
 
 function determineHREFTarget(mI) {
-  return mI.link.charAt(0) !== '#' &&
-    (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
-    ? 'target="_blank"'
-    : '';
+  if (mI.hasOwnProperty('target')) {
+    console.log('yes');
+    console.log(mI.target);
+    return `target="${mI.target}"`;
+  } else {
+    console.log('no');
+    return mI.link.charAt(0) !== '#' &&
+      (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
+      ? 'target="_blank"'
+      : '';
+  }
 }
 
 function isCurrentPage(page) {
