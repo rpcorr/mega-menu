@@ -37,7 +37,8 @@ the colours:
 Completed components:
 
 - btn
-- table
-- menu
+- callout section
 - hero section
+- menu
 - separators
+- table
