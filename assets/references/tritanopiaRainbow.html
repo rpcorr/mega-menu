@@ -81,7 +81,7 @@
       /* Hero container ... */
 
       .hero-container {
-        max-width: 80%;
+        max-width: 90%;
         margin: 0 auto; /* Center the container */
       }
       .hero-background {
@@ -139,9 +139,19 @@
       }
 
       /* Responsive adjustments */
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 1315px) {
+        .hero-image {
+          width: 60%;
+        }
+
+        .hero-image img {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 992px) {
         .hero-section {
-          flex-direction: column; /* Stack items vertically on small screens */
+          flex-direction: column; /*Stack items vertically on small screens */
           align-items: center;
           text-align: center; /* Center align text */
           padding: 0px;
@@ -152,6 +162,13 @@
         }
         .hero-buttons {
           margin: 20px 0; /* Add space between buttons and image */
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-image,
+        .hero-image img {
+          width: 90%; /* Set image width to 100% */
         }
       }
 
@@ -339,7 +356,7 @@
           </div>
           <div class="hero-image">
             <img
-              src="https://via.placeholder.com/600x400"
+              src="https://via.placeholder.com/800x400"
               alt="Hero Image"
               style="max-width: 100%"
             />
