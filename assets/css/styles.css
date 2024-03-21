@@ -128,7 +128,7 @@ section {
 
 /* base classes */
 .screen-reader-text {
-  clip: rect(1px, 1px, 1px, 1px);
+  clip: rect(0.063rem, 0.063rem, 0.063rem, 0.063rem);
   position: absolute !important;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
@@ -165,7 +165,7 @@ nav li li li li li li {
 }
 
 .max-width {
-  width: 1500px;
+  width: 93.75rem;
   max-width: 90%;
   margin: 0 auto;
 }
@@ -406,7 +406,7 @@ body.has-hover
 body.has-hover ul#menu-main-menu .hover:hover > .sub-menu-div {
   /* display: flex;
   position: absolute;
-  top: 54px; */
+  top: 3.375rem; */
 }
 
 body.has-hover ul#menu-main-menu .hover:hover > ul ul.sub-menu,
@@ -653,14 +653,14 @@ header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.9);
   color: #000;
-  box-shadow: -2px 2px 70px -25px rgba(0, 0, 0, 0.3);
+  box-shadow: -0.125rem 0.125rem 70 -20.313rem rgba(0, 0, 0, 0.3);
   text-align: left;
   transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  margin-top: 25px;
+  margin-top: 20.313rem;
   opacity: 0;
   visibility: hidden;
   overflow-y: auto;
@@ -679,8 +679,8 @@ header nav ul.menu > li > .sub-menu-div > ul li {
 
 header nav ul.menu > li > .sub-menu-div > ul li a {
   display: block;
-  padding: 10px 0;
-  font-size: 25px;
+  padding: 0.625rem 0;
+  font-size: 20.313rem;
   color: #555555;
   padding-left: 1.5rem;
   transition: color 0.3s ease;
@@ -698,10 +698,10 @@ header nav ul.menu > li > .mega-menu > .list-item > ul > li {
 header nav ul.menu > li > .mega-menu > .list-item > ul > li > a {
   text-decoration: none;
   color: #555555;
-  font-size: 15px;
+  font-size: 10.313rem;
   display: block;
   transition: color 0.3s ease;
-  padding: 5px 0;
+  padding: 0.313rem 0;
 }
 
 header nav ul.menu > li > .mega-menu {
@@ -716,27 +716,27 @@ header nav ul.menu > li > .mega-menu {
 }
 
 header nav ul.menu > li > .mega-menu.mega-menu-column-4 {
-  max-width: 1100px;
+  max-width: 68rem;
   width: 55rem;
   /* width: 100%; */
   /* overflow-wrap: normal; */
   display: flex;
   flex-wrap: wrap;
-  padding: 20px 0px;
+  padding: 1.25rem 0;
 }
 
 header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item {
   flex: 0 0 25%;
   flex-grow: 0;
-  padding: 0 15px;
+  padding: 0 10.313rem;
 }
 
 header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item .title {
-  font-size: 16px;
+  font-size: 1rem;
   color: #ea4636;
   font-weight: 600;
   line-height: 1;
-  padding: 10px 0;
+  padding: 0.625rem 0;
 }
 
 header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item img {
@@ -781,10 +781,10 @@ h2 {
 
 .login-form {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  padding: 1.25rem;
+  border-radius: 0.313rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+  width: 300;
   max-width: 80%;
 }
 
@@ -800,19 +800,19 @@ h2 {
 .login-form input[type='text'],
 .login-form input[type='password'] {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  padding: 0.625rem;
+  margin-bottom: 0.625rem;
+  border: 0.063rem solid #ccc;
+  border-radius: 0.188rem;
   box-sizing: border-box;
 }
 .login-form input[type='submit'] {
   width: 100%;
-  padding: 10px;
+  padding: 0.625rem;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 0.188rem;
   cursor: pointer;
 }
 .login-form input[type='submit']:hover {

@@ -20,35 +20,35 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 50px;
+        padding: 3.125rem;
         flex-wrap: wrap; /* Allow items to wrap */
       }
       .hero-content {
         flex: 1;
-        padding-right: 50px;
-        margin-bottom: 20px; /* Add margin bottom for spacing */
+        padding-right: 3.125rem;
+        margin-bottom: 1.25rem; /* Add margin bottom for spacing */
       }
       .hero-content h1 {
-        font-size: 36px;
+        font-size: 2.25rem;
         color: #daf1f4;
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
       }
       .hero-content p {
-        font-size: 18px;
+        font-size: 1.125rem;
         color: #daf1f4;
-        margin-bottom: 30px;
+        margin-bottom: 1.875rem;
       }
       .hero-buttons {
         display: flex;
       }
       .hero-buttons .btn {
         display: inline-block;
-        padding: 10px 20px;
-        margin-right: 10px;
+        padding: 0.625rem 1.25rem;
+        margin-right: 0.625rem;
         border: none;
-        border-radius: 5px;
+        border-radius: 0.313rem;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 1rem;
         transition: background-color 0.3s;
       }
       .hero-buttons .btn.primary {
@@ -70,23 +70,23 @@
       }
 
       /* Responsive adjustments */
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 48rem) {
         .hero-section {
           flex-direction: column; /* Stack items vertically on small screens */
           align-items: center;
           text-align: center; /* Center align text */
-          padding: 0px;
+          padding: 0;
         }
         .hero-content {
           padding-right: 0;
           margin-bottom: 0;
         }
         .hero-buttons {
-          margin: 20px 0; /* Add space between buttons and image */
+          margin: 1.25rem 0; /* Add space between buttons and image */
         }
       }
 
-      @media screen and (max-width: 320px) {
+      @media screen and (max-width: 31.25rem) {
         .hero-content,
         .hero-buttons {
           padding: 0;
@@ -95,7 +95,7 @@
           margin-right: 0;
         }
         .hero-image {
-          margin-top: 20px; /* Add space between image and buttons */
+          margin-top: 1.25rem; /* Add space between image and buttons */
         }
       }
     </style>
@@ -114,7 +114,7 @@
           </div>
           <div class="hero-image">
             <img
-              src="https://via.placeholder.com/800x400"
+              src="https://via.placeholder.com/700x400"
               alt="Hero Image"
               style="max-width: 100%"
             />
