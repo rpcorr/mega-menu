@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hero Section</title>
+    <title>Menu</title>
     <style>
       body {
         margin: 0;
@@ -13,108 +13,101 @@
         max-width: 90%;
         margin: 0 auto; /* Center the container */
       }
-      .hero-background {
-        background-color: #bdd9bf;
+      /* Style for the navigation menu */
+      nav {
+        text-align: center; /* Center align the menu items */
+        background-color: #6fde6e; /* Background color for the nav container */
       }
-      .hero-section {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 50px;
-        flex-wrap: wrap; /* Allow items to wrap */
+
+      nav ul {
+        list-style: none;
+        padding: 0;
       }
-      .hero-content {
-        flex: 1;
-        padding-right: 50px;
-        margin-bottom: 20px; /* Add margin bottom for spacing */
-      }
-      .hero-content h1 {
-        font-size: 36px;
-        color: #a997df;
-        margin-bottom: 20px;
-      }
-      .hero-content p {
-        font-size: 18px;
-        color: #929084;
-        margin-bottom: 30px;
-      }
-      .hero-buttons {
-        display: flex;
-      }
-      .hero-buttons .btn {
+
+      nav ul li {
         display: inline-block;
+        position: relative;
+      }
+
+      nav ul li a {
+        display: block;
         padding: 10px 20px;
-        margin-right: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-      }
-      .hero-buttons .btn.primary {
-        background-color: #ffc857;
-        color: white;
-      }
-      .hero-buttons .btn.secondary {
-        background-color: #e5323b;
-        color: white;
-      }
-      .hero-buttons .btn:hover {
-        background-color: #4ba33d;
+        color: #e8f086; /* Top-level menu text color */
+        color: #fff; /* Top-level menu text color */
+        text-decoration: none;
       }
 
-      /* Responsive adjustments */
-      @media screen and (max-width: 768px) {
-        .hero-section {
-          flex-direction: column; /* Stack items vertically on small screens */
-          align-items: center;
-          text-align: center; /* Center align text */
-          padding: 0px;
-        }
-        .hero-content {
-          padding-right: 0;
-          margin-bottom: 0;
-        }
-        .hero-buttons {
-          margin: 20px 0; /* Add space between buttons and image */
-        }
+      nav ul ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        background-color: #ff4242; /* Submenu background color */
       }
 
-      @media screen and (max-width: 320px) {
-        .hero-content,
-        .hero-buttons {
-          padding: 0;
-        }
-        .hero-buttons .btn {
-          margin-right: 0;
-        }
-        .hero-image {
-          margin-top: 20px; /* Add space between image and buttons */
-        }
+      nav ul ul ul {
+        left: 100%;
+        top: 0;
+        background-color: #a691ae; /* Sub-submenu background color */
+      }
+
+      nav ul li:hover > ul {
+        display: block;
+      }
+
+      /* Hover effect for menu items */
+      nav ul li:hover > a {
+        background-color: #235fa4; /* Hover background color */
+      }
+
+      /* Text color for submenu items */
+      nav ul ul li a {
+        color: #ffffff;
+      }
+
+      /* Text color for third-level submenu items */
+      nav ul ul ul li a {
+        color: #ffffff;
       }
     </style>
   </head>
   <body>
-    <div class="hero-background">
-      <div class="container">
-        <div class="hero-section">
-          <div class="hero-content">
-            <h1>Title Goes Here</h1>
-            <p>This is the paragraph describing your hero section.</p>
-            <div class="hero-buttons">
-              <button class="btn primary">Primary Button</button>
-              <button class="btn secondary">Secondary Button</button>
-            </div>
-          </div>
-          <div class="hero-image">
-            <img
-              src="https://via.placeholder.com/800x400"
-              alt="Hero Image"
-              style="max-width: 100%"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <nav>
+      <ul>
+        <li>
+          <a href="#">Menu 1</a>
+          <ul>
+            <li>
+              <a href="#">Submenu 1.1</a>
+              <ul>
+                <li><a href="#">Sub-submenu 1.1.1</a></li>
+                <li><a href="#">Sub-submenu 1.1.2</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Submenu 1.2</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Menu 2</a>
+          <ul>
+            <li><a href="#">Submenu 2.1</a></li>
+            <li><a href="#">Submenu 2.2</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Menu 3</a>
+          <ul>
+            <li><a href="#">Submenu 3.1</a></li>
+            <li>
+              <a href="#">Submenu 3.2</a>
+              <ul>
+                <li><a href="#">Sub-submenu 3.2.1</a></li>
+                <li><a href="#">Sub-submenu 3.2.2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
   </body>
 </html>
