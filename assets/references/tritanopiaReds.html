@@ -4,71 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TritanopiaReds - HTML Elements Example Page</title>
+    <link rel="stylesheet" href="../css/common.css" />
     <style>
       body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
         background-color: #ffe4ed; /* Using light pink background for better readability */
         color: #6d1129; /* Default text color */
       }
 
-      .container {
-        max-width: 50rem;
-        margin: 0 auto;
-        padding: 1.25rem;
-      }
-
+      /* HEADER/FOOTER COLOURS ... */
       header,
       footer {
         background-color: #6d1129; /* Header and footer background color */
         color: #ffb9bd; /* Header and footer text color */
-        padding: 0.625rem;
-        text-align: center;
       }
+      /* ... HEADER/FOOTER COLOURS */
 
-      /* Navigation ... */
-
-      /* Style for the navigation menu */
+      /* NAV COLOURS ... */
       nav {
-        text-align: center; /* Center align the menu items */
         background-color: #6d1129; /* Background color for the nav container */
       }
 
-      nav ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      nav ul li {
-        display: inline-block;
-        position: relative;
-      }
-
       nav ul li a {
-        display: block;
-        padding: 0.625rem 1.25rem;
         color: #ffb9bd; /* Text color for menu items */
-        text-decoration: none;
       }
 
       nav ul ul {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        display: none;
         background-color: #ffb9bd; /* Submenu background color */
       }
 
       nav ul ul ul {
-        left: 100%;
-        top: 0;
-        background-color: #ffe4ed; /* Sub-submenu background color */
         background-color: #ff004d; /* Sub-submenu background color */
-      }
-
-      nav ul li:hover > ul {
-        display: block;
       }
 
       /* Hover effect for menu items */
@@ -84,7 +49,6 @@
 
       /* Text color for third-level submenu items */
       nav ul ul ul li a {
-        color: #6d1129;
         color: #ffe4ed;
       }
 
@@ -92,53 +56,21 @@
       nav ul ul ul li a:hover {
         color: #ffe4ed;
       }
+      /* ...NAV COLOURS */
 
-      /* ...Navigation */
-
-      /* Hero ... */
-
-      .hero-container {
-        max-width: 90%;
-        margin: 0 auto; /* Center the container */
-      }
+      /* HERO COLOURS ... */
       .hero-background {
         background-color: #6d1129;
       }
-      .hero-section {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 3.125rem;
-        flex-wrap: wrap; /* Allow items to wrap */
-      }
-      .hero-content {
-        flex: 1;
-        padding-right: 3.125rem;
-        margin-bottom: 1.25rem; /* Add margin bottom for spacing */
-      }
+
       .hero-content h1 {
-        font-size: 2.25rem;
         color: #ffb9bd;
-        margin-bottom: 1.25rem;
       }
+
       .hero-content p {
-        font-size: 1.125rem;
         color: #ffe4ed;
-        margin-bottom: 1.875rem;
       }
-      .hero-buttons {
-        display: flex;
-      }
-      .hero-buttons .btn {
-        display: inline-block;
-        padding: 0.625rem 1.25rem;
-        margin-right: 0.625rem;
-        border: none;
-        border-radius: 0.313rem;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background-color 0.3s;
-      }
+
       .hero-buttons .btn.primary {
         background-color: #ff004d;
         color: white;
@@ -148,103 +80,41 @@
         background-color: #ffb9bd;
         color: #6d1129;
       }
+
       .hero-buttons .btn.secondary {
         background-color: #ffb9bd;
         color: #6d1129;
       }
+
       .hero-buttons .btn:hover {
         background-color: #ff004d;
         color: white;
       }
+      /* ... HERO COLOIURS */
 
-      /* Responsive adjustments */
-      @media screen and (max-width: 1310.313rem) {
-        .hero-image {
-          width: 60%;
-        }
-
-        .hero-image img {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 62rem) {
-        .hero-section {
-          flex-direction: column; /*Stack items vertically on small screens */
-          align-items: center;
-          text-align: center; /* Center align text */
-          padding: 0;
-        }
-        .hero-content {
-          padding-right: 0;
-          margin-bottom: 0;
-        }
-        .hero-buttons {
-          margin: 1.25rem 0; /* Add space between buttons and image */
-          align-items: center;
-          justify-content: center;
-        }
-
-        .hero-image,
-        .hero-image img {
-          width: 90%; /* Set image width to 100% */
-        }
-      }
-
-      @media screen and (max-width: 31.25rem) {
-        .hero-content,
-        .hero-buttons {
-          padding: 0;
-        }
-        .hero-buttons .btn {
-          margin-right: 0;
-        }
-        .hero-image {
-          margin-top: 1.25rem; /* Add space between image and buttons */
-        }
-      }
-
-      /* ... Hero */
-
+      /* CALLOUT COLOURS ... */
       .callout {
         background-color: #ff004d; /* Callout background color */
         color: #ffffff; /* Callout text color */
-        padding: 1.25rem;
-        margin-top: 1.25rem;
-        text-align: center;
       }
-      /* button */
-      /* Base styles for the button */
+      /* ... CALLOUT COLOURS */
+
+      /* BUTTON COLOURS ... */
       .btn {
-        display: inline-block;
-        padding: 0.625rem 1.25rem;
         background-color: #6d1129;
         color: #ffffff; /* White text for better contrast */
-        border: none;
-        border-radius: 0.313rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
       }
 
       /* Hover state */
       .btn:hover {
         background-color: #ff004d;
       }
+      /* BUTTON COLOURS ... */
 
-      /* table */
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 2em 0;
-      }
-
+      /* TABLE COLOURS ... */
       th,
       td {
-        padding: 0.5rem;
         border-bottom: 0.063rem solid #ddd;
-        text-align: left;
       }
 
       th {
@@ -260,49 +130,29 @@
       tr:nth-child(odd) {
         background-color: #ffb9bd;
       }
+      /* ... TABLE COLOURS */
 
-      /* separators */
-      .separator {
-        width: 100%;
-        height: 0.313rem; /* Change this value to adjust thickness */
-        margin: 1.25rem 0; /* Adjust margin as needed */
-      }
-
-      .long-separator {
-        width: 80%; /* Change this value to adjust length */
-      }
-
-      .medium-separator {
-        width: 60%; /* Change this value to adjust length */
-      }
-
-      .short-separator {
-        width: 40%; /* Change this value to adjust length */
-      }
-
-      .thin-separator {
-        height: 0.125rem; /* Change this value to adjust thickness */
-      }
-
+      /* SEPARATORS COLOURS ... */
       .separator-maroon {
-        background-color: #6d1129; /* Change color as needed */
+        background-color: #6d1129;
       }
 
       .separator-red {
-        background-color: #ff004d; /* Change color as needed */
+        background-color: #ff004d;
       }
 
       .separator-pink {
-        background-color: #ffb9bd; /* Change color as needed */
+        background-color: #ffb9bd;
       }
 
       .separator-light-pink {
-        background-color: #ffe4ed; /* Change color as needed */
+        background-color: #ffe4ed;
       }
 
       .separator-purple {
-        background-color: #785f6d; /* Change color as needed */
+        background-color: #785f6d;
       }
+      /* ... SEPARATORS COLOURS */
     </style>
   </head>
   <body>

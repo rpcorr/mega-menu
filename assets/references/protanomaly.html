@@ -4,57 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Protanomaly - HTML Elements Example Page</title>
+    <link rel="stylesheet" href="../css/common.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #ffffff; /* Using white background for better readability */
-        color: #333333; /* Default text color */
-      }
-
-      /* Navigation .... */
-
-      /* Style for the navigation menu */
+      /* NAV COLOURS .... */
       nav {
-        text-align: center; /* Center align the menu items */
         background-color: #929084; /* Background color for the nav container */
       }
 
-      nav ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      nav ul li {
-        display: inline-block;
-        position: relative;
-      }
-
       nav ul li a {
-        display: block;
-        padding: 0.625rem 1.25rem;
         color: #929084; /* Text color for menu items */
         color: #fff; /* Text color for menu items */
-        text-decoration: none;
       }
 
       nav ul ul {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        display: none;
         background-color: #bdd9bf; /* Submenu background color */
       }
 
       nav ul ul ul {
-        left: 100%;
-        top: 0;
         background-color: #929084; /* Sub-submenu background color */
-      }
-
-      nav ul li:hover > ul {
-        display: block;
       }
 
       /* Hover effect for menu items */
@@ -65,7 +32,6 @@
 
       /* Text color for submenu items */
       nav ul ul li a {
-        color: #ffc857;
         color: #333;
       }
 
@@ -79,54 +45,18 @@
         color: #333;
       }
 
-      /* ... Navigation .... */
+      /* ... NAV COLOURS */
 
-      /* Hero ... */
-
-      .hero-container {
-        max-width: 90%;
-        margin: 0 auto; /* Center the container */
-      }
+      /* HERO COLOURS ... */
       .hero-background {
         background-color: #bdd9bf;
       }
-      .hero-section {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 3.125rem;
-        flex-wrap: wrap; /* Allow items to wrap */
-      }
-      .hero-content {
-        flex: 1;
-        padding-right: 3.125rem;
-        margin-bottom: 1.25rem; /* Add margin bottom for spacing */
-      }
-      .hero-content h1 {
-        font-size: 2.25rem;
-        /* color: #a997df; */
-        color: #333333;
-        margin-bottom: 1.25rem;
-      }
+
+      .hero-content h1,
       .hero-content p {
-        font-size: 1.125rem;
-        color: #929084;
         color: #333333;
-        margin-bottom: 1.875rem;
       }
-      .hero-buttons {
-        display: flex;
-      }
-      .hero-buttons .btn {
-        display: inline-block;
-        padding: 0.625rem 1.25rem;
-        margin-right: 0.625rem;
-        border: none;
-        border-radius: 0.313rem;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background-color 0.3s;
-      }
+
       .hero-buttons .btn.primary {
         background-color: #ffc857;
         color: #333333;
@@ -136,71 +66,15 @@
         color: white;
       }
       .hero-buttons .btn:hover {
-        background-color: #4ba33d;
         background-color: #929084;
         color: white;
       }
+      /* ...HERO COLOURS */
 
-      /* Responsive adjustments */
-      @media screen and (max-width: 1310.313rem) {
-        .hero-image {
-          width: 60%;
-        }
-
-        .hero-image img {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 62rem) {
-        .hero-section {
-          flex-direction: column; /*Stack items vertically on small screens */
-          align-items: center;
-          text-align: center; /* Center align text */
-          padding: 0;
-        }
-        .hero-content {
-          padding-right: 0;
-          margin-bottom: 0;
-        }
-        .hero-buttons {
-          margin: 1.25rem 0; /* Add space between buttons and image */
-          align-items: center;
-          justify-content: center;
-        }
-
-        .hero-image,
-        .hero-image img {
-          width: 90%; /* Set image width to 100% */
-        }
-      }
-
-      @media screen and (max-width: 31.25rem) {
-        .hero-content,
-        .hero-buttons {
-          padding: 0;
-        }
-        .hero-buttons .btn {
-          margin-right: 0;
-        }
-        .hero-image {
-          margin-top: 1.25rem; /* Add space between image and buttons */
-        }
-      }
-
-      /* ...Hero */
-
-      /* Base styles for the button */
+      /* BUTTON COLOURS... */
       .btn {
-        display: inline-block;
-        padding: 0.625rem 1.25rem;
         background-color: #bdd9bf;
         color: #000000; /* Black text for better contrast */
-        border: none;
-        border-radius: 0.313rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s; /* Transition both background color and text color */
       }
 
       /* Hover state */
@@ -208,18 +82,12 @@
         background-color: #929084;
         color: #ffffff; /* White text on hover for better contrast */
       }
+      /* ... BUTTON COLOURS */
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 2em 0;
-      }
-
+      /* TABLE COLOURS ... */
       th,
       td {
-        padding: 0.5rem;
         border-bottom: 0.063rem solid #ddd;
-        text-align: left;
       }
 
       th {
@@ -234,72 +102,44 @@
       tr:nth-child(odd) {
         background-color: #ffc857;
       }
+      /* ...TABLE COLOURS */
 
-      .container {
-        max-width: 50rem;
-        margin: 0 auto;
-        padding: 1.25rem;
-      }
-
-      .error {
-        color: #e5323b;
-      }
-
+      /* HEADER/FOOTER COLOURS ... */
       header,
       footer {
         background-color: #929084; /* Header and footer background color */
         color: #ffffff; /* Header and footer text color */
-        padding: 0.625rem;
-        text-align: center;
       }
+      /* ... HEADER/FOOTER COLOURS */
 
+      /* CALLOUT COLOURS ... */
       .callout {
         background-color: #e5323b; /* Callout background color */
         color: #ffffff; /* Callout text color */
-        padding: 1.25rem;
-        margin-top: 1.25rem;
-        text-align: center;
       }
+      /* ... CALLOUT COLOURS */
 
-      /* separators */
+      /* SEPARATORS COLOURS... */
       .separator {
-        width: 100%;
-        height: 0.313rem; /* Change this value to adjust thickness */
-        background-color: #bdd9bf; /* Change color as needed */
-        margin: 1.25rem 0; /* Adjust margin as needed */
+        background-color: #bdd9bf;
       }
 
-      .long-separator {
-        width: 80%; /* Change this value to adjust length */
+      .separator-beige {
+        background-color: #929084;
       }
 
-      .medium-separator {
-        width: 60%; /* Change this value to adjust length */
-      }
-
-      .short-separator {
-        width: 40%; /* Change this value to adjust length */
-      }
-
-      .thin-separator {
-        height: 0.125rem; /* Change this value to adjust thickness */
-      }
-
-      .separator-green {
-        background-color: #929084; /* Change color as needed */
-      }
-
-      .separator-red {
-        background-color: #ffc857; /* Change color as needed */
+      .separator-yellow {
+        background-color: #ffc857;
       }
 
       .separator-purple {
-        background-color: #a997df; /* Change color as needed */
+        background-color: #a997df;
       }
 
-      .separator-blue {
-        background-color: #e5323b; /* Change color as needed */
+      .separator-red {
+        background-color: #e5323b;
       }
+      /* ...SEPARATOR COLOURS */
     </style>
   </head>
   <body>
@@ -461,10 +301,10 @@
       </form>
 
       <div class="separator long-separator"></div>
-      <div class="separator medium-separator separator-green"></div>
-      <div class="separator short-separator separator-red"></div>
+      <div class="separator medium-separator separator-beige"></div>
+      <div class="separator short-separator separator-yellow"></div>
       <div class="separator long-separator separator-purple"></div>
-      <div class="separator thin-separator separator-blue"></div>
+      <div class="separator thin-separator separator-red"></div>
 
       <div class="callout">
         <h2>Callout Section</h2>

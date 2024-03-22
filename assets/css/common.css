@@ -1,0 +1,213 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Using white background for better readability */
+  color: #333333; /* Default text color */
+}
+
+/* Style for the navigation menu */
+nav {
+  text-align: center; /* Center align the menu items */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  position: relative;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0.625rem 1.25rem;
+  text-decoration: none;
+}
+
+nav ul ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+}
+
+nav ul ul ul {
+  left: 100%;
+  top: 0;
+}
+
+nav ul li:hover > ul {
+  display: block;
+}
+
+/*  hero styles ... */
+
+.hero-container {
+  max-width: 90%;
+  margin: 0 auto; /* Center the container */
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3.125rem;
+  flex-wrap: wrap; /* Allow items to wrap */
+}
+.hero-content {
+  flex: 1;
+  padding-right: 3.125rem;
+  margin-bottom: 1.25rem; /* Add margin bottom for spacing */
+}
+.hero-content h1 {
+  font-size: 2.25rem;
+  margin-bottom: 1.25rem;
+}
+.hero-content p {
+  font-size: 1.125rem;
+  margin-bottom: 1.875rem;
+}
+.hero-buttons {
+  display: flex;
+}
+.hero-buttons .btn {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  margin-right: 0.625rem;
+  border: none;
+  border-radius: 0.313rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  -webkit-border-radius: 0.313rem;
+  -moz-border-radius: 0.313rem;
+  -ms-border-radius: 0.313rem;
+  -o-border-radius: 0.313rem;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -ms-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 82rem) {
+  .hero-image {
+    width: 60%;
+  }
+
+  .hero-image img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 62rem) {
+  .hero-section {
+    flex-direction: column; /*Stack items vertically on small screens */
+    align-items: center;
+    text-align: center; /* Center align text */
+    padding: 0;
+  }
+  .hero-content {
+    padding-right: 0;
+    margin-bottom: 0;
+  }
+  .hero-buttons {
+    margin: 1.25rem 0; /* Add space between buttons and image */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-image,
+  .hero-image img {
+    width: 90%; /* Set image width to 90% */
+  }
+}
+
+@media screen and (max-width: 20rem) {
+  .hero-content,
+  .hero-buttons {
+    padding: 0;
+  }
+  .hero-buttons .btn {
+    margin-right: 0;
+  }
+  .hero-image {
+    margin-top: 1.25rem; /* Add space between image and buttons */
+  }
+}
+
+/* ...hero styles */
+
+/* Base styles for the button */
+.btn {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 0.313rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Transition both background color and text color */
+}
+
+.error {
+  color: #ff4242;
+}
+
+.container {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+header,
+footer {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+.callout {
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+/* table */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  text-align: left;
+}
+
+/* separators */
+
+.separator {
+  width: 100%;
+  height: 0.313rem; /* Change this value to adjust thickness */
+  margin: 1.25rem 0; /* Adjust margin as needed */
+}
+
+.long-separator {
+  width: 80%; /* Change this value to adjust length */
+}
+
+.medium-separator {
+  width: 60%; /* Change this value to adjust length */
+}
+
+.short-separator {
+  width: 40%; /* Change this value to adjust length */
+}
+
+.thin-separator {
+  height: 0.125rem; /* Change this value to adjust thickness */
+}
