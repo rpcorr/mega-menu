@@ -1,0 +1,21 @@
+#mainNavigation {
+  background-color: #6fde6e;
+}
+
+#mainNavigation a {
+  color: #fff;
+}
+
+ul#menu-main-menu li.menu-item-has-children.visible > ul,
+header nav ul.menu > li.menu-item-has-children.visible .sub-menu-div {
+  background-color: #ff4242; /* first-level submenu background colour */
+}
+
+.menu-main-menu-container > #menu-main-menu > li:hover,
+.menu-main-menu-container > #menu-main-menu > li li:hover {
+  background-color: #235fa4; /* second-level submenu background colour */
+}
+
+ul#menu-main-menu li.menu-item-has-children.visible > ul ul.sub-menu {
+  background-color: #a691ae; /* third-level submenu background colour */
+}
