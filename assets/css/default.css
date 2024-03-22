@@ -8,11 +8,24 @@ a {
 }
 
 a:hover,
-a:focus {
+a:focus,
+#siteIdentity a {
   color: #fff;
 }
 
-ul#menu-main-menu li > ul {
+ul#menu-main-menu li > ul,
+.menu-main-menu-container
+  > #menu-main-menu
+  > li
+  > .sub-menu
+  > li.menu-item-has-children:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:focus,
+.menu-main-menu-container > #menu-main-menu > li li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li li li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu .sub-menu-div a,
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 {
   background-color: #fff;
 }
 
@@ -24,10 +37,6 @@ ul#menuu-main-menu li.menu-item-has-children::after {
   background-color: #555;
 }
 
-#siteIdentity a {
-  color: #fff;
-}
-
 ul#menuu-main-menu li.menu-item-has-children::after {
   border-color: #afacd1;
 }
@@ -35,16 +44,6 @@ ul#menuu-main-menu li.menu-item-has-children::after {
 .menu-main-menu-container > #menu-main-menu > li > .sub-menu a,
 .menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a {
   color: #000;
-}
-
-.menu-main-menu-container
-  > #menu-main-menu
-  > li
-  > .sub-menu
-  > li.menu-item-has-children:hover,
-.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:hover,
-.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:focus {
-  background-color: #ffffff;
 }
 
 .menu-main-menu-container > #menu-main-menu > li > .sub-menu a:hover,
@@ -58,13 +57,6 @@ ul#menuu-main-menu li.menu-item-has-children::after {
 
 ul.sub-menu li > ul.sub-menu {
   background-color: rgba(85, 85, 85, 1);
-}
-
-.menu-main-menu-container > #menu-main-menu > li li > .sub-menu a,
-.menu-main-menu-container > #menu-main-menu > li li li > .sub-menu a,
-.menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a,
-.menu-main-menu-container > #menu-main-menu > li > .sub-menu .sub-menu-div a {
-  background-color: #fff;
 }
 
 .menu-main-menu-container
@@ -86,16 +78,9 @@ header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
   color: #000;
 }
 
-header nav ul.menu > li > .sub-menu-div > ul li a {
-  color: #555555;
-}
-
+header nav ul.menu > li > .sub-menu-div > ul li a,
 header nav ul.menu > li > .mega-menu > .list-item > ul > li > a {
   color: #555555;
-}
-
-header nav ul.menu > li > .mega-menu.mega-menu-column-4 {
-  background-color: #fff;
 }
 
 header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item .title {
