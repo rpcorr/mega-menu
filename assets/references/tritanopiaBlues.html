@@ -4,64 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TritanopiaBlues - HTML Elements Example Page</title>
+    <link rel="stylesheet" href="../css/common.css" />
     <style>
       body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
         background-color: #daf1f4; /* Using light blue background for better readability */
         color: #0a556b; /* Default text color */
       }
 
-      /* Navigation ... */
-
-      /* Style for the navigation menu */
+      /* NAV COLOURS... */
       nav {
-        text-align: center; /* Center align the menu items */
         background-color: #0a556b; /* Background color for the nav container */
       }
 
-      nav ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      nav ul li {
-        display: inline-block;
-        position: relative;
-      }
-
       nav ul li a {
-        display: block;
-        padding: 10px 20px;
-        color: #218ab2; /* Text color for menu items */
-        color: #daf1f4;
-        text-decoration: none;
+        color: #daf1f4; /* Text color for menu items */
       }
 
       nav ul ul {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        display: none;
         background-color: #00dfff; /* Submenu background color */
       }
 
       nav ul ul ul {
-        left: 100%;
-        top: 0;
         background-color: #a6ebff; /* Sub-submenu background color */
-      }
-
-      nav ul li:hover > ul {
-        display: block;
       }
 
       /* Hover effect for menu items */
       nav ul li:hover > a {
-        background-color: #daf1f4; /* Hover background color */
         background-color: #218ab2; /* Hover background color */
-        /* color: #0a556b; */
       }
 
       /* Text color for submenu items */
@@ -72,7 +41,6 @@
       /* Text color for hovered submenu items */
       nav ul ul li:hover a {
         color: #daf1f4;
-        /* color: #0a556b; */
       }
 
       /* Text color for third-level submenu items */
@@ -84,53 +52,18 @@
       nav ul ul ul li a:hover {
         color: #daf1f4 !important;
       }
+      /* ... NAV COLOURS */
 
-      /* ... Navigation */
-
-      /* ... Hero */
-
-      .hero-container {
-        max-width: 90%;
-        margin: 0 auto; /* Center the container */
-      }
+      /* HERO COLOURS ... */
       .hero-background {
         background-color: #0a556b;
       }
-      .hero-section {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 50px;
-        flex-wrap: wrap; /* Allow items to wrap */
-      }
-      .hero-content {
-        flex: 1;
-        padding-right: 50px;
-        margin-bottom: 20px; /* Add margin bottom for spacing */
-      }
-      .hero-content h1 {
-        font-size: 36px;
-        color: #daf1f4;
-        margin-bottom: 20px;
-      }
+
+      .hero-content h1,
       .hero-content p {
-        font-size: 18px;
         color: #daf1f4;
-        margin-bottom: 30px;
       }
-      .hero-buttons {
-        display: flex;
-      }
-      .hero-buttons .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-right: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-      }
+
       .hero-buttons .btn.primary {
         background-color: #218ab2;
         color: white;
@@ -148,109 +81,39 @@
         background-color: #218ab2;
         color: #ffffff;
       }
+      /* ...HERO COLOURS */
 
-      /* Responsive adjustments */
-      @media screen and (max-width: 1315px) {
-        .hero-image {
-          width: 60%;
-        }
-
-        .hero-image img {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 992px) {
-        .hero-section {
-          flex-direction: column; /*Stack items vertically on small screens */
-          align-items: center;
-          text-align: center; /* Center align text */
-          padding: 0px;
-        }
-        .hero-content {
-          padding-right: 0;
-          margin-bottom: 0;
-        }
-        .hero-buttons {
-          margin: 20px 0; /* Add space between buttons and image */
-          align-items: center;
-          justify-content: center;
-        }
-
-        .hero-image,
-        .hero-image img {
-          width: 90%; /* Set image width to 100% */
-        }
-      }
-
-      @media screen and (max-width: 320px) {
-        .hero-content,
-        .hero-buttons {
-          padding: 0;
-        }
-        .hero-buttons .btn {
-          margin-right: 0;
-        }
-        .hero-image {
-          margin-top: 20px; /* Add space between image and buttons */
-        }
-      }
-
-      /* Hero ... */
-
-      /* Base styles for the button */
+      /* BUTTON COLOURS ... */
       .btn {
-        display: inline-block;
-        padding: 10px 20px;
         background-color: #0a556b;
         color: #ffffff; /* White text for better contrast */
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
       }
 
       /* Hover state */
       .btn:hover {
         background-color: #218ab2;
       }
+      /* ... BUTTON COLOURS */
 
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
+      /* HEADER/FOOTER COLOURS ... */
       header,
       footer {
         background-color: #0a556b; /* Header and footer background color */
         color: #daf1f4; /* Header and footer text color */
-        padding: 10px;
-        text-align: center;
       }
+      /* ... HEADER/FOOTER COLOURS */
 
+      /* CALLOUT COLOURS ... */
       .callout {
         background-color: #218ab2; /* Callout background color */
         color: #ffffff; /* Callout text color */
-        padding: 20px;
-        margin-top: 20px;
-        text-align: center;
       }
+      /* ... CALLOUT COLOURS */
 
-      /** table style start **/
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 2em 0;
-      }
-
+      /** TABLE COLOURS ... **/
       th,
       td {
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-        text-align: left;
+        border-bottom: 0.063rem solid #ddd;
       }
 
       th {
@@ -266,53 +129,29 @@
       tr:nth-child(odd) {
         background-color: #00dfff;
       }
+      /* ... TABLE COLOURS */
 
-      /** table style end **/
-
-      /** separators styles **/
-      .separator {
-        width: 100%;
-        height: 5px; /* Change this value to adjust thickness */
-        margin: 20px 0; /* Adjust margin as needed */
-      }
-
-      .long-separator {
-        width: 80%; /* Change this value to adjust length */
-      }
-
-      .medium-separator {
-        width: 60%; /* Change this value to adjust length */
-      }
-
-      .short-separator {
-        width: 40%; /* Change this value to adjust length */
-      }
-
-      .thin-separator {
-        height: 2px; /* Change this value to adjust thickness */
-      }
-
+      /* SEPARATORS COLOURS ... */
       .separator-dark-blue {
-        background-color: #0a556b; /* Change color as needed */
+        background-color: #0a556b;
       }
 
       .separator-blue {
-        background-color: #218ab2; /* Change color as needed */
+        background-color: #218ab2;
       }
 
       .separator-cyan {
-        background-color: #00dfff; /* Change color as needed */
+        background-color: #00dfff;
       }
 
       .separator-light-cyan {
-        background-color: #a6ebff; /* Change color as needed */
+        background-color: #a6ebff;
       }
 
       .separator-light-blue {
-        background-color: #daf1f4; /* Change color as needed */
+        background-color: #daf1f4;
       }
-
-      /* separators styles end */
+      /* ... SEPARATORS COLOURS */
     </style>
   </head>
   <body>
@@ -371,7 +210,7 @@
           </div>
           <div class="hero-image">
             <img
-              src="https://via.placeholder.com/800x400"
+              src="https://via.placeholder.com/700x400"
               alt="Hero Image"
               style="max-width: 100%"
             />

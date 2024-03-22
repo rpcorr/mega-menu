@@ -4,56 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Achromatomaly - HTML Elements Example Page</title>
+    <link rel="stylesheet" href="../css/common.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #ffffff; /* Using white background for better readability */
-        color: #333333; /* Default text color */
-      }
-
-      /*  Navigation ... */
-
-      /* Style for the navigation menu */
+      /* NAV COLOURS ... */
       nav {
-        text-align: center; /* Center align the menu items */
         background-color: #dbd8c7; /* Background color for the nav container */
       }
 
-      nav ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      nav ul li {
-        display: inline-block;
-        position: relative;
-      }
-
       nav ul li a {
-        display: block;
-        padding: 10px 20px;
         color: #303136; /* Text color for menu items */
-        text-decoration: none;
       }
 
       nav ul ul {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        display: none;
         background-color: #854a4c; /* Submenu background color */
       }
 
       nav ul ul ul {
-        left: 100%;
-        top: 0;
         background-color: #447794; /* Sub-submenu background color */
-      }
-
-      nav ul li:hover > ul {
-        display: block;
       }
 
       /* Hover effect for menu items */
@@ -76,125 +43,41 @@
       nav ul ul ul li a:hover {
         color: #303136;
       }
+      /*... NAV COLOURS  */
 
-      /* ... Navigation */
-
-      /*  Hero ... */
-      .hero-container {
-        max-width: 90%;
-        margin: 0 auto; /* Center the container */
-      }
+      /*  HERO COlOURS ... */
       .hero-background {
         background-color: #dbd8c7;
       }
-      .hero-section {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 50px;
-        flex-wrap: wrap; /* Allow items to wrap */
-      }
-      .hero-content {
-        flex: 1;
-        padding-right: 50px;
-        margin-bottom: 20px; /* Add margin bottom for spacing */
-      }
+
       .hero-content h1 {
-        font-size: 36px;
         color: #447794;
-        margin-bottom: 20px;
       }
+
       .hero-content p {
-        font-size: 18px;
         color: #303136;
-        margin-bottom: 30px;
       }
-      .hero-buttons {
-        display: flex;
-      }
-      .hero-buttons .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-right: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-      }
+
       .hero-buttons .btn.primary {
         background-color: #caa386;
         color: #303136;
       }
+
       .hero-buttons .btn.secondary {
         background-color: #854a4c;
         color: white;
       }
+
       .hero-buttons .btn:hover {
         background-color: #303136;
         color: white;
       }
+      /* ... HERO COLOURS */
 
-      /* Responsive adjustments */
-      @media screen and (max-width: 1315px) {
-        .hero-image {
-          width: 60%;
-        }
-
-        .hero-image img {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 992px) {
-        .hero-section {
-          flex-direction: column; /*Stack items vertically on small screens */
-          align-items: center;
-          text-align: center; /* Center align text */
-          padding: 0px;
-        }
-        .hero-content {
-          padding-right: 0;
-          margin-bottom: 0;
-        }
-        .hero-buttons {
-          margin: 20px 0; /* Add space between buttons and image */
-          align-items: center;
-          justify-content: center;
-        }
-
-        .hero-image,
-        .hero-image img {
-          width: 90%; /* Set image width to 100% */
-        }
-      }
-
-      @media screen and (max-width: 320px) {
-        .hero-content,
-        .hero-buttons {
-          padding: 0;
-        }
-        .hero-buttons .btn {
-          margin-right: 0;
-        }
-        .hero-image {
-          margin-top: 20px; /* Add space between image and buttons */
-        }
-      }
-
-      /* ... Hero */
-
-      /* Base styles for the button */
+      /* BUTTON COLOURS ... */
       .btn {
-        display: inline-block;
-        padding: 10px 20px;
         background-color: #dbd8c7;
         color: #000000; /* Black text for better contrast */
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s; /* Transition both background color and text color */
       }
 
       /* Hover state */
@@ -202,40 +85,27 @@
         background-color: #caa386;
         color: #000;
       }
+      /* ... BUTTON COLOURS */
 
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
+      /* HEADER/FOOTER COLOURS ... */
       header,
       footer {
         background-color: #dbd8c7; /* Header and footer background color */
         color: #303136; /* Header and footer text color */
-        padding: 10px;
-        text-align: center;
       }
+      /* ... HEADER/FOOTER COLOURS */
 
+      /* CALLOUT COLOURS ... */
       .callout {
         background-color: #447794; /* Callout background color */
         color: #ffffff; /* Callout text color */
-        padding: 20px;
-        margin-top: 20px;
-        text-align: center;
       }
+      /* ... CALLOUT COLOURS ... */
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 2em 0;
-      }
-
+      /* TABLE COLOURS ... */
       th,
       td {
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-        text-align: left;
+        border-bottom: 0.063rem solid #ddd;
       }
 
       th {
@@ -251,46 +121,27 @@
         background-color: #854a4c;
         color: #fff;
       }
+      /* ... TABLE COLOURS */
 
-      /* Separators */
-
+      /* SEPARATORS COLOURS ... */
       .separator {
-        width: 100%;
-        height: 5px; /* Change this value to adjust thickness */
-        background-color: #dbd8c7; /* Change color as needed */
-        margin: 20px 0; /* Adjust margin as needed */
-      }
-
-      .long-separator {
-        width: 80%; /* Change this value to adjust length */
-      }
-
-      .medium-separator {
-        width: 60%; /* Change this value to adjust length */
-      }
-
-      .short-separator {
-        width: 40%; /* Change this value to adjust length */
-      }
-
-      .thin-separator {
-        height: 2px; /* Change this value to adjust thickness */
+        background-color: #dbd8c7;
       }
 
       .separator-orange {
-        background-color: #caa386; /* Change color as needed */
+        background-color: #caa386;
       }
 
       .separator-red {
-        background-color: #854a4c; /* Change color as needed */
+        background-color: #854a4c;
       }
 
       .separator-blue {
-        background-color: #447794; /* Change color as needed */
+        background-color: #447794;
       }
 
       .separator-dark {
-        background-color: #303136; /* Change color as needed */
+        background-color: #303136;
       }
     </style>
   </head>
@@ -350,7 +201,7 @@
           </div>
           <div class="hero-image">
             <img
-              src="https://via.placeholder.com/800x400"
+              src="https://via.placeholder.com/700x400"
               alt="Hero Image"
               style="max-width: 100%"
             />
