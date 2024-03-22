@@ -1,0 +1,128 @@
+html {
+  background-color: #333;
+  color: #eee;
+}
+
+a {
+  color: #eee;
+}
+
+a:hover,
+a:focus {
+  color: #fff;
+}
+
+ul#menu-main-menu li > ul {
+  background-color: #fff;
+}
+
+ul#menuu-main-menu li.menu-item-has-children::after {
+  border-color: #fff;
+}
+
+#siteIdentity {
+  background-color: #555;
+}
+
+#siteIdentity a {
+  color: #fff;
+}
+
+ul#menuu-main-menu li.menu-item-has-children::after {
+  border-color: #afacd1;
+}
+
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a {
+  color: #000;
+}
+
+.menu-main-menu-container
+  > #menu-main-menu
+  > li
+  > .sub-menu
+  > li.menu-item-has-children:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:focus {
+  background-color: #ffffff;
+}
+
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:focus {
+  color: #afacd1;
+}
+
+#menu-main-menu > li.menu-item-has-children > ul.sub-menu {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+ul.sub-menu li > ul.sub-menu {
+  background-color: rgba(85, 85, 85, 1);
+}
+
+.menu-main-menu-container > #menu-main-menu > li li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li li li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu .sub-menu-div a {
+  background-color: #fff;
+}
+
+.menu-main-menu-container
+  > #menu-main-menu
+  > li
+  > .sub-menu
+  .sub-menu-div
+  .title {
+  color: #ea4636;
+}
+
+.menu-main-menu-container > #menu-main-menu > li > ul.sub-menu::before {
+  border-color: transparent transparent rgba(255, 255, 255, 0.9) transparent;
+}
+
+/* Styles from Mega menu */
+header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+
+header nav ul.menu > li > .sub-menu-div > ul li a {
+  color: #555555;
+}
+
+header nav ul.menu > li > .mega-menu > .list-item > ul > li > a {
+  color: #555555;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 {
+  background-color: #fff;
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item .title {
+  color: #ea4636;
+}
+
+header nav ul.menu > li > .mega-menu > .list-item > ul > li > a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:focus {
+  background-color: #fff;
+  color: #afacd1;
+}
+
+.login-form {
+  background-color: #fff;
+}
+
+.login-form h1,
+.login-form label {
+  color: #000;
+}
+
+.login-form input[type='submit'] {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.login-form input[type='submit']:hover {
+  background-color: #0056b3;
+}
