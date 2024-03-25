@@ -81,9 +81,11 @@ ul#menu-main-menu li > ul,
 }
 .menu-main-menu-container > #menu-main-menu > li li li > .sub-menu a {
   background-color: #6fde6e; /* third submenu background-colour */
+  background-color: #e8f086;
+  color: #000;
 }
 .menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a {
-  background-color: #e8f086; /* fourth submenu background-colour */
+  background-color: #6fde6e; /* fourth submenu background-colour */
   color: #000;
 }
 
