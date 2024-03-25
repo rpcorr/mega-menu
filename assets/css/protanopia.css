@@ -82,6 +82,10 @@ ul#menu-main-menu li > ul,
 .menu-main-menu-container > #menu-main-menu > li li li > .sub-menu a {
   background-color: #6fde6e; /* third submenu background-colour */
 }
+.menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a {
+  background-color: #e8f086; /* fourth submenu background-colour */
+  color: #000;
+}
 
 /* Styles from Mega menu */
 header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
