@@ -1,0 +1,156 @@
+html {
+  background-color: #fff;
+  color: #2d3043;
+}
+
+h1 {
+  color: #2d3043;
+}
+
+#mainNavigation {
+  background-color: #f4d4ad;
+}
+
+ul#menu-main-menu li > ul,
+.menu-main-menu-container > #menu-main-menu > li > a {
+  color: #2d3043;
+}
+
+header {
+  border-bottom: 0.15rem solid #235fa4;
+}
+
+a {
+  color: #2d3043;
+}
+
+a:hover,
+a:focus,
+#siteIdentity a {
+  color: #2d3043;
+}
+
+ul#menu-main-menu li > ul,
+.menu-main-menu-container
+  > #menu-main-menu
+  > li
+  > .sub-menu
+  > li.menu-item-has-children:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:focus,
+.sub-menu-div.mega-menu.mega-menu-column-4 a:hover {
+  background-color: #e89f43;
+  background-color: #a15229;
+}
+
+#siteIdentity {
+  background-color: #a15229;
+}
+
+#siteIdentity a {
+  color: #fff;
+}
+
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a {
+  color: #fff;
+}
+
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu a:focus {
+  background-color: #a15229;
+  color: #fff;
+}
+
+/* Change top-level background color on hover */
+.menu-main-menu > .menu > li:hover > a {
+  background-color: #e89f43;
+  background-color: #a15229;
+}
+
+/* Change top-level background color when sub-menu is open */
+.menu-main-menu > .menu > li:hover > ul {
+  display: block;
+}
+
+#menu-main-menu > li.menu-item-has-children > ul.sub-menu {
+  background-color: rgba(
+    232,
+    157,
+    66,
+    0.9
+  ); /* first submenu background colour */
+}
+
+#menu-main-menu > li.menu-item-has-children > ul.sub-menu > li > a {
+  color: #fff;
+}
+
+#menu-main-menu > li.menu-item-has-children > li li > ul.sub-menu {
+  background-color: #2d3043;
+}
+
+.menu-main-menu-container > #menu-main-menu > li li > .sub-menu a {
+  background-color: #2f88dc; /* second submenu background-colour */
+  color: #fff;
+}
+.menu-main-menu-container > #menu-main-menu > li li li > .sub-menu a {
+  background-color: #f4d4ad; /* third submenu background-colour */
+  color: #2d3043;
+}
+
+.menu-main-menu-container > #menu-main-menu > li li li li > .sub-menu a {
+  background-color: #a15229; /* fourth submenu background-colour */
+  background-color: #2d3043;
+  color: #fff;
+}
+
+/* Styles from Mega menu */
+header nav ul.menu > li.menu-item-has-children > .sub-menu-div {
+  background-color: rgba(204, 45, 53, 0.9);
+  background-color: rgba(232, 157, 66, 0.9);
+  color: #2d3043;
+}
+
+ul.menu li:hover {
+  background-color: #a15229;
+}
+
+header nav ul.menu > li > .mega-menu > .list-item > ul > li > a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:hover,
+.menu-main-menu-container > #menu-main-menu > li > .sub-menu-div a:focus {
+  background-color: #e89f43;
+  background-color: #a15229;
+  color: #fff;
+}
+
+ul.menu li:hover a {
+  /* color: #2d3043; */
+}
+
+header nav ul.menu > li > .mega-menu.mega-menu-column-4 > .list-item .title {
+  color: #2d3043; /* 4.56 */
+}
+
+ul.menu li:hover > a {
+  color: #fff !important;
+}
+
+.login-form {
+  background-color: #f4d4ad;
+}
+
+.login-form h1,
+.login-form label {
+  color: #2d3043;
+}
+
+.login-form input[type='submit'] {
+  background-color: #e89f43;
+  color: #2d3043;
+}
+
+.login-form input[type='submit']:hover {
+  background-color: #a15229;
+  color: #fff;
+}
