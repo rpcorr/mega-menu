@@ -2,15 +2,18 @@
   "users": [
     {
       "username": "user1",
-      "userType": "admin"
+      "userType": "admin",
+      "stylePreference": "protanopia"
     },
     {
       "username": "user2",
-      "userType": "premium"
+      "userType": "premium",
+      "stylePreference": "protanomaly"
     },
     {
       "username": "user3",
-      "userType": "basic"
+      "userType": "basic",
+      "stylePreference": "tritanopia"
     }
   ],
 

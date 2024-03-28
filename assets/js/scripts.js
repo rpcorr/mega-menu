@@ -34,6 +34,11 @@ $(document).ready(function () {
             // store current user in user localstorage variable
             localStorage.setItem('user', response.users[i].username);
             localStorage.setItem('userType', response.users[i].userType);
+            localStorage.setItem(
+              'stylePreference',
+              response.users[i].stylePreference
+            );
+
             // exit loop early
             break;
           }
@@ -48,11 +53,14 @@ $(document).ready(function () {
         }
       } else {
         // there is a user
-        console.log('Here I am');
         const user = {
           username: localStorage.getItem('user'),
           userType: localStorage.getItem('userType'),
+          stylePreference: localStorage.getItem('stylePreference'),
         };
+
+        // update style preferences
+        selectStylesheet(user.stylePreference);
 
         // create the menu base on the user
         response.menuItems.forEach((mI) => {
@@ -796,11 +804,8 @@ function closeSiblingSubMenus(menuLink) {
 
 function determineHREFTarget(mI) {
   if (mI.hasOwnProperty('target')) {
-    console.log('yes');
-    console.log(mI.target);
     return `target="${mI.target}"`;
   } else {
-    console.log('no');
     return mI.link.charAt(0) !== '#' &&
       (mI.link.indexOf('http') !== -1 || mI.link.indexOf('.pdf') !== -1)
       ? 'target="_blank"'
@@ -811,4 +816,23 @@ function determineHREFTarget(mI) {
 function isCurrentPage(page) {
   if (window.location.href.indexOf(page) !== -1 || page === 'index.html')
     return true;
+}
+
+// Add event listener to all radio buttons with name "option"
+var radioButtons = document.querySelectorAll('input[name="option"]');
+radioButtons.forEach(function (radioButton) {
+  radioButton.addEventListener('click', function () {
+    selectStylesheet(this);
+  });
+});
+
+function selectStylesheet(stylesheet) {
+  // Hide all stylesheets
+  document.querySelectorAll('link[data-change]').forEach(function (sheet) {
+    sheet.media = 'none';
+  });
+  // Show the selected stylesheet
+  document.querySelector(
+    'link[href="assets/css/' + stylesheet + '.css"]'
+  ).media = 'screen';
 }
