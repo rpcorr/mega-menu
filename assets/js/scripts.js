@@ -822,17 +822,24 @@ function isCurrentPage(page) {
 var radioButtons = document.querySelectorAll('input[name="option"]');
 radioButtons.forEach(function (radioButton) {
   radioButton.addEventListener('click', function () {
-    selectStylesheet(this);
+    selectStylesheet(this.id);
   });
 });
 
-function selectStylesheet(stylesheet) {
-  // Hide all stylesheets
-  document.querySelectorAll('link[data-change]').forEach(function (sheet) {
-    sheet.media = 'none';
+function selectStylesheet(stylesheetName) {
+  const stylesheet = document.createElement('link');
+  stylesheet.rel = 'stylesheet';
+  stylesheet.type = 'text/css';
+  stylesheet.href = 'assets/css/templatesStyles/' + stylesheetName + '.css';
+
+  // Add the stylesheet to the head when a radio button is clicked
+  document.head.appendChild(stylesheet);
+
+  // Remove previous stylesheets if any
+  const previousStylesheets = document.querySelectorAll(
+    'link[rel="stylesheet"][href^="assets/css/templatesStyles"]:not(:last-of-type)'
+  );
+  previousStylesheets.forEach(function (previousStylesheet) {
+    document.head.removeChild(previousStylesheet);
   });
-  // Show the selected stylesheet
-  document.querySelector(
-    'link[href="assets/css/' + stylesheet + '.css"]'
-  ).media = 'screen';
 }
